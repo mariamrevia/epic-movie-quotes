@@ -4,6 +4,7 @@
         <div class="bg-landingPage h-53 border-none min-w-full flex flex-col items-center justify-center">
             <FormRegister/>
             <LandingRegisterEmailSent/>
+            <LandingRegisterEmailConfirm/>
             <div>
                 <h1 class="text-caramel md:text-4 md:w-50 w-22 text-2 text-center">
                     Find any quote in millions of movie lines
@@ -41,6 +42,7 @@
 <script setup>
     import FormRegister from '@/components/LandingFormRegister.vue'
     import LandingRegisterEmailSent from '@/components/LandingRegisterEmailSent.vue'
+    import LandingRegisterEmailConfirm from '@/components/LandingRegisterEmailConfirm.vue';
     import TheHeader from '@/components/shared/TheHeader.vue'
      
 </script>

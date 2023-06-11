@@ -31,6 +31,7 @@ export default {
         31:'31rem',
         44:'44rem',
         23.4:'23.4rem',
+        33:'33rem'
 
       },
       borderRadius: {
