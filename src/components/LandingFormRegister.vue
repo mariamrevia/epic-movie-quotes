@@ -62,7 +62,7 @@
     const Modal = useModalStore()
     const isModalActive = Modal.isModalActive
     const logIn = () => {
-        Modal.openModal('loginModalActive')
+        Modal.openModal('emailSentModalActive')
     }
     const closeModal = (event) => {
         if (event.target.classList.contains('modal-wrapper')) {
@@ -81,7 +81,7 @@ const sendData = async (values) => {
     values.password_confirmation
   )
   if (response.status === 200) {
-    Modal.openModal('emailModalActive')
+    Modal.openModal('emailSentModalActive')
   }
   console.log('sdfsdfs')
 }

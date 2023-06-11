@@ -3,6 +3,7 @@
       <TheHeader/>
         <div class="bg-landingPage h-53 border-none min-w-full flex flex-col items-center justify-center">
             <FormRegister/>
+            <LandingRegisterEmailSent/>
             <div>
                 <h1 class="text-caramel md:text-4 md:w-50 w-22 text-2 text-center">
                     Find any quote in millions of movie lines
@@ -38,8 +39,8 @@
     </div>
 </template>
 <script setup>
-  
     import FormRegister from '@/components/LandingFormRegister.vue'
-    import TheHeader from '@/components/shared/TheHeader.vue';
+    import LandingRegisterEmailSent from '@/components/LandingRegisterEmailSent.vue'
+    import TheHeader from '@/components/shared/TheHeader.vue'
      
 </script>

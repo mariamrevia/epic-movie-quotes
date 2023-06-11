@@ -29,7 +29,8 @@ export default {
         2.3:'2.3rem',
         53:'53rem',
         31:'31rem',
-        44:'44rem'
+        44:'44rem',
+        23.4:'23.4rem',
 
       },
       borderRadius: {
