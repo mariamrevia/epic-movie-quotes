@@ -11,5 +11,10 @@
 </template>
 
 <script setup>
-const props = defineProps(['modalActive'])
+const props = defineProps({
+  modalActive: {
+    require: true,
+    type: Boolean
+  }
+})
 </script>
