@@ -76,12 +76,12 @@ const resetPassword = () => {
 const loginStore = useLoginStore()
 //   const router = useRouter()
 
-const authUser = useUserStore()
+const authUserStore = useUserStore()
 const handleLoginSubmit = async (values) => {
   await csrf.getCookie()
   const response = await Api.login(values.username, values.password)
   if (response.status === 200) {
-    await authUser.fetchUser()
+    await authUserStore.fetchUser()
 
     console.log(response)
   }
