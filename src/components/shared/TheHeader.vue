@@ -19,7 +19,9 @@ import { useModalStore } from '@/stores/modal/index.js'
             const toggleRegisterModal = () => {
                 Modal.openModal('registerModalActive')
             }
-      
+            const toggleLoginModal = () => {
+                Modal.openModal('loginModalActive')
+            }
 
 
 </script>

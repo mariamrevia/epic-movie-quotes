@@ -20,7 +20,8 @@ export default {
         4.4:'4.4rem',
         3.3:'3.3rem',
         7.4:'7.4rem',
-        0.5:'0.5rem'
+        0.5:'0.5rem',
+        13.6:'13.6rem',
         
       
       },
@@ -31,7 +32,10 @@ export default {
         31:'31rem',
         44:'44rem',
         23.4:'23.4rem',
-        33:'33rem'
+        33:'33rem',
+        35:'35rem',
+        3.3:'3.3rem',
+        25:'25rem'
 
       },
       borderRadius: {

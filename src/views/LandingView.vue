@@ -3,6 +3,7 @@
       <TheHeader/>
         <div class="bg-landingPage h-53 border-none min-w-full flex flex-col items-center justify-center">
             <FormRegister/>
+            <LandingFormLogin/>
             <LandingRegisterEmailSent/>
             <LandingRegisterEmailConfirm/>
             <div>
@@ -41,6 +42,7 @@
 </template>
 <script setup>
     import FormRegister from '@/components/LandingFormRegister.vue'
+    import LandingFormLogin from  '@/components/LandingFormLogin.vue'
     import LandingRegisterEmailSent from '@/components/LandingRegisterEmailSent.vue'
     import LandingRegisterEmailConfirm from '@/components/LandingRegisterEmailConfirm.vue';
     import TheHeader from '@/components/shared/TheHeader.vue'

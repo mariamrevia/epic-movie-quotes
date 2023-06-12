@@ -7,7 +7,8 @@ state: () => ({
 registerModalActive: false,
 confirmModalActive: false,
 loginModalActive: false,
-emailSentModalActive:false
+emailSentModalActive:false,
+passwordModalActive:false
 
 }),
 

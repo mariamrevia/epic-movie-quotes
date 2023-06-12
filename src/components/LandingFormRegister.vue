@@ -62,8 +62,9 @@
     const Modal = useModalStore()
     const isModalActive = Modal.isModalActive
     const logIn = () => {
-        Modal.openModal('emailSentModalActive')
+        Modal.openModal('loginModalActive')
     }
+    
     const closeModal = (event) => {
         if (event.target.classList.contains('modal-wrapper')) {
             Modal.closeModal('registerModalActive')
