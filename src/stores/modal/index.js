@@ -8,7 +8,8 @@ registerModalActive: false,
 confirmModalActive: false,
 loginModalActive: false,
 emailSentModalActive:false,
-passwordModalActive:false
+passwordModalActive:false,
+
 
 }),
 

@@ -6,6 +6,7 @@
             <LandingFormLogin/>
             <LandingRegisterEmailSent/>
             <LandingRegisterEmailConfirm/>
+            <LandingPasswordVerifyEmail/>
             <div>
                 <h1 class="text-caramel md:text-4 md:w-50 w-22 text-2 text-center">
                     Find any quote in millions of movie lines
@@ -45,6 +46,7 @@
     import LandingFormLogin from  '@/components/LandingFormLogin.vue'
     import LandingRegisterEmailSent from '@/components/LandingRegisterEmailSent.vue'
     import LandingRegisterEmailConfirm from '@/components/LandingRegisterEmailConfirm.vue';
+    import LandingPasswordVerifyEmail from "@/components/LandingPasswordVerifyEmail.vue"
     import TheHeader from '@/components/shared/TheHeader.vue'
      
 </script>

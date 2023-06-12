@@ -18,3 +18,7 @@ export async function register(username, email, password, password_confirmation)
   export async function getUser() {
     return axios.get('/user')
   }
+  
+  export async function resetPasswordVerifyEmail(email) {
+    return axios.post('/forgot-password', email)
+  }
