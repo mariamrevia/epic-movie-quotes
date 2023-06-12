@@ -15,7 +15,7 @@
         <InputText
           class="w-22 h-2.3 rounded-md bg-light-gray mt-7"
           name="email"
-          v-model="resetPasswordEmail.email"
+          v-model="resetPasswordEmailStore.email"
           rules="required|email"
         />
         <p class="mt-4 text-dark-gray w-96 text-center">
@@ -39,23 +39,23 @@ import { useResetPasswordEmailStore } from '@/stores/passwordEmailVerify'
 import * as Api from '@/services/api/auth.js'
 import csrf from '@/services/api/csrf.js'
 
-const resetPasswordEmail = useResetPasswordEmailStore()
-const Modal = useModalStore()
-const isModalActive = Modal.isModalActive
-console.log(resetPasswordEmail)
+const resetPasswordEmailStore = useResetPasswordEmailStore()
+const modalStore = useModalStore()
+const isModalActive = modalStore.isModalActive
+console.log(resetPasswordEmailStore)
 
-const handleResetPasswordSubmit = async () => {
+const handleResetPasswordSubmit = async (value) => {
   await csrf.getCookie()
-  const response = await Api.resetPasswordVerifyEmail(resetPasswordEmail)
+  const response = await Api.resetPasswordVerifyEmail(value.email)
   if (response.status === 200) {
-    Modal.openModal('emailModalActive')
+    modalStore.openModal('emailModalActive')
   }
   console.log('sdfsdfs')
 }
 
 const closePasswordModal = (event) => {
   if (event.target.classList.contains('modal-wrapper')) {
-    Modal.closeModal('passwordModalActive')
+    modalStore.closeModal('passwordModalActive')
   }
 }
 </script>

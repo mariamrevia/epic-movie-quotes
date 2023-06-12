@@ -17,19 +17,24 @@
           <InputText
             name="username"
             label="Name*"
-            v-model="register.username"
+            v-model="registerStore.username"
             rules="required|minLength:3|maxLength:15"
           />
-          <InputText name="email" v-model="register.email" label="Email*" rules="required|email" />
           <InputText
-            v-model="register.password"
+            name="email"
+            v-model="registerStore.email"
+            label="Email*"
+            rules="required|email"
+          />
+          <InputText
+            v-model="registerStore.password"
             name="password"
             label="Password*"
             type="password"
             rules="required"
           />
           <InputText
-            v-model="register.confirm_password"
+            v-model="registerStore.confirm_password"
             name="password_confirmation"
             label="Confirm Password*"
             type="password"
@@ -62,16 +67,16 @@ import * as Api from '@/services/api/auth.js'
 import csrf from '@/services/api/csrf.js'
 import LandingModal from '@/components/ui/LandingModal.vue'
 
-const register = useRegisterStore()
-const Modal = useModalStore()
-const isModalActive = Modal.isModalActive
+const registerStore = useRegisterStore()
+const modalStore = useModalStore()
+const isModalActive = modalStore.isModalActive
 const logIn = () => {
-  Modal.openModal('loginModalActive')
+  modalStore.openModal('loginModalActive')
 }
 
 const closeModal = (event) => {
   if (event.target.classList.contains('modal-wrapper')) {
-    Modal.closeModal('registerModalActive')
+    modalStore.closeModal('registerModalActive')
   }
 }
 
@@ -85,7 +90,7 @@ const sendData = async (values) => {
     values.password_confirmation
   )
   if (response.status === 200) {
-    Modal.openModal('emailSentModalActive')
+    modalStore.openModal('emailSentModalActive')
   }
   console.log('sdfsdfs')
 }

@@ -25,20 +25,21 @@ import { useRoute } from 'vue-router'
 import { ref } from 'vue'
 
 const modalWrapper = ref(null)
-const Modal = useModalStore()
-const isModalActive = Modal.isModalActive
+const modalStore = useModalStore()
+const isModalActive = modalStore.isModalActive
 const route = useRoute()
+
 onMounted(() => {
   const confirmed = route.query.confirmed
   console.log(confirmed)
   if (confirmed === 'true') {
-    Modal.openModal('confirmModalActive')
+    modalStore.openModal('confirmModalActive')
   }
 })
 
 const closeModal = (event) => {
   if (event.target === modalWrapper.value) {
-    Modal.closeModal('confirmModalActive')
+    modalStore.closeModal('confirmModalActive')
   }
 }
 </script>

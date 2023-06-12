@@ -21,14 +21,15 @@
 
 <script setup>
 import { ref } from 'vue'
-const modalWrapper = ref(null)
 import { useModalStore } from '@/stores/modal'
 import ModalLanding from '@/components/ui/LandingModal.vue'
-const Modal = useModalStore()
-const isModalActive = Modal.isModalActive
+
+const modalWrapper = ref(null)
+const modalStore = useModalStore()
+const isModalActive = modalStore.isModalActive
 const closeModal = (event) => {
   if (event.target === modalWrapper.value) {
-    Modal.closeModal('emailSentModalActive')
+    modalStore.closeModal('emailSentModalActive')
   }
 }
 </script>

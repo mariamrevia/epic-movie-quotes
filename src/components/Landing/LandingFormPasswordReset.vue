@@ -13,14 +13,14 @@
       <Form>
         <h2 class="text-white text-2">Reset Password</h2>
         <InputText
-          v-model="resetPasswordData.password"
+          v-model="resetPasswordDataStore.password"
           name="password"
           label="Password*"
           type="password"
           rules="required"
         />
         <InputText
-          v-model="resetPasswordData.password_confirmation"
+          v-model="resetPasswordDataStore.password_confirmation"
           name="password_confirmation"
           label="Confirm Password*"
           type="password"
@@ -51,15 +51,15 @@ import { useRoute } from 'vue-router'
 import * as Api from '@/services/api/auth.js'
 import csrf from '@/services/api/csrf.js'
 
-const Modal = useModalStore()
-const resetPasswordData = usePasswordResetStore()
-const isModalActive = Modal.isModalActive
+const modalStore = useModalStore()
+const resetPasswordDataStore = usePasswordResetStore()
+const isModalActive = modalStore.isModalActive
 
 const route = useRoute()
 onMounted(() => {
   const token = route.query.token
   if (token) {
-    Modal.openModal('passwordResetModalActive')
+    modalStore.openModal('passwordResetModalActive')
   }
 })
 
@@ -74,6 +74,6 @@ const resetPassword = async (values) => {
     password_confirmation: values.password_confirmation,
     token: token
   })
-  Modal.openModal('emailSentModalActive')
+  modalStore.openModal('emailSentModalActive')
 }
 </script>

@@ -14,11 +14,11 @@
           <InputText
             name="username"
             label="Name*"
-            v-model="login.username"
+            v-model="loginStore.username"
             rules="required|minLength:3|maxLength:15"
           />
           <InputText
-            v-model="login.password"
+            v-model="loginStore.password"
             name="password"
             label="Password*"
             type="password"
@@ -62,15 +62,18 @@ import InputText from '@/components/ui/InputText.vue'
 import * as Api from '@/services/api/auth.js'
 import csrf from '@/services/api/csrf.js'
 
+const modalStore = useModalStore()
+const isModalActive = modalStore.isModalActive
+
 const signUp = () => {
-  Modal.openModal('registerModalActive')
+  modalStore.openModal('registerModalActive')
 }
 
 const resetPassword = () => {
-  Modal.openModal('passwordModalActive')
+  modalStore.openModal('passwordModalActive')
 }
 
-const login = useLoginStore()
+const loginStore = useLoginStore()
 //   const router = useRouter()
 
 const authUser = useUserStore()
@@ -88,9 +91,7 @@ const handleLoginSubmit = async (values) => {
 
 const closeModal = (event) => {
   if (event.target.classList.contains('modal-wrapper')) {
-    Modal.closeModal('loginModalActive')
+    modalStore.closeModal('loginModalActive')
   }
 }
-const Modal = useModalStore()
-const isModalActive = Modal.isModalActive
 </script>
