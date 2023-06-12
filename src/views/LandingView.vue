@@ -4,7 +4,7 @@
     <div
       class="bg-landingPage h-53 border-none min-w-full flex flex-col items-center justify-center"
     >
-      <FormRegister />
+      <LandingFormRegister />
       <LandingFormLogin />
       <LandingRegisterEmailSent />
       <LandingRegisterEmailConfirm />
@@ -52,10 +52,10 @@
   </div>
 </template>
 <script setup>
-import FormRegister from '@/components/LandingFormRegister.vue'
-import LandingFormLogin from '@/components/LandingFormLogin.vue'
-import LandingRegisterEmailSent from '@/components/LandingRegisterEmailSent.vue'
-import LandingRegisterEmailConfirm from '@/components/LandingRegisterEmailConfirm.vue'
-import LandingPasswordVerifyEmail from '@/components/LandingPasswordVerifyEmail.vue'
+import LandingFormRegister from '@/components/Landing/LandingFormRegister.vue'
+import LandingFormLogin from '@/components/Landing/LandingFormLogin.vue'
+import LandingRegisterEmailSent from '@/components/Landing/LandingRegisterEmailSent.vue'
+import LandingRegisterEmailConfirm from '@/components/Landing/LandingRegisterEmailConfirm.vue'
+import LandingPasswordVerifyEmail from '@/components/Landing/LandingPasswordVerifyEmail.vue'
 import TheHeader from '@/components/shared/TheHeader.vue'
 </script>
