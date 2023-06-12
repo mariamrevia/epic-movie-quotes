@@ -9,6 +9,7 @@ confirmModalActive: false,
 loginModalActive: false,
 emailSentModalActive:false,
 passwordModalActive:false,
+passwordResetModalActive:false
 
 
 }),

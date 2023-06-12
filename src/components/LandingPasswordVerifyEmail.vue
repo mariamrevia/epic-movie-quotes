@@ -24,7 +24,7 @@
             </p>
             <button
               type="submit"
-              class="bg-red w-37.5 h-2.3 border-none rounded-md text-white mt-1.5"
+              class="bg-red w-22 h-2.3 border-none rounded-md text-white mt-1.5"
             >
               Send instructions
             </button>

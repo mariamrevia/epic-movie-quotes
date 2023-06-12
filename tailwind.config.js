@@ -53,7 +53,8 @@ export default {
         22:'22rem',
         17.5:'17.5rem',
         15.6:'15.6rem',
-        37.5:'37.5rem'
+        37.5:'37.5rem',
+        33.6:'33.6rem'
       },
       fontSize: {
        2:'2rem',
