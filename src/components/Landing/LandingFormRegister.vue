@@ -8,7 +8,7 @@
       :modalActive="isModalActive('registerModalActive')"
     >
       <Form
-        @submit="sendData"
+        @submit="handleSubmit"
         class="w-37.5 h-44 z-10 fixed flex flex-col items-center bg-gray rounded-lg mt-7.4"
       >
         <div class="flex flex-col items-center">
@@ -63,7 +63,7 @@ import { Form } from 'vee-validate'
 import { useModalStore } from '@/stores/modal/index.js'
 import { useRegisterStore } from '@/stores/register'
 import InputText from '@/components/ui/InputText.vue'
-import * as Api from '@/services/api/auth.js'
+import { register } from '@/services/api/auth.js'
 import csrf from '@/services/api/csrf.js'
 import LandingModal from '@/components/ui/LandingModal.vue'
 
@@ -80,18 +80,21 @@ const closeModal = (event) => {
   }
 }
 
-const sendData = async (values) => {
-  console.log(values)
-  await csrf.getCookie()
-  const response = await Api.register(
-    values.username,
-    values.email,
-    values.password,
-    values.password_confirmation
-  )
-  if (response.status === 200) {
-    modalStore.openModal('emailSentModalActive')
+const handleSubmit = async (values) => {
+  try {
+    await csrf.getCookie()
+    const response = await register(
+      values.username,
+      values.email,
+      values.password,
+      values.password_confirmation
+    )
+    if (response.status === 200) {
+      modalStore.openModal('emailSentModalActive')
+    }
+    console.log('sdfsdfs')
+  } catch (error) {
+    console.log(error)
   }
-  console.log('sdfsdfs')
 }
 </script>

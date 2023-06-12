@@ -5,7 +5,7 @@
   >
     <LandingModal :modalActive="isModalActive('loginModalActive')">
       <Form
-        @submit="handleLoginSubmit"
+        @submit="handleSubmit"
         class="w-37.5 h-35 z-10 fixed flex flex-col mt-13.6 items-center bg-gray rounded-lg"
       >
         <div class="flex flex-col items-center">
@@ -59,7 +59,7 @@ import { useModalStore } from '@/stores/modal'
 import { useUserStore } from '@/stores/authUser'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import InputText from '@/components/ui/InputText.vue'
-import * as Api from '@/services/api/auth.js'
+import { login } from '@/services/api/auth.js'
 import csrf from '@/services/api/csrf.js'
 
 const modalStore = useModalStore()
@@ -77,16 +77,18 @@ const loginStore = useLoginStore()
 //   const router = useRouter()
 
 const authUserStore = useUserStore()
-const handleLoginSubmit = async (values) => {
-  await csrf.getCookie()
-  const response = await Api.login(values.username, values.password)
-  if (response.status === 200) {
-    await authUserStore.fetchUser()
+const handleSubmit = async (values) => {
+  try {
+    await csrf.getCookie()
+    const response = await login(values.username, values.password)
+    if (response.status === 200) {
+      await authUserStore.fetchUser()
 
-    console.log(response)
+      console.log(response)
+    }
+  } catch (error) {
+    console.log(error)
   }
-
-  console.log('sdfsdfs')
 }
 
 const closeModal = (event) => {

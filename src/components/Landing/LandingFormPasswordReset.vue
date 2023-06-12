@@ -10,7 +10,7 @@
       class="w-33.6 h-23.4 z-10 fixed flex flex-col items-center justify-center bg-gray rounded-lg"
       :modalActive="isModalActive('passwordResetModalActive')"
     >
-      <Form>
+      <Form @submit="handleSubmit">
         <h2 class="text-white text-2">Reset Password</h2>
         <InputText
           v-model="resetPasswordDataStore.password"
@@ -28,11 +28,7 @@
         />
 
         <p class="mt-4 text-white">Your account has been activated.</p>
-        <button
-          type="submit"
-          @click.prevent="resetPassword"
-          class="bg-red w-22 h-2.3 border-none rounded-md text-white mt-1.5"
-        >
+        <button type="submit" class="bg-red w-22 h-2.3 border-none rounded-md text-white mt-1.5">
           Reset Password
         </button>
       </Form>
@@ -48,7 +44,7 @@ import { usePasswordResetStore } from '@/stores/passwordReset'
 import { useModalStore } from '@/stores/modal'
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import * as Api from '@/services/api/auth.js'
+import { resetPassword } from '@/services/api/auth.js'
 import csrf from '@/services/api/csrf.js'
 
 const modalStore = useModalStore()
@@ -63,17 +59,23 @@ onMounted(() => {
   }
 })
 
-const resetPassword = async (values) => {
+const handleSubmit = async (values) => {
   const token = route.query.token
   const email = route.query.email
-
-  await csrf.getCookie()
-  await Api.resetPassword({
-    password: values.password,
-    email: email,
-    password_confirmation: values.password_confirmation,
-    token: token
-  })
-  modalStore.openModal('emailSentModalActive')
+  try {
+    await csrf.getCookie()
+    const response = await resetPassword({
+      password: values.password,
+      email: email,
+      password_confirmation: values.password_confirmation,
+      token: token
+    })
+    if (response.status === 200) {
+      modalStore.openModal('emailSentModalActive')
+    }
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
 }
 </script>

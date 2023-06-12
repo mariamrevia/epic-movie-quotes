@@ -8,7 +8,7 @@
       :modalActive="isModalActive('passwordModalActive')"
     >
       <Form
-        @submit="handleResetPasswordSubmit"
+        @submit="handleSubmit"
         class="w-37.5 h-25 z-10 fixed flex flex-col mt-13.6 items-center justify-center bg-gray rounded-lg"
       >
         <h2 class="text-2 text-white">Forgot password?</h2>
@@ -36,7 +36,7 @@ import { useModalStore } from '@/stores/modal'
 import InputText from '@/components/ui/InputText.vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import { useResetPasswordEmailStore } from '@/stores/passwordEmailVerify'
-import * as Api from '@/services/api/auth.js'
+import { resetPasswordVerifyEmail } from '@/services/api/auth.js'
 import csrf from '@/services/api/csrf.js'
 
 const resetPasswordEmailStore = useResetPasswordEmailStore()
@@ -44,13 +44,17 @@ const modalStore = useModalStore()
 const isModalActive = modalStore.isModalActive
 console.log(resetPasswordEmailStore)
 
-const handleResetPasswordSubmit = async (value) => {
-  await csrf.getCookie()
-  const response = await Api.resetPasswordVerifyEmail(value.email)
-  if (response.status === 200) {
-    modalStore.openModal('emailModalActive')
+const handleSubmit = async (value) => {
+  try {
+    await csrf.getCookie()
+    const response = await resetPasswordVerifyEmail(value.email)
+    if (response.status === 200) {
+      modalStore.openModal('emailModalActive')
+    }
+    console.log('sdfsdfs')
+  } catch (error) {
+    console.log(error)
   }
-  console.log('sdfsdfs')
 }
 
 const closePasswordModal = (event) => {
