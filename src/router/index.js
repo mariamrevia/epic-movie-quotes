@@ -1,23 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import LandingView from '@/views/LandingView.vue'
+import NewsFeedView from '@/views/NewsFeedView.vue'
+import { useUserStore } from '@/stores/authUser'
+
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: HomeView
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    }
-  ]
+history: createWebHistory(),
+routes: [
+{path: '/',name: 'landing',component: LandingView },
+{path:'/newsFeed' , name:'newsFeed' , component:NewsFeedView ,meta: { requiresAuth: true } }
+
+]
 })
 
-export default router
+router.beforeEach((to, from, next) => {
+    const authUser = useUserStore();
+    console.log(authUser);
+    if (to.meta.requiresAuth && (!authUser.isAuthenticated || !authUser.verified)) {
+      next('/');
+    } else {
+      next();
+    }
+  });
+export default router;
