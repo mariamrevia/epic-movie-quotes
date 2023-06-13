@@ -9,7 +9,7 @@
     >
       <Form
         @submit="handleSubmit"
-        class="w-37.5 h-44 z-10 fixed flex flex-col items-center bg-gray rounded-lg mt-7.4"
+        class="w-37.5 z-10 fixed flex flex-col pb-4 items-center bg-gray rounded-lg mt-7.4"
       >
         <div class="flex flex-col items-center">
           <h1 class="text-white text-2 mt-3.3">Create and Account</h1>
