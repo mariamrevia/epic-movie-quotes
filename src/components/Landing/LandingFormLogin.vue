@@ -36,7 +36,11 @@
           <button type="submit" class="w-22 mt-1.5 h-2.3 bg-red border-none rounded-md text-white">
             Sign In
           </button>
-          <button type="submit" class="w-22 mt-1.5 h-2.3 border rounded-md text-white">
+          <button
+            @click="loginWithGoogle"
+            type="button"
+            class="w-22 mt-1.5 h-2.3 border rounded-md text-white"
+          >
             Sign In with Google
           </button>
           <div class="flex flex-row">
@@ -55,11 +59,11 @@
 import { Form } from 'vee-validate'
 import { useLoginStore } from '@/stores/Login'
 import { useModalStore } from '@/stores/modal'
-//   import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/authUser'
+import { authGoogle } from '@/services/api/oauth'
+import { login } from '@/services/api/auth.js'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import InputText from '@/components/ui/InputText.vue'
-import { login } from '@/services/api/auth.js'
 import csrf from '@/services/api/csrf.js'
 
 const modalStore = useModalStore()
@@ -74,8 +78,6 @@ const resetPassword = () => {
 }
 
 const loginStore = useLoginStore()
-//   const router = useRouter()
-
 const authUserStore = useUserStore()
 const handleSubmit = async (values) => {
   try {
@@ -86,6 +88,14 @@ const handleSubmit = async (values) => {
 
       console.log(response)
     }
+  } catch (error) {
+    console.log(error)
+  }
+}
+const loginWithGoogle = async () => {
+  try {
+    await csrf.getCookie()
+    await authGoogle()
   } catch (error) {
     console.log(error)
   }

@@ -43,7 +43,11 @@
           <button type="submit" class="w-22 mt-1.5 h-2.3 bg-red border-none rounded-md text-white">
             Get started
           </button>
-          <button type="submit" class="w-22 mt-1.5 h-2.3 border rounded-md text-white">
+          <button
+            type="button"
+            @click="registerWithGoogle"
+            class="w-22 mt-1.5 h-2.3 border rounded-md text-white"
+          >
             Sign Up with Google
           </button>
           <div class="flex flex-row">
@@ -64,6 +68,7 @@ import { useModalStore } from '@/stores/modal/index.js'
 import { useRegisterStore } from '@/stores/register'
 import InputText from '@/components/ui/InputText.vue'
 import { register } from '@/services/api/auth.js'
+import { authGoogle } from '@/services/api/oauth'
 import csrf from '@/services/api/csrf.js'
 import LandingModal from '@/components/ui/LandingModal.vue'
 
@@ -93,6 +98,14 @@ const handleSubmit = async (values) => {
       modalStore.openModal('emailSentModalActive')
     }
     console.log('sdfsdfs')
+  } catch (error) {
+    console.log(error)
+  }
+}
+const registerWithGoogle = async () => {
+  try {
+    await csrf.getCookie()
+    await authGoogle()
   } catch (error) {
     console.log(error)
   }
