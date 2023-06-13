@@ -6,10 +6,10 @@
     <LandingModal :modalActive="isModalActive('loginModalActive')">
       <Form
         @submit="handleSubmit"
-        class="w-37.5 h-35 z-10 fixed flex flex-col mt-13.6 items-center bg-gray rounded-lg"
+        class="w-37.5 z-10 fixed flex flex-col md:mt-13.6 pb-13 md:pb-4 items-center bg-darkgray md:bg-gray rounded-lg"
       >
         <div class="flex flex-col items-center">
-          <h1 class="text-white text-2 mt-3.3">Create and Account</h1>
+          <h1 class="text-white text-2 mt-3.3">Log in to your account</h1>
           <p class="text-dark-gray">Welcome back! Please enter your details.</p>
           <InputText
             name="username"
@@ -30,7 +30,9 @@
               <p>Rememmber me</p>
             </div>
             <div>
-              <button type="button" @click="resetPassword">Forgot Password</button>
+              <button class="text-blue underline" type="button" @click="resetPassword">
+                Forgot Password
+              </button>
             </div>
           </div>
           <button type="submit" class="w-22 mt-1.5 h-2.3 bg-red border-none rounded-md text-white">
@@ -43,9 +45,9 @@
           >
             Sign In with Google
           </button>
-          <div class="flex flex-row">
+          <div class="flex flex-row mb-5">
             <p class="mt-2 text-dark-gray">Already have an accoun?</p>
-            <button type="button" @click="signUp" class="text-white flex items-end ml-0.5">
+            <button type="button" @click="signUp" class="text-blue underline flex items-end ml-0.5">
               Sign Up
             </button>
           </div>

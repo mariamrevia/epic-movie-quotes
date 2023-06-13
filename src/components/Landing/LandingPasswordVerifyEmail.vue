@@ -1,32 +1,33 @@
 <template>
   <div
-    :class="['modal-wrapper', { 'modal-wrapper--active': isModalActive('passwordModalActive') }]"
+    :class="[
+      'modal-wrapper flex justify-center',
+      { 'modal-wrapper--active': isModalActive('passwordModalActive') }
+    ]"
     @click="closePasswordModal"
   >
-    <LandingModal
-      class="flex flex-col items-center align-middle"
-      :modalActive="isModalActive('passwordModalActive')"
-    >
-      <Form
-        @submit="handleSubmit"
-        class="w-37.5 h-25 z-10 fixed flex flex-col mt-13.6 items-center justify-center bg-gray rounded-lg"
+    <div class="h-screen w-screen flex justify-center md:h-0 md:w-0 bg-landingPage">
+      <LandingModal
+        class="flex flex-col items-center align-middle"
+        :modalActive="isModalActive('passwordModalActive')"
       >
-        <h2 class="text-2 text-white">Forgot password?</h2>
-        <InputText
-          class="w-22 h-2.3 rounded-md bg-light-gray mt-7"
-          name="email"
-          v-model="resetPasswordEmailStore.email"
-          rules="required|email"
-        />
-        <p class="mt-4 text-dark-gray w-96 text-center">
-          Enter the email and we’ll send an email with instructions to reset your password
-        </p>
-        <button type="submit" class="bg-red w-22 h-2.3 border-none rounded-md text-white mt-1.5">
-          Send instructions
-        </button>
-        <button class="border-none text-dark-gray mt-6">back to Log In</button>
-      </Form>
-    </LandingModal>
+        <Form
+          @submit="handleSubmit"
+          class="md:w-37.5 w-full h-25 z-10 fixed flex flex-col mt-5 md:mt-13.6 items-center justify-center md:bg-gray bg-gradient rounded-lg"
+        >
+          <iconcheckSend />
+          <h2 class="text-2 text-white mt-1.5">Forgot password?</h2>
+          <InputText name="email" v-model="resetPasswordEmailStore.email" rules="required|email" />
+          <p class="mt-4 text-dark-gray w-96 text-center">
+            Enter the email and we’ll send an email with instructions to reset your password
+          </p>
+          <button type="submit" class="bg-red w-22 h-2.3 border-none rounded-md text-white mt-1.5">
+            Send instructions
+          </button>
+          <button class="border-none text-dark-gray mt-6">back to Log In</button>
+        </Form>
+      </LandingModal>
+    </div>
   </div>
 </template>
 
@@ -38,6 +39,7 @@ import LandingModal from '@/components/ui/LandingModal.vue'
 import { useResetPasswordEmailStore } from '@/stores/passwordEmailVerify'
 import { resetPasswordVerifyEmail } from '@/services/api/auth.js'
 import csrf from '@/services/api/csrf.js'
+import iconcheckSend from '@/components/icons/IconCheckSend.vue'
 
 const resetPasswordEmailStore = useResetPasswordEmailStore()
 const modalStore = useModalStore()

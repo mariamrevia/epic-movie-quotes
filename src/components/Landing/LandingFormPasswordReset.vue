@@ -1,38 +1,40 @@
 <template>
   <div
     :class="[
-      'modal-wrapper',
+      'modal-wrapper flex justify-center',
       { 'modal-wrapper--active': isModalActive('passwordResetModalActive') }
     ]"
     @click="closeModal"
   >
-    <LandingModal
-      class="w-33.6 h-23.4 z-10 fixed flex flex-col items-center justify-center bg-gray rounded-lg"
-      :modalActive="isModalActive('passwordResetModalActive')"
-    >
-      <Form @submit="handleSubmit">
-        <h2 class="text-white text-2">Reset Password</h2>
-        <InputText
-          v-model="resetPasswordDataStore.password"
-          name="password"
-          label="Password*"
-          type="password"
-          rules="required"
-        />
-        <InputText
-          v-model="resetPasswordDataStore.password_confirmation"
-          name="password_confirmation"
-          label="Confirm Password*"
-          type="password"
-          rules="required|confirmed:password"
-        />
+    <div class="h-screen w-screen flex justify-center md:h-0 md:w-0 bg-lightBlack">
+      <LandingModal
+        class="w-33.6 pb-10 pt-10 z-10 mt-5 md:mt-13.6 fixed flex flex-col items-center justify-center bg-gradient md:bg-gray rounded-lg"
+        :modalActive="isModalActive('passwordResetModalActive')"
+      >
+        <Form class="flex justify-center flex-col" @submit="handleSubmit">
+          <h2 class="text-white text-2 flex justify-center">Reset Password</h2>
+          <InputText
+            v-model="resetPasswordDataStore.password"
+            name="password"
+            label="Password*"
+            type="password"
+            rules="required"
+          />
+          <InputText
+            v-model="resetPasswordDataStore.password_confirmation"
+            name="password_confirmation"
+            label="Confirm Password*"
+            type="password"
+            rules="required|confirmed:password"
+          />
 
-        <p class="mt-4 text-white">Your account has been activated.</p>
-        <button type="submit" class="bg-red w-22 h-2.3 border-none rounded-md text-white mt-1.5">
-          Reset Password
-        </button>
-      </Form>
-    </LandingModal>
+          <p class="mt-4 text-white">Your account has been activated.</p>
+          <button type="submit" class="bg-red w-22 h-2.3 border-none rounded-md text-white mt-1.5">
+            Reset Password
+          </button>
+        </Form>
+      </LandingModal>
+    </div>
   </div>
 </template>
 

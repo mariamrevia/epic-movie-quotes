@@ -18,6 +18,7 @@ export default {
         3.3: '3.3rem',
         7.4: '7.4rem',
         0.5: '0.5rem',
+        5: '5rem',
         13.6: '13.6rem'
       },
       height: {
@@ -34,7 +35,8 @@ export default {
       },
       borderRadius: {},
       textColor: {
-        caramel: '#DDCCAA'
+        caramel: '#DDCCAA',
+        blue: ' #0D6EFD'
       },
       borderWidth: {
         0.1: '0.1rem'
@@ -49,12 +51,18 @@ export default {
         17.5: '17.5rem',
         15.6: '15.6rem',
         37.5: '37.5rem',
-        33.6: '33.6rem'
+        33.6: '33.6rem',
+        35: '35rem',
+        45: '45rem'
+      },
+      padding: {
+        13: '13rem'
       },
       fontSize: {
         2: '2rem',
         1.25: '1.25rem',
-        1: '1rem'
+        1: '1rem',
+        3: '3rem'
       },
       colors: {
         'dark-gray': '#6C757D',
@@ -65,9 +73,17 @@ export default {
         red: '#E31221',
         gray: '#222030',
         'light-gray': '#CED4DA',
-        blur: 'rgba(0, 0, 0, 0.5)'
+        blur: 'rgba(0, 0, 0, 0.5)',
+        darkgray: '#11101A',
+        gradient: 'linear-gradient(187.16deg, #181623 0.7%, #191725 51.65%, #0D0B14 98.75%)',
+        modalgradient:
+          'linear-gradient(112.94deg, rgba(239, 239, 239, 0.4) -1.81%, rgba(239, 239, 239, 0.00514528) 102.5%, rgba(1, 1, 1, 0.00260417) 102.51%, rgba(239, 239, 239, 0.05) 102.52%);',
+        lightBlack: '#181623'
       },
       backgroundImage: {
+        gray: '#222030',
+        modalgradient:
+          'linear-gradient(112.94deg, rgba(239, 239, 239, 0.4) -1.81%, rgba(239, 239, 239, 0.006) 102.5%, rgba(1, 1, 1, 0.00460417) 102.51%, rgba(239, 239, 239, 0.08) 102.52%);',
         landingPage: 'linear-gradient(180deg, #11101A 0%, #08080D 50.52%, rgba(0, 0, 0, 0.9) 100%)',
         landingPage1: "url('@/assets/images/landingPage-1.png')",
         landingPage2: "url('@/assets/images/landingPage-2.png')",
@@ -75,8 +91,7 @@ export default {
       },
       inset: {
         0.8: '0.8rem'
-      },
-      padding: {}
+      }
     }
   },
   plugins: []
