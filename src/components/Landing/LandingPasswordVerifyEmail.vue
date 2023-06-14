@@ -51,7 +51,7 @@ const handleSubmit = async (value) => {
     await csrf.getCookie()
     const response = await resetPasswordVerifyEmail(value.email)
     if (response.status === 200) {
-      modalStore.openModal('emailModalActive')
+      modalStore.openModal('passwordEmailSentModalActive')
     }
     console.log('sdfsdfs')
   } catch (error) {

@@ -73,11 +73,17 @@ const handleSubmit = async (values) => {
       token: token
     })
     if (response.status === 200) {
-      modalStore.openModal('emailSentModalActive')
+      modalStore.openModal('passwordResetSuccessActive')
     }
   } catch (error) {
     console.log(error)
     throw error
+  }
+}
+
+const closeModal = (event) => {
+  if (event.target.classList.contains('modal-wrapper')) {
+    modalStore.closeModal('passwordResetModalActive')
   }
 }
 </script>

@@ -10,6 +10,9 @@
       <LandingRegisterEmailConfirm />
       <LandingPasswordVerifyEmail />
       <LandingFormPasswordReset />
+      <LandingPasswordResetSuccess />
+      <LandingPasswordEmailSent />
+
       <div>
         <h1 class="text-caramel md:text-4 md:w-50 w-22 text-2 text-center">
           Find any quote in millions of movie lines
@@ -54,10 +57,12 @@
 </template>
 <script setup>
 import LandingFormRegister from '@/components/Landing/LandingFormRegister.vue'
+import LandingPasswordResetSuccess from '@/components/Landing/LandingPasswordResetSuccess.vue'
 import LandingFormLogin from '@/components/Landing/LandingFormLogin.vue'
 import LandingRegisterEmailSent from '@/components/Landing/LandingRegisterEmailSent.vue'
 import LandingRegisterEmailConfirm from '@/components/Landing/LandingRegisterEmailConfirm.vue'
 import LandingPasswordVerifyEmail from '@/components/Landing/LandingPasswordVerifyEmail.vue'
 import LandingFormPasswordReset from '@/components/Landing/LandingFormPasswordReset.vue'
+import LandingPasswordEmailSent from '@/components/Landing/LandingPasswordEmailSent.vue'
 import TheHeader from '@/components/shared/TheHeader.vue'
 </script>

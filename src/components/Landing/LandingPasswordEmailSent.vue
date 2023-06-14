@@ -3,19 +3,19 @@
     ref="modalWrapper"
     :class="[
       'modal-wrapper flex justify-center',
-      { 'modal-wrapper--active': isModalActive('emailSentModalActive') }
+      { 'modal-wrapper--active': isModalActive('passwordEmailSentModalActive') }
     ]"
     @click="closeModal"
   >
     <div class="h-screen w-screen flex justify-center md:h-0 md:w-0 bg-black">
       <LandingModal
         class="md:w-33.6 w-22 h-23.4 z-10 mt-5 md:mt-13.6 fixed flex flex-col items-center justify-center bg-gray md:bg-gray rounded-lg"
-        :modalActive="isModalActive('emailSentModalActive')"
+        :modalActive="isModalActive('passwordEmailSentModalActive')"
       >
         <iconCheckSend />
         <h2 class="text-white text-2 mt-1.5">Thank You!</h2>
         <p class="mt-4 text-white w-60 md:w-96 text-center">
-          Please check your email and follow the instructions to activate your account.
+          We have sent a password recover instructions to your email
         </p>
         <button
           type="button"
@@ -38,7 +38,7 @@ const modalStore = useModalStore()
 const isModalActive = modalStore.isModalActive
 const closeModal = (event) => {
   if (event.target === modalWrapper.value) {
-    modalStore.closeModal('emailSentModalActive')
+    modalStore.closeModal('passwordEmailSentModalActive')
   }
 }
 </script>
