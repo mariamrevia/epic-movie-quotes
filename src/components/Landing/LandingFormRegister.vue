@@ -40,9 +40,8 @@
             type="password"
             rules="required|confirmed:password"
           />
-          <button type="submit" class="w-22 mt-1.5 h-2.3 bg-red border-none rounded-md text-white">
-            Get started
-          </button>
+
+          <LandingModalButton text="Get started" type="submit" />
           <button
             type="button"
             @click="registerWithGoogle"
@@ -67,6 +66,7 @@ import { Form } from 'vee-validate'
 import { useModalStore } from '@/stores/modal/index.js'
 import { useRegisterStore } from '@/stores/register'
 import InputText from '@/components/ui/InputText.vue'
+import LandingModalButton from '@/components/ui/LandingModalButton.vue'
 import { register } from '@/services/api/auth.js'
 import { authGoogle } from '@/services/api/oauth'
 import csrf from '@/services/api/csrf.js'

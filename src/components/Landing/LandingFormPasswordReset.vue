@@ -29,9 +29,7 @@
           />
 
           <p class="mt-4 text-white">Your account has been activated.</p>
-          <button type="submit" class="bg-red w-22 h-2.3 border-none rounded-md text-white mt-1.5">
-            Reset Password
-          </button>
+          <LandingModalButton text="Reset Password" type="submit" />
         </Form>
       </LandingModal>
     </div>
@@ -42,6 +40,7 @@
 import { Form } from 'vee-validate'
 import InputText from '@/components/ui/InputText.vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
+import LandingModalButton from '@/components/ui/LandingModalButton.vue'
 import { usePasswordResetStore } from '@/stores/passwordReset'
 import { useModalStore } from '@/stores/modal'
 import { onMounted } from 'vue'

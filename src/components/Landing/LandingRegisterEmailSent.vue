@@ -17,12 +17,12 @@
         <p class="mt-4 text-white w-60 md:w-96 text-center">
           Please check your email and follow the instructions to activate your account.
         </p>
-        <button
-          type="button"
-          class="bg-red md:w-22 w-56 h-2.3 border-none rounded-md text-white mt-1.5"
+        <a
+          href="https://mail.google.com/"
+          class="bg-red md:w-22 w-56 h-2.3 border-none flex items-center justify-center rounded-md text-white mt-1.5"
+          target="_blank"
+          >Go to my email</a
         >
-          Go to my Email
-        </button>
       </LandingModal>
     </div>
   </div>

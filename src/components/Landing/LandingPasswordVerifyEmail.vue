@@ -21,9 +21,8 @@
           <p class="mt-4 text-dark-gray w-96 text-center">
             Enter the email and we’ll send an email with instructions to reset your password
           </p>
-          <button type="submit" class="bg-red w-22 h-2.3 border-none rounded-md text-white mt-1.5">
-            Send instructions
-          </button>
+          <LandingModalButton type="submit" text="Send instructions" />
+
           <button class="border-none text-dark-gray mt-6">back to Log In</button>
         </Form>
       </LandingModal>
@@ -36,6 +35,7 @@ import { Form } from 'vee-validate'
 import { useModalStore } from '@/stores/modal'
 import InputText from '@/components/ui/InputText.vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
+import LandingModalButton from '@/components/ui/LandingModalButton.vue'
 import { useResetPasswordEmailStore } from '@/stores/passwordEmailVerify'
 import { resetPasswordVerifyEmail } from '@/services/api/auth.js'
 import csrf from '@/services/api/csrf.js'
