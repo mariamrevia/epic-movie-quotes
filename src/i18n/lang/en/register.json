@@ -1,0 +1,23 @@
+{
+  "create_account": "Create an Account",
+  "start_journey": "Start your journey!",
+  "name": "name*",
+  "email": "Email",
+  "password": "password",
+  "confirm_password": "Confirm Password",
+  "sign_up_google": "Sign Up with Google",
+  "get_started": "Get Started",
+  "have_account": "Already have an accoun?",
+  "log_in": "Log In",
+
+  "email_confirm": {
+    "thank_you": "thank you!",
+    "note": "Your account has been activated",
+    "go_news_feed": "Go to my news feed"
+  },
+  "email_sent": {
+    "thank_you": "thank you!",
+    "note": "Please check your email and follow the instructions to activate your account.",
+    "go_to_email": "Go to my email"
+  }
+}

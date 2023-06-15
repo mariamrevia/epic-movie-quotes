@@ -16,14 +16,16 @@
           class="md:w-37.5 w-full h-25 z-10 fixed flex flex-col mt-5 md:mt-13.6 items-center justify-center md:bg-gray bg-gradient rounded-lg"
         >
           <iconcheckSend />
-          <h2 class="text-2 text-white mt-1.5">Forgot password?</h2>
+          <h2 class="text-2 text-white mt-1.5">{{ $t('passwordReset.forgot_password') }}</h2>
           <InputText name="email" v-model="resetPasswordEmailStore.email" rules="required|email" />
           <p class="mt-4 text-dark-gray w-96 text-center">
-            Enter the email and we’ll send an email with instructions to reset your password
+            {{ $t('passwordReset.note_instractions') }}
           </p>
           <LandingModalButton type="submit" text="Send instructions" />
 
-          <button @click="goToLogIn" class="border-none text-dark-gray mt-6">back to Log In</button>
+          <button @click="goToLogIn" class="border-none text-dark-gray mt-6">
+            {{ $t('passwordReset.back_log_in') }}
+          </button>
         </Form>
       </LandingModal>
     </div>
