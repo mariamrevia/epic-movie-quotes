@@ -1,13 +1,19 @@
-import * as Api from '@/services/api/auth.js'
+import { getUser } from '@/services/api/auth.js'
 export default {
-    async fetchUser() {
+  async fetchUser() {
     try {
-      const user = await Api.getUser();
-      this.isAuthenticated = !!user;
-      this.verified = user.data.email_verified_at;
+      const user = await getUser()
+      console.log(user)
+      this.isAuthenticated = !!user
+      if (user.data.email_verified_at === null) {
+        this.verified === user.data.google_id
+      } else {
+        this.verified = user.data.email_verified_at
+      }
+
       console.log(this.isAuthenticated)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  },
+  }
 }

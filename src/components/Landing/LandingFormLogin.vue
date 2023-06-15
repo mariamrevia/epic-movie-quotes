@@ -35,9 +35,8 @@
               </button>
             </div>
           </div>
-          <button type="submit" class="w-22 mt-1.5 h-2.3 bg-red border-none rounded-md text-white">
-            Sign In
-          </button>
+
+          <LandingModalButton type="submit" text="Sign In" />
           <button
             @click="loginWithGoogle"
             type="button"
@@ -61,10 +60,10 @@
 import { Form } from 'vee-validate'
 import { useLoginStore } from '@/stores/Login'
 import { useModalStore } from '@/stores/modal'
-import { useUserStore } from '@/stores/authUser'
 import { authGoogle } from '@/services/api/oauth'
 import { login } from '@/services/api/auth.js'
 import LandingModal from '@/components/ui/LandingModal.vue'
+import LandingModalButton from '@/components/ui/LandingModalButton.vue'
 import InputText from '@/components/ui/InputText.vue'
 import csrf from '@/services/api/csrf.js'
 
@@ -80,14 +79,11 @@ const resetPassword = () => {
 }
 
 const loginStore = useLoginStore()
-const authUserStore = useUserStore()
 const handleSubmit = async (values) => {
   try {
     await csrf.getCookie()
     const response = await login(values.username, values.password)
     if (response.status === 200) {
-      await authUserStore.fetchUser()
-
       console.log(response)
     }
   } catch (error) {

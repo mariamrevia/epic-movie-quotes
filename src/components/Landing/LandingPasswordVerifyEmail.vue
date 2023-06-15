@@ -23,7 +23,7 @@
           </p>
           <LandingModalButton type="submit" text="Send instructions" />
 
-          <button class="border-none text-dark-gray mt-6">back to Log In</button>
+          <button @click="goToLogIn" class="border-none text-dark-gray mt-6">back to Log In</button>
         </Form>
       </LandingModal>
     </div>
@@ -58,7 +58,9 @@ const handleSubmit = async (value) => {
     console.log(error)
   }
 }
-
+const goToLogIn = () => {
+  modalStore.openModal('loginModalActive')
+}
 const closePasswordModal = (event) => {
   if (event.target.classList.contains('modal-wrapper')) {
     modalStore.closeModal('passwordModalActive')

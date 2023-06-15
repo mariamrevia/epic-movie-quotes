@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '@/stores/authUser'
+
 import LandingView from '@/views/LandingView.vue'
 import NewsFeedView from '@/views/NewsFeedView.vue'
 
@@ -11,13 +12,20 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  const authUser = useUserStore()
-  console.log(authUser)
-  if (to.meta.requiresAuth && (!authUser.isAuthenticated || !authUser.verified)) {
-    next({ name: 'landing' })
-  } else {
-    next()
+router.beforeEach(async (to, from, next) => {
+  try {
+    const authUserStore = useUserStore()
+    await authUserStore.fetchUser()
+    console.log(authUserStore)
+    if (to.meta.requiresAuth && (!authUserStore.isAuthenticated || authUserStore.verified)) {
+      next({ name: 'landing' })
+    } else {
+      next()
+    }
+  } catch (error) {
+    console.error(error)
+    next(false)
   }
 })
+
 export default router

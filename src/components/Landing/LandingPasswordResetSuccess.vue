@@ -16,6 +16,7 @@
         <p class="mt-4 text-white w-60 md:w-96 text-center">Your Password changed successfully.</p>
         <button
           type="button"
+          @click="goToLogIn"
           class="bg-red md:w-22 w-56 h-2.3 border-none rounded-md text-white mt-1.5"
         >
           Log In
@@ -36,5 +37,8 @@ const closeModal = (event) => {
   if (event.target) {
     modalStore.closeModal('passwordResetSuccessActive')
   }
+}
+const goToLogIn = () => {
+  modalStore.openModal('loginModalActive')
 }
 </script>
