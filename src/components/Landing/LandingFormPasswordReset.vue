@@ -1,0 +1,88 @@
+<template>
+  <div
+    :class="[
+      'modal-wrapper flex justify-center',
+      { 'modal-wrapper--active': isModalActive('passwordResetModalActive') }
+    ]"
+    @click="closeModal"
+  >
+    <div class="h-screen w-screen flex justify-center md:h-0 md:w-0 bg-lightBlack">
+      <LandingModal
+        class="w-33.6 pb-10 pt-10 z-10 mt-5 md:mt-13.6 fixed flex flex-col items-center justify-center bg-gradient md:bg-gray rounded-lg"
+        :modalActive="isModalActive('passwordResetModalActive')"
+      >
+        <Form class="flex justify-center flex-col" @submit="handleSubmit">
+          <h2 class="text-white text-2 flex justify-center">Reset Password</h2>
+          <InputText
+            v-model="resetPasswordDataStore.password"
+            name="password"
+            label="Password*"
+            type="password"
+            rules="required"
+          />
+          <InputText
+            v-model="resetPasswordDataStore.password_confirmation"
+            name="password_confirmation"
+            label="Confirm Password*"
+            type="password"
+            rules="required|confirmed:password"
+          />
+
+          <p class="mt-4 text-white">Your account has been activated.</p>
+          <LandingModalButton text="Reset Password" type="submit" />
+        </Form>
+      </LandingModal>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { Form } from 'vee-validate'
+import InputText from '@/components/ui/InputText.vue'
+import LandingModal from '@/components/ui/LandingModal.vue'
+import LandingModalButton from '@/components/ui/LandingModalButton.vue'
+import { usePasswordResetStore } from '@/stores/passwordReset'
+import { useModalStore } from '@/stores/modal'
+import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { resetPassword } from '@/services/api/auth.js'
+import csrf from '@/services/api/csrf.js'
+
+const modalStore = useModalStore()
+const resetPasswordDataStore = usePasswordResetStore()
+const isModalActive = modalStore.isModalActive
+
+const route = useRoute()
+onMounted(() => {
+  const token = route.query.token
+  if (token) {
+    modalStore.openModal('passwordResetModalActive')
+  }
+})
+
+const handleSubmit = async (values) => {
+  const token = route.query.token
+  const email = route.query.email
+  try {
+    await csrf.getCookie()
+    const response = await resetPassword({
+      password: values.password,
+      email: email,
+      password_confirmation: values.password_confirmation,
+      token: token
+    })
+    if (response.status === 200) {
+      modalStore.openModal('passwordResetSuccessActive')
+    }
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
+
+const closeModal = (event) => {
+  if (event.target.classList.contains('modal-wrapper')) {
+    modalStore.closeModal('passwordResetModalActive')
+  }
+}
+</script>

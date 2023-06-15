@@ -3,19 +3,17 @@ import actions from '@/stores/modal/actions'
 import getters from '@/stores/modal/getters'
 
 export const useModalStore = defineStore('modal', {
-state: () => ({
-registerModalActive: false,
-confirmModalActive: false,
-loginModalActive: false,
-emailSentModalActive:false,
-passwordModalActive:false,
-passwordResetModalActive:false
+  state: () => ({
+    registerModalActive: false,
+    confirmModalActive: false,
+    loginModalActive: false,
+    emailSentModalActive: false,
+    passwordModalActive: false,
+    passwordResetModalActive: false,
+    passwordResetSuccessActive: false,
+    passwordEmailSentModalActive: false
+  }),
 
-
-}),
-
-
-getters: getters,
-actions: actions
-
+  getters: getters,
+  actions: actions
 })
