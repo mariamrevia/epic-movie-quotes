@@ -18,7 +18,7 @@
             name="username"
             :label="$t('register.name')"
             v-model="registerStore.username"
-            rules="required|minLength:3|maxLength:15"
+            rules="required|minLength:3|maxLength:15|lowercase"
           />
           <InputText
             name="email"
@@ -31,7 +31,7 @@
             name="password"
             :label="$t('register.password')"
             type="password"
-            rules="required"
+            rules="required|lowercase"
           />
           <InputText
             v-model="registerStore.confirm_password"
