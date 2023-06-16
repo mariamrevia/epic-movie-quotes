@@ -16,6 +16,7 @@
             :label="$t('login.name')"
             v-model="loginStore.username"
             rules="required|minLength:3|maxLength:15"
+            :placeholder="$t('placeholders.email')"
           />
           <InputText
             v-model="loginStore.password"
@@ -23,6 +24,7 @@
             :label="$t('login.password')"
             type="password"
             rules="required"
+            :placeholder="$t('placeholders.enter_password')"
           />
 
           <div class="flex flex-row justify-between text-white w-full mt-4">

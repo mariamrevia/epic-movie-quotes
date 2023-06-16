@@ -19,12 +19,14 @@
             :label="$t('register.name')"
             v-model="registerStore.username"
             rules="required|minLength:3|maxLength:15|lowercase"
+            :placeholder="$t('placeholders.name')"
           />
           <InputText
             name="email"
             v-model="registerStore.email"
             :label="$t('register.email')"
             rules="required|email"
+            :placeholder="$t('placeholders.email')"
           />
           <InputText
             v-model="registerStore.password"
@@ -32,6 +34,7 @@
             :label="$t('register.password')"
             type="password"
             rules="required|lowercase"
+            :placeholder="$t('placeholders.password')"
           />
           <InputText
             v-model="registerStore.confirm_password"
@@ -39,6 +42,7 @@
             :label="$t('register.confirm_password')"
             type="password"
             rules="required|confirmed:password"
+            :placeholder="$t('placeholders.confirm_password')"
           />
 
           <LandingModalButton :text="$t('register.get_started')" type="submit" />

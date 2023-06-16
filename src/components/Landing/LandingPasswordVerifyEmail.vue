@@ -17,7 +17,12 @@
         >
           <iconcheckSend />
           <h2 class="text-2 text-white mt-1.5">{{ $t('passwordReset.forgot_password') }}</h2>
-          <InputText name="email" v-model="resetPasswordEmailStore.email" rules="required|email" />
+          <InputText
+            name="email"
+            v-model="resetPasswordEmailStore.email"
+            rules="required|email"
+            :placeholder="$t('placeholders.email')"
+          />
           <p class="mt-4 text-dark-gray w-96 text-center">
             {{ $t('passwordReset.note_instractions') }}
           </p>

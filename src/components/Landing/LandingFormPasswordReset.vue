@@ -19,6 +19,7 @@
             :label="$t('passwordReset.password')"
             type="password"
             rules="required"
+            :placeholder="$t('placeholders.password')"
           />
           <InputText
             v-model="resetPasswordDataStore.password_confirmation"
@@ -26,6 +27,7 @@
             :label="$t('passwordReset.confirm_password')"
             type="password"
             rules="required|confirmed:password"
+            :placeholder="$t('placeholders.enter_password')"
           />
 
           <p class="mt-4 text-white">{{ $t('passwordReset.note_activation') }}</p>
