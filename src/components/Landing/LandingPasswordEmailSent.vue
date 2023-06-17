@@ -13,15 +13,16 @@
         :modalActive="isModalActive('passwordEmailSentModalActive')"
       >
         <iconCheckSend />
-        <h2 class="text-white text-2 mt-1.5">Thank You!</h2>
+        <h2 class="text-white text-2 mt-1.5">{{ $t('passwordReset.email_sent.thanks') }}</h2>
         <p class="mt-4 text-white w-60 md:w-96 text-center">
-          We have sent a password recover instructions to your email
+          {{ $t('passwordReset.email_sent.note') }}
         </p>
         <a
           href="https://mail.google.com/"
           class="bg-red md:w-22 w-56 h-2.3 border-none flex items-center justify-center rounded-md text-white mt-1.5"
           target="_blank"
-          >Go to my email</a
+        >
+          {{ $t('passwordReset.email_sent.go_to_email') }}</a
         >
       </LandingModal>
     </div>

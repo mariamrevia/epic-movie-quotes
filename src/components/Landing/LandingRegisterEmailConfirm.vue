@@ -13,10 +13,10 @@
         :modalActive="isModalActive('confirmModalActive')"
       >
         <iconDone />
-        <h2 class="text-white text-2 mt-1.5">Thank You!</h2>
-        <p class="mt-4 text-white">Your account has been activated.</p>
+        <h2 class="text-white text-2 mt-1.5">{{ $t('register.email_confirm.thank_you') }}</h2>
+        <p class="mt-4 text-white">{{ $t('register.email_confirm.note') }}</p>
         <button class="bg-red w-56 md:w-22 h-2.3 border-none rounded-md text-white mt-1.5">
-          Go to my news feed
+          {{ $t('register.email_confirm.go_news_feed') }}
         </button>
       </LandingModal>
     </div>

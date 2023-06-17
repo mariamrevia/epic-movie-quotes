@@ -12,24 +12,26 @@
         :modalActive="isModalActive('passwordResetModalActive')"
       >
         <Form class="flex justify-center flex-col" @submit="handleSubmit">
-          <h2 class="text-white text-2 flex justify-center">Reset Password</h2>
+          <h2 class="text-white text-2 flex justify-center">{{ $t('passwordReset.title') }}</h2>
           <InputText
             v-model="resetPasswordDataStore.password"
             name="password"
-            label="Password*"
+            :label="$t('passwordReset.password')"
             type="password"
             rules="required"
+            :placeholder="$t('placeholders.password')"
           />
           <InputText
             v-model="resetPasswordDataStore.password_confirmation"
             name="password_confirmation"
-            label="Confirm Password*"
+            :label="$t('passwordReset.confirm_password')"
             type="password"
             rules="required|confirmed:password"
+            :placeholder="$t('placeholders.enter_password')"
           />
 
-          <p class="mt-4 text-white">Your account has been activated.</p>
-          <LandingModalButton text="Reset Password" type="submit" />
+          <p class="mt-4 text-white">{{ $t('passwordReset.note_activation') }}</p>
+          <LandingModalButton :text="$t('passwordReset.reset_password')" type="submit" />
         </Form>
       </LandingModal>
     </div>

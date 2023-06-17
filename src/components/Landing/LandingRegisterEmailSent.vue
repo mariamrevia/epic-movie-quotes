@@ -13,15 +13,16 @@
         :modalActive="isModalActive('emailSentModalActive')"
       >
         <iconCheckSend />
-        <h2 class="text-white text-2 mt-1.5">Thank You!</h2>
+        <h2 class="text-white text-2 mt-1.5">{{ $t('register.email_sent.thank_you') }}</h2>
         <p class="mt-4 text-white w-60 md:w-96 text-center">
-          Please check your email and follow the instructions to activate your account.
+          {{ $t('register.email_sent.note') }}
         </p>
         <a
           href="https://mail.google.com/"
           class="bg-red md:w-22 w-56 h-2.3 border-none flex items-center justify-center rounded-md text-white mt-1.5"
           target="_blank"
-          >Go to my email</a
+        >
+          {{ $t('register.email_sent.go_to_email') }}</a
         >
       </LandingModal>
     </div>

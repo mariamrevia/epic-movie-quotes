@@ -10,12 +10,14 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@intlify/unplugin-vue-i18n": "^0.11.0",
     "@vee-validate/rules": "^4.9.6",
     "axios": "^1.4.0",
     "pinia": "^2.0.36",
     "vee-validate": "^4.9.6",
     "vue": "^3.3.2",
     "vue-axios": "^3.5.2",
+    "vue-i18n": "^9.2.2",
     "vue-router": "^4.2.0"
   },
   "devDependencies": {

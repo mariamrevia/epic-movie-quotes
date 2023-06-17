@@ -1,0 +1,7 @@
+{
+  "name": "At least 3 & max.15 lower case characters",
+  "email": "Enter your email",
+  "password": "At least 8 & max.15 lower case characters",
+  "confirm_password": "Confirm Password",
+  "enter_password": "Enter Password"
+}

@@ -15,11 +15,11 @@
 
       <div>
         <h1 class="text-caramel md:text-4 md:w-50 w-22 text-2 text-center">
-          Find any quote in millions of movie lines
+          {{ $t('landing.title') }}
         </h1>
       </div>
       <button class="bg-red w-8.3 h-3 border-none rounded-md text-white mt-[1.5rem]">
-        Get started
+        {{ $t('landing.get_started') }}
       </button>
     </div>
 

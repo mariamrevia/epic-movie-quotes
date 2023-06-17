@@ -1,0 +1,8 @@
+{
+  "required": "Field is required",
+  "confirmed": "Passwords must match",
+  "email": "This field must be a valid email",
+  "minLength": "This field must be at least {limit} characters",
+  "maxLength": "This field must not exceed {limit} characters",
+  "lowerCase": "Only lowercase letters are allowed"
+}
