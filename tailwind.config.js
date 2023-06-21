@@ -23,7 +23,7 @@ export default {
         26: '26rem'
       },
       height: {
-        1.3: '1.3',
+        1.3: '1.3rem',
         2: '2rem',
         3: '3rem',
         2.3: '2.4rem',
@@ -34,9 +34,11 @@ export default {
         33: '33rem',
         35: '35rem',
         3.3: '3.3rem',
+        5: '5rem',
         25: '25rem',
         41: '41rem',
-        9.6: '9.6rem'
+        9.6: '9.6rem',
+        19: '19rem'
       },
       borderRadius: {},
       textColor: {
@@ -64,6 +66,7 @@ export default {
         33.6: '33.6rem',
         35: '35rem',
         27: '26rem',
+        27.5: '27.5rem',
         45: '45rem',
         95: '95rem',
         88: '88rem'
@@ -81,6 +84,9 @@ export default {
       colors: {
         'dark-gray': '#6C757D',
         shadow: '0px 0px 0px 4px rgba(13, 110, 253, 0.25);'
+      },
+      gap: {
+        3: '3rem'
       },
 
       backgroundColor: {
@@ -112,6 +118,7 @@ export default {
         9: '9rem',
         10: '10rem',
         12: '12rem',
+        4.4: '4.4rem',
         14: '15rem'
       }
     }

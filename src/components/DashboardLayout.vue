@@ -1,35 +1,40 @@
 <template>
-  <div class="bg-lightBlack h-screen w-screen">
+  <div class="bg-lightBlack h-full w-full">
     <div class="relative">
       <HeaderDashboard />
     </div>
     <button @click="toggleListDiv" class="z-10 absolute top-3 md:hidden flex left-3">
       <IconList />
     </button>
-    <div
-      :class="
-        listDivVisible
-          ? 'md:h-screen absolute top-2 h-41 w-22 md:w-22  bg-lightBlack md:flex flex-col'
-          : 'md:h-screen h-41 w-22 md:w-22 bg-lightBlack md:flex flex-col hidden'
-      "
-    >
-      <div class="flex flex-row left-7 ml-13 top-9 absolute w-17.5">
-        <div class="h-1.3 w-1.3 border-white border-2 rounded-full"></div>
-        <h2 class="text-white h-6 flex ml-2">{{ authUserStore.username }}</h2>
-      </div>
+    <div class="flex flex-row h-full w-full justify-center">
+      <div
+        :class="
+          listDivVisible
+            ? 'md:h-screen absolute top-2 h-41 w-22 md:w-27 left-0 bg-lightBlack md:flex flex-col'
+            : 'md:h-screen h-41 w-22 md:w-27 bg-lightBlack md:flex flex-col hidden'
+        "
+      >
+        <div class="flex flex-row left-4.4 ml-13 top-9 absolute">
+          <div class="h-1.3 w-1.3 border-white border-2 rounded-full"></div>
+          <h2 class="text-white h-6 flex ml-2">{{ authUserStore.username }}</h2>
+        </div>
 
-      <div class="flex flex-row left-7 absolute top-12 w-17.5">
-        <IconHouse class="h-1.3 w-1.3" />
-        <button class="text-white h-6 flex border-none ml-2">news feed</button>
-      </div>
+        <div class="flex flex-row left-4.4 absolute top-12">
+          <IconHouse class="h-1.3 w-1.3" />
+          <button class="text-white h-6 flex border-none ml-2">news feed</button>
+        </div>
 
-      <div class="flex flex-row absolute left-7 top-14 items-center w-17.5">
-        <IconCamera class="h-1.3 w-1.3" />
-        <button class="text-white h-6 flex border-none ml-2" @click="navigateTo('list-of-movies')">
-          List of movies
-        </button>
+        <div class="flex flex-row absolute left-4.4 top-14 items-center">
+          <IconCamera class="h-1.3 w-1.3" />
+          <button
+            class="text-white h-6 flex border-none ml-2"
+            @click="navigateTo('list-of-movies')"
+          >
+            List of movies
+          </button>
+        </div>
       </div>
-      <div class="flex items-center justify-center ml-26 mr-auto">
+      <div class="flex items-center justify-center">
         <slot></slot>
       </div>
     </div>
