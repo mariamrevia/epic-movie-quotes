@@ -4,11 +4,12 @@ export default {
     try {
       const user = await getUser()
       console.log(user)
+      this.username = user.data.username
       this.isAuthenticated = !!user
       if (user.data.email_verified_at === null) {
         this.verified === user.data.google_id
       } else {
-        this.verified = user.data.email_verified_at
+        this.verified === user.data.email_verified_at
       }
 
       console.log(this.isAuthenticated)
