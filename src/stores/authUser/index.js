@@ -4,6 +4,7 @@ export const useUserStore = defineStore('authUser', {
   state: () => ({
     user: null,
     verified: null,
+    username: null,
     isAuthenticated: false
   }),
   actions: actions

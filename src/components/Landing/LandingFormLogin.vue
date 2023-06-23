@@ -64,6 +64,7 @@ import { useLoginStore } from '@/stores/Login'
 import { useModalStore } from '@/stores/modal'
 import { authGoogle } from '@/services/api/oauth'
 import { login } from '@/services/api/auth.js'
+import { useRouter } from 'vue-router'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import LandingModalButton from '@/components/ui/LandingModalButton.vue'
 import InputText from '@/components/ui/InputText.vue'
@@ -71,6 +72,7 @@ import csrf from '@/services/api/csrf.js'
 
 const modalStore = useModalStore()
 const isModalActive = modalStore.isModalActive
+const router = useRouter()
 
 const signUp = () => {
   modalStore.openModal('registerModalActive')
@@ -86,6 +88,7 @@ const handleSubmit = async (values) => {
     await csrf.getCookie()
     const response = await login(values.username, values.password)
     if (response.status === 200) {
+      router.push({ name: 'newsFeed' })
       console.log(response)
     }
   } catch (error) {

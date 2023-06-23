@@ -1,3 +1,3 @@
 <template>
-    <h2>hello</h2>
+  <h2>news feed</h2>
 </template>
