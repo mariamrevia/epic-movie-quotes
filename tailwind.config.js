@@ -69,7 +69,9 @@ export default {
         27.5: '27.5rem',
         45: '45rem',
         95: '95rem',
-        88: '88rem'
+        88: '88rem',
+        56: '56rem',
+        60: '60rem'
       },
       padding: {
         13: '13rem'
