@@ -25,6 +25,7 @@ export default {
       height: {
         1.3: '1.3rem',
         2: '2rem',
+        1.5: '1.5rem',
         3: '3rem',
         2.3: '2.4rem',
         53: '53rem',
@@ -114,6 +115,7 @@ export default {
       },
       inset: {
         0.8: '0.8rem',
+        2.5: '2.5rem',
         3: '2rem',
         7: '7rem',
         8: '8rem',

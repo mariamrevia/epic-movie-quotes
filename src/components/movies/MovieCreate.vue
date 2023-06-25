@@ -22,10 +22,42 @@
           rules="required"
         />
 
-        <Field name="genre" v-model="movieStore.createMovieData.genre" as="select">
-          <option v-for="genres in movieStore.genreData" :key="genres.id" :value="genres.id">
-            {{ genres.title }}
-          </option>
+        <Field
+          class="w-56 h-2.3 rounded-md border-0.1 placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
+          name="genre"
+          rules="required"
+          v-model="movieStore.createMovieData.genre"
+        >
+          <div
+            class="w-56 h-2.3 rounded-md items-center border-0.1 gap-2 placeholder-white text-white bg-transparent relative border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none flex flex-row"
+            @click="toggleDropdown"
+          >
+            <div
+              v-for="title in movieStore.genreTitle"
+              :key="title"
+              class="text-white justify-between h-1.5 p-2 border ml-1 rounded-sm flex items-center bg-[#6C757D] border-none gap-2"
+            >
+              {{ title }}
+              <iconCross @click.stop="deleteGenre(title)" />
+            </div>
+
+            <div
+              class="w-56 bg-lightBlack text-white absolute z-50 top-2.5 rounded-b-lg p-3 pr-2"
+              v-if="isDropdownOpen"
+            >
+              <div
+                class="p-1"
+                v-for="genre in movieStore.genreData"
+                :value="genre.id"
+                :key="genre.id"
+                @click="selectedGenre(genre, genre.title)"
+              >
+                {{ genre.title }}
+              </div>
+            </div>
+            {{ select() }}
+          </div>
+          <ErrorMessage class="text-red-700" name="genre" />
         </Field>
         <InputMovie
           name="year"
@@ -60,7 +92,12 @@
           rules="required"
         />
 
-        <Field name="image" v-model="movieStore.createMovieData.image" type="file" />
+        <Field
+          class="w-56 h-5 mt-0.5 rounded-md border-0.1 placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
+          name="image"
+          v-model="movieStore.createMovieData.image"
+          type="file"
+        />
 
         <button type="submit">submit</button>
       </Form>
@@ -69,17 +106,41 @@
 </template>
 
 <script setup>
-import { Field } from 'vee-validate'
-import { useModalStore } from '@/stores/modal'
 import TextAreaBase from '@/components/ui/TextAreaBase.vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
+import iconCross from '@/components/icons/IconCross.vue'
 import InputMovie from '@/components/ui/InputMovie.vue'
+import { useModalStore } from '@/stores/modal'
+import { Field, ErrorMessage } from 'vee-validate'
+import { ref } from 'vue'
 import { useMovieStore } from '@/stores/movies'
 import { Form } from 'vee-validate'
 import { storeMovies } from '@/services/api/movies'
 
 const modalStore = useModalStore()
 const movieStore = useMovieStore()
+const isDropdownOpen = ref(false)
+const toggleDropdown = () => {
+  isDropdownOpen.value = !isDropdownOpen.value
+}
+const selectedGenre = (genre, title) => {
+  movieStore.createMovieData.genre.push(genre.id)
+  movieStore.genreTitle.push(title)
+}
+const deleteGenre = (title) => {
+  const index = movieStore.genreTitle.indexOf(title)
+  if (index > -1) {
+    movieStore.genreTitle.splice(index, 1)
+    movieStore.createMovieData.genre.splice(index, 1)
+  }
+}
+const select = () => {
+  if (movieStore.genreTitle.length > 0) {
+    return ''
+  } else {
+    return 'select the genres'
+  }
+}
 const isModalActive = modalStore.isModalActive
 
 const submitData = async () => {

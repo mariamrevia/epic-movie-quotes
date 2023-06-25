@@ -13,7 +13,9 @@ export async function storeMovies({ name, director, year, description, genre, im
   formData.set('description[en]', description.ka)
   formData.set('description[ka]', description.ka)
   formData.append('image', image)
-  formData.set('genre', genre)
+  genre.forEach((genreId) => {
+    formData.append('genre[]', genreId)
+  })
   formData.set('year', year)
   return await axios.post('/movies', formData, {
     headers: {

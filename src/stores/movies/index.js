@@ -4,6 +4,7 @@ export const useMovieStore = defineStore('movies', {
   state: () => ({
     movieData: [],
     genreData: [],
+    genreTitle: [],
     createMovieData: {
       name: {
         en: '',
@@ -18,7 +19,7 @@ export const useMovieStore = defineStore('movies', {
         en: '',
         ka: ''
       },
-      genre: '',
+      genre: [],
       image: ''
     }
   }),
