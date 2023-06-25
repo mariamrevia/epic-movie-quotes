@@ -14,12 +14,14 @@
           v-model="movieStore.createMovieData.name.en"
           placeholder="Movie name"
           rules="required"
+          lang="Eng"
         />
         <InputMovie
           name="name[ka]"
           v-model="movieStore.createMovieData.name.ka"
           placeholder="ფილმის სახელი"
           rules="required"
+          lang="Geo"
         />
 
         <Field
@@ -29,7 +31,7 @@
           v-model="movieStore.createMovieData.genre"
         >
           <div
-            class="w-56 h-2.3 rounded-md items-center border-0.1 gap-2 placeholder-white text-white bg-transparent relative border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none flex flex-row"
+            class="w-56 h-2.3 mt-1.25 rounded-md items-center border-0.1 gap-2 placeholder-white text-white bg-transparent relative border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none flex flex-row"
             @click="toggleDropdown"
           >
             <div
@@ -71,12 +73,14 @@
           v-model="movieStore.createMovieData.director.en"
           placeholder="Director"
           rules="required"
+          lang="Eng"
         />
         <InputMovie
           name="director[ka]"
           v-model="movieStore.createMovieData.director.ka"
           placeholder="რეჟისორი"
           rules="required"
+          lang="Geo"
         />
         <TextAreaBase
           name="description[en]"
@@ -92,14 +96,27 @@
           rules="required"
         />
 
-        <Field
-          class="w-56 h-5 mt-0.5 rounded-md border-0.1 placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
-          name="image"
-          v-model="movieStore.createMovieData.image"
-          type="file"
-        />
+        <div
+          class="w-56 h-5 mt-0.5 rounded-md border-0.1 flex items-center placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
+        >
+          <label
+            for="file-upload"
+            class="h-2.6 ml-2 text-center flex p-3 rounded-sm items-center bg-[#9747FF]"
+          >
+            choose file
+          </label>
+          <Field
+            id="file-upload"
+            name="image"
+            class="hidden"
+            v-model="movieStore.createMovieData.image"
+            type="file"
+          />
+        </div>
 
-        <button type="submit">submit</button>
+        <button class="bg-red w-56 h-2.3 border-none rounded-md text-white mt-1.5" type="submit">
+          submit
+        </button>
       </Form>
     </LandingModal>
   </div>

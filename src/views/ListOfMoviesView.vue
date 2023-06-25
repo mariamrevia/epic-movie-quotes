@@ -12,12 +12,22 @@
           </button>
         </div>
       </div>
-      <div class="md:grid grid-cols-3 gap-3 flex flex-col justify-center align-middle w-full">
-        <li v-for="movie in movieStore.movieData" :key="movie.id">
-          <img class="md:w-27.5 md:h-23.4 w-22 h-19" :src="movie.image" alt="Movie Image" />
-          <h2 class="text-white">{{ movie.name }}</h2>
-          <p class="text-white">{{ movie.release_date }}</p>
-        </li>
+      <div
+        class="md:grid grid-cols-3 gap-3 flex flex-col rounded-md justify-center align-middle w-full"
+      >
+        <div class="rounded-md border-none" v-for="movie in movieStore.movieData" :key="movie.id">
+          <img
+            class="md:w-27.5 md:h-23.4 w-22 h-19 object-cover border-none rounded-md"
+            :src="getImageURL(movie)"
+            alt="Movie Image"
+          />
+          <div class="flex flex-row mt-1 items-center align-middle">
+            <h2 class="text-white text-1.5 flex items-center">
+              {{ $i18n.locale === 'en' ? movie.name.en : movie.name.ka }}
+            </h2>
+            <p class="text-white text-1.5 flex items-center ml-3">({{ movie.year }})</p>
+          </div>
+        </div>
       </div>
     </div>
   </DashboardLayout>
@@ -45,6 +55,10 @@ onMounted(async () => {
     console.error(error)
   }
 })
+
+const getImageURL = (movie) => {
+  return `${import.meta.env.VITE_API_BASE_URL}/storage/${movie.image}`
+}
 
 const modalStore = useModalStore()
 

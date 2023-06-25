@@ -14,6 +14,7 @@ export default {
       margin: {
         2: '2rem',
         1.5: '1.5rem',
+        1.25: '1.25rem',
         4.4: '4.4rem',
         3.3: '3.3rem',
         7.4: '7.4rem',
@@ -28,6 +29,7 @@ export default {
         1.5: '1.5rem',
         3: '3rem',
         2.3: '2.4rem',
+        2.6: '2.6rem',
         53: '53rem',
         31: '31rem',
         44: '44rem',
@@ -79,6 +81,7 @@ export default {
       },
       fontSize: {
         2: '2rem',
+        1.5: '1.5rem',
         1.25: '1.25rem',
         1: '1rem',
         3: '3rem'

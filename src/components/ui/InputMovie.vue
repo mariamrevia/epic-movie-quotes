@@ -11,6 +11,7 @@
         :name="props.name"
         :rules="props.rules"
       />
+      <span class="absolute z-999 ml-[95%] text-[#6C757D]">{{ props.lang }}</span>
     </div>
   </div>
   <ErrorMessage class="text-red-700" :name="name" />
@@ -39,6 +40,11 @@ const props = defineProps({
     required: false
   },
   name: {
+    type: String,
+    required: true,
+    default: ''
+  },
+  lang: {
     type: String,
     required: true,
     default: ''
