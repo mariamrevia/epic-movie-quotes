@@ -28,6 +28,7 @@ export default {
         2: '2rem',
         1.5: '1.5rem',
         3: '3rem',
+        2.7: '2.7',
         2.3: '2.4rem',
         2.6: '2.6rem',
         53: '53rem',
@@ -41,7 +42,8 @@ export default {
         25: '25rem',
         41: '41rem',
         9.6: '9.6rem',
-        19: '19rem'
+        19: '19rem',
+        27: '27rem'
       },
       borderRadius: {},
       textColor: {
@@ -89,7 +91,9 @@ export default {
 
       colors: {
         'dark-gray': '#6C757D',
-        shadow: '0px 0px 0px 4px rgba(13, 110, 253, 0.25);'
+        shadow: '0px 0px 0px 4px rgba(13, 110, 253, 0.25);',
+        whiteGray: '#CED4DA',
+        '#24222F': '#24222F'
       },
       gap: {
         3: '3rem'
