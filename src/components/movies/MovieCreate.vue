@@ -108,15 +108,13 @@
           <Field
             id="file-upload"
             name="image"
-            class="hidden"
             v-model="movieStore.createMovieData.image"
             type="file"
+            :rules="movieStore.createMovieData.image ? '' : 'required'"
           />
+          <ErrorMessage class="text-red-700" name="image" />
         </div>
-
-        <button class="bg-red w-56 h-2.3 border-none rounded-md text-white mt-1.5" type="submit">
-          submit
-        </button>
+        <buttonMovie type="submit" />
       </Form>
     </LandingModal>
   </div>
@@ -127,6 +125,7 @@ import TextAreaBase from '@/components/ui/TextAreaBase.vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import iconCross from '@/components/icons/IconCross.vue'
 import InputMovie from '@/components/ui/InputMovie.vue'
+import buttonMovie from '@/components/ui/ButtonMovie.vue'
 import { useModalStore } from '@/stores/modal'
 import { Field, ErrorMessage } from 'vee-validate'
 import { ref } from 'vue'
@@ -143,6 +142,7 @@ const toggleDropdown = () => {
 const selectedGenre = (genre, title) => {
   movieStore.createMovieData.genre.push(genre.id)
   movieStore.genreTitle.push(title)
+  console.log(movieStore.genreTitle)
 }
 const deleteGenre = (title) => {
   const index = movieStore.genreTitle.indexOf(title)

@@ -4,22 +4,18 @@ export async function getMovies() {
   return axios.get('/movies')
 }
 
-export async function storeMovies({ name, director, year, description, genre, image }) {
-  const formData = new FormData()
-  formData.set('name[en]', name.en)
-  formData.set('name[ka]', name.ka)
-  formData.set('director[en]', director.en)
-  formData.set('director[ka]', director.ka)
-  formData.set('description[en]', description.ka)
-  formData.set('description[ka]', description.ka)
-  formData.append('image', image)
-  genre.forEach((genreId) => {
-    formData.append('genre[]', genreId)
-  })
-  formData.set('year', year)
-  return await axios.post('/movies', formData, {
+export async function storeMovies(data) {
+  return await axios.post('/movies', data, {
     headers: {
       'Content-Type': 'multipart/form-data'
+    }
+  })
+}
+export async function updateMovies(data) {
+  return await axios.post(`/movies/${data.movieId}`, data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'X-HTTP-Method-Override': 'PATCH'
     }
   })
 }

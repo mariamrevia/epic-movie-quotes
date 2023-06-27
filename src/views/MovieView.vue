@@ -16,7 +16,7 @@
           <div
             class="flex flex-row bg-#24222F w-10 h-2.7 items-center rounded-md justify-center gap-12"
           >
-            <iconEdit />
+            <iconEdit @click="toggleEditMovieModal" />
 
             <iconDelete />
           </div>
@@ -32,29 +32,51 @@
       </div>
     </div>
   </DashboardLayout>
+  <MovieEdit v-if="movie" :movie="movie" :genres="genres" />
 </template>
 
 <script setup>
 import { useMovieStore } from '@/stores/movies/index.js'
+import { useModalStore } from '@/stores/modal/index.js'
 import DashboardLayout from '@/components/DashboardLayout.vue'
 import iconDelete from '@/components/icons/IconDelete.vue'
 import iconEdit from '@/components/icons/IconEdit.vue'
-import { ref, toRef, onMounted } from 'vue'
+import MovieEdit from '@/components/movies/MovieEdit.vue'
+import { getMovies } from '@/services/api/movies.js'
+import { onMounted, ref, toRef } from 'vue'
 import { useRoute } from 'vue-router'
 
 const movieStore = useMovieStore()
+const modalStore = useModalStore()
 const route = useRoute()
 
 const destinationId = ref(parseInt(toRef(route, 'params').value.id))
 
 const movie = ref(null)
-
-onMounted(() => {
-  movie.value = movieStore.movieData.find((movie) => movie.id === destinationId.value)
-  console.log(movie.value, destinationId.value)
+const genres = ref(null)
+onMounted(async () => {
+  try {
+    if (movieStore.movieData.length > 0 && movieStore.genreData.length > 0) {
+      movie.value = movieStore.movieData.find((movie) => movie.id === destinationId.value)
+      genres.value = movieStore.genreData
+    } else {
+      const response = await getMovies()
+      console.log(response)
+      movie.value = response.data.movies.find((movie) => movie.id === destinationId.value)
+      movieStore.setMovies([movie])
+      movieStore.setGenres(response.data.genres)
+      genres.value = response.data.genres
+    }
+  } catch (error) {
+    console.log(error)
+  }
 })
 
 const getImageURL = (image) => {
   return `${import.meta.env.VITE_API_BASE_URL}/storage/${image}`
+}
+
+const toggleEditMovieModal = () => {
+  modalStore.openModal('editMovieModalActive')
 }
 </script>

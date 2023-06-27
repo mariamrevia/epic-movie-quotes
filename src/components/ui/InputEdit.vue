@@ -1,12 +1,15 @@
 <template>
   <div class="flex flex-col">
     <label class="text-caramel mb-0.5 mt-0.5">{{ label }}</label>
-    <div class="flex relative h-3 flex-row items-center">
-      <span class="absolute z-999 ml-[1%] text-[#6C757D]">{{ text }}</span>
+    <div
+      class="flex relative h-3 flex-row items-center border-[#6C757D] w-56 rounded-md border-0.1 bg-transparen focus-within:ring focus:shadow-shadow outline-none"
+    >
+      <span class="ml-[1%] text-[#6C757D]">{{ text }}</span>
       <Field
         v-bind="$attrs"
         :value="props.value"
-        class="w-56 h-2.3 rounded-md border-0.1 placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
+        :placeholder="placeholder"
+        class="h-2.3 placeholder-white text-white bg-transparent w-45 ml-1.5 border-[#6C757D] outline-none"
         @input="updateText($event.target.value)"
         :type="props.type"
         :name="props.name"
@@ -46,6 +49,11 @@ const props = defineProps({
     default: ''
   },
   lang: {
+    type: String,
+    required: false,
+    default: ''
+  },
+  placeholder: {
     type: String,
     required: false,
     default: ''
