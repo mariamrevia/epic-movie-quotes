@@ -1,6 +1,6 @@
 <template>
   <DashboardLayout>
-    <div class="flex flex-col md:ml-4.4 md:mr-4.4 m-auto">
+    <div class="flex flex-col md:ml-4.4 md:mr-4.4 m-auto md:mt-2">
       <div class="flex items-center h-3.3 md:mt-0 mt-3 justify-between">
         <p class="text-white">My List of Movies</p>
         <div>
@@ -12,12 +12,27 @@
           </button>
         </div>
       </div>
-      <div class="md:grid grid-cols-3 gap-3 flex flex-col justify-center align-middle w-full">
-        <li v-for="movie in movieStore.movieData" :key="movie.id">
-          <img class="md:w-27.5 md:h-23.4 w-22 h-19" :src="movie.image" alt="Movie Image" />
-          <h2 class="text-white">{{ movie.name }}</h2>
-          <p class="text-white">{{ movie.release_date }}</p>
-        </li>
+      <div
+        class="md:grid grid-cols-3 gap-3 flex flex-col rounded-md justify-center align-middle w-full"
+      >
+        <div
+          class="rounded-md border-none"
+          @click="navigate(movie.id)"
+          v-for="movie in movieStore.movieData"
+          :key="movie.id"
+        >
+          <img
+            class="md:w-27.5 md:h-23.4 w-22 h-19 object-cover border-none rounded-md"
+            :src="getImageURL(movie.image)"
+            alt="Movie Image"
+          />
+          <div class="flex flex-row mt-1 items-center align-middle">
+            <h2 class="text-white text-1.5 flex items-center">
+              {{ $i18n.locale === 'en' ? movie.name.en : movie.name.ka }}
+            </h2>
+            <p class="text-white text-1.5 flex items-center ml-3">({{ movie.year }})</p>
+          </div>
+        </div>
       </div>
     </div>
   </DashboardLayout>
@@ -31,8 +46,10 @@ import { getMovies } from '@/services/api/movies.js'
 import { onMounted } from 'vue'
 import { useMovieStore } from '@/stores/movies/index.js'
 import { useModalStore } from '@/stores/modal/index.js'
+import { useRouter } from 'vue-router'
 
 const movieStore = useMovieStore()
+const router = useRouter()
 
 onMounted(async () => {
   try {
@@ -46,10 +63,18 @@ onMounted(async () => {
   }
 })
 
+const getImageURL = (image) => {
+  return `${import.meta.env.VITE_API_BASE_URL}/storage/${image}`
+}
+
 const modalStore = useModalStore()
 
 const toggleAddMovieModal = () => {
   modalStore.openModal('AddMovieModalActive')
   console.log('sdfsdf')
+}
+
+const navigate = (id) => {
+  router.push(`/movie/${id}`)
 }
 </script>

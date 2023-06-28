@@ -10,8 +10,8 @@
       <div
         :class="
           listDivVisible
-            ? 'md:h-screen absolute top-2 h-41 w-22 md:w-27 left-0 bg-lightBlack md:flex flex-col'
-            : 'md:h-screen h-41 w-22 md:w-27 bg-lightBlack md:flex flex-col hidden'
+            ? 'md:h-screen absolute top-2 h-41 w-22 md:w-17.5 left-0 bg-lightBlack md:flex flex-col'
+            : 'md:h-screen h-41 w-22 md:w-17.5 bg-lightBlack md:flex flex-col hidden'
         "
       >
         <div class="flex flex-row left-4.4 ml-13 top-9 absolute">
@@ -34,7 +34,7 @@
           </button>
         </div>
       </div>
-      <div class="flex items-center justify-center">
+      <div>
         <slot></slot>
       </div>
     </div>

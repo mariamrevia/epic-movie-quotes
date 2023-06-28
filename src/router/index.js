@@ -4,6 +4,7 @@ import { useUserStore } from '@/stores/authUser'
 import LandingView from '@/views/LandingView.vue'
 import ListOfMoviesView from '@/views/ListOfMoviesView.vue'
 import NewsFeedView from '@/views/NewsFeedView.vue'
+import MovieView from '@/views/MovieView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -20,6 +21,11 @@ const router = createRouter({
       name: 'list-of-movies',
       component: ListOfMoviesView,
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/movie/:id',
+
+      component: MovieView
     }
   ]
 })

@@ -14,9 +14,11 @@ export default {
       margin: {
         2: '2rem',
         1.5: '1.5rem',
+        1.25: '1.25rem',
         4.4: '4.4rem',
         3.3: '3.3rem',
         7.4: '7.4rem',
+        9: '9rem',
         0.5: '0.5rem',
         5: '5rem',
         13.6: '13.6rem',
@@ -25,8 +27,11 @@ export default {
       height: {
         1.3: '1.3rem',
         2: '2rem',
+        1.5: '1.5rem',
         3: '3rem',
+        2.7: '2.7',
         2.3: '2.4rem',
+        2.6: '2.6rem',
         53: '53rem',
         31: '31rem',
         44: '44rem',
@@ -38,7 +43,8 @@ export default {
         25: '25rem',
         41: '41rem',
         9.6: '9.6rem',
-        19: '19rem'
+        19: '19rem',
+        27: '27rem'
       },
       borderRadius: {},
       textColor: {
@@ -78,6 +84,7 @@ export default {
       },
       fontSize: {
         2: '2rem',
+        1.5: '1.5rem',
         1.25: '1.25rem',
         1: '1rem',
         3: '3rem'
@@ -85,7 +92,9 @@ export default {
 
       colors: {
         'dark-gray': '#6C757D',
-        shadow: '0px 0px 0px 4px rgba(13, 110, 253, 0.25);'
+        shadow: '0px 0px 0px 4px rgba(13, 110, 253, 0.25);',
+        whiteGray: '#CED4DA',
+        '#24222F': '#24222F'
       },
       gap: {
         3: '3rem'
@@ -114,6 +123,7 @@ export default {
       },
       inset: {
         0.8: '0.8rem',
+        2.5: '2.5rem',
         3: '2rem',
         7: '7rem',
         8: '8rem',
