@@ -3,7 +3,7 @@
     :class="['modal-wrapper', { 'modal-wrapper--active': isModalActive('editMovieModalActive') }]"
     @click="closeModal"
   >
-    <landingModal :modalActive="isModalActive('editMovieModalActive')">
+    <LandingModal :modalActive="isModalActive('editMovieModalActive')">
       <Form
         @submit="submitData"
         class="w-60 z-10 fixed flex flex-col md:mt-13.6 pb-13 md:pb-4 items-center bg-darkgray md:bg-gray rounded-lg"
@@ -59,21 +59,21 @@
           </div>
           <ErrorMessage class="text-red-700" name="genre" />
         </Field>
-        <inputEdit
+        <InputEdit
           name="year"
           v-model="editMovie.year"
           type="number"
           text="წელი:"
           :rules="editMovie.year ? '' : 'required'"
         />
-        <inputEdit
+        <InputEdit
           name="director[en]"
           v-model="editMovie.director.en"
           text="director:"
           lang="Eng"
           rules="required"
         />
-        <inputEdit
+        <InputEdit
           name="director[ka]"
           v-model="editMovie.director.ka"
           text="რეჟისორი:"
@@ -115,16 +115,16 @@
             @change="onFileChange"
           />
         </div>
-        <buttonMovie type="submit" />
+        <ButtonBase type="submit" />
       </Form>
-    </landingModal>
+    </LandingModal>
   </div>
 </template>
 
 <script setup>
-import landingModal from '@/components/ui/LandingModal.vue'
-import inputEdit from '@/components/ui/InputEdit.vue'
-import buttonMovie from '@/components/ui/ButtonMovie.vue'
+import LandingModal from '@/components/ui/LandingModal.vue'
+import InputEdit from '@/components/ui/InputEdit.vue'
+import ButtonBase from '@/components/ui/ButtonBase.vue'
 import iconCross from '@/components/icons/IconCross.vue'
 import { updateMovies } from '@/services/api/movies.js'
 import { Field, Form, ErrorMessage } from 'vee-validate'

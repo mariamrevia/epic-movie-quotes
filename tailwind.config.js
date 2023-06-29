@@ -22,13 +22,15 @@ export default {
         0.5: '0.5rem',
         5: '5rem',
         13.6: '13.6rem',
-        26: '26rem'
+        26: '26rem',
+        95: '95%'
       },
       height: {
         1.3: '1.3rem',
         2: '2rem',
         1.5: '1.5rem',
         3: '3rem',
+        3.25: '3.25rem',
         2.7: '2.7',
         2.3: '2.4rem',
         2.6: '2.6rem',
@@ -39,11 +41,13 @@ export default {
         33: '33rem',
         35: '35rem',
         3.3: '3.3rem',
+        4: '4rem',
         5: '5rem',
         25: '25rem',
         41: '41rem',
         9.6: '9.6rem',
         19: '19rem',
+        0.05: '0.05rem',
         27: '27rem'
       },
       borderRadius: {},
@@ -65,6 +69,7 @@ export default {
         5.5: '5.5rem',
         6: '6rem',
         50: '50rem',
+        48: '48rem',
         22: '22rem',
         17.5: '17.5rem',
         15.6: '15.6rem',
@@ -77,7 +82,8 @@ export default {
         95: '95rem',
         88: '88rem',
         56: '56rem',
-        60: '60rem'
+        60: '60rem',
+        4: '4rem'
       },
       padding: {
         13: '13rem'

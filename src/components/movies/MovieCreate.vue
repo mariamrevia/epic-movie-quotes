@@ -40,7 +40,7 @@
               class="text-white justify-between h-1.5 p-2 border ml-1 rounded-sm flex items-center bg-[#6C757D] border-none gap-2"
             >
               {{ title }}
-              <iconCross @click.stop="deleteGenre(title)" />
+              <IconCross @click.stop="deleteGenre(title)" />
             </div>
 
             <div
@@ -114,7 +114,7 @@
           />
           <ErrorMessage class="text-red-700" name="image" />
         </div>
-        <buttonMovie type="submit" />
+        <ButtonBase type="submit" />
       </Form>
     </LandingModal>
   </div>
@@ -123,9 +123,9 @@
 <script setup>
 import TextAreaBase from '@/components/ui/TextAreaBase.vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
-import iconCross from '@/components/icons/IconCross.vue'
+import IconCross from '@/components/icons/IconCross.vue'
 import InputMovie from '@/components/ui/InputMovie.vue'
-import buttonMovie from '@/components/ui/ButtonMovie.vue'
+import ButtonBase from '@/components/ui/ButtonBase.vue'
 import { useModalStore } from '@/stores/modal'
 import { Field, ErrorMessage } from 'vee-validate'
 import { ref } from 'vue'

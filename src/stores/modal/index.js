@@ -13,7 +13,8 @@ export const useModalStore = defineStore('modal', {
     passwordResetSuccessActive: false,
     passwordEmailSentModalActive: false,
     AddMovieModalActive: false,
-    editMovieModalActive: false
+    editMovieModalActive: false,
+    addQuoteModalActive: false
   }),
 
   getters: getters,
