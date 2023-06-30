@@ -6,9 +6,9 @@
     <LandingModal :modalActive="isModalActive('editMovieModalActive')">
       <Form
         @submit="submitData"
-        class="w-60 z-10 fixed flex flex-col md:mt-13.6 pb-13 md:pb-4 items-center bg-darkgray md:bg-gray rounded-lg"
+        class="w-60 z-10 fixed flex flex-col md:mt-13.6 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
       >
-        <h1 class="text-whiteGray text-2 mt-2">Edit Movie</h1>
+        <HeaderEditAdd heading="Edit Movie" />
         <inputEdit
           name="name[en]"
           rules="required"
@@ -115,7 +115,7 @@
             @change="onFileChange"
           />
         </div>
-        <ButtonBase type="submit" />
+        <ButtonBase type="submit" text="Edit Movie" />
       </Form>
     </LandingModal>
   </div>
@@ -126,6 +126,7 @@ import LandingModal from '@/components/ui/LandingModal.vue'
 import InputEdit from '@/components/ui/InputEdit.vue'
 import ButtonBase from '@/components/ui/ButtonBase.vue'
 import iconCross from '@/components/icons/IconCross.vue'
+import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
 import { updateMovies } from '@/services/api/movies.js'
 import { Field, Form, ErrorMessage } from 'vee-validate'
 import { useModalStore } from '@/stores/modal'

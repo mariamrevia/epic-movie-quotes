@@ -3,7 +3,7 @@
     <div class="flex flex-row gap-4 mt-2">
       <div class="flex flex-col text-white">
         <h2 class="mb-1.5 text-1.5 text-whiteGray">Movie discription</h2>
-        <img class="w-50 h-27 object-center rounded-2xl" :src="getImageURL(movie && movie.image)" />
+        <img class="w-50 object-center rounded-2xl" :src="getImageURL(movie && movie.image)" />
       </div>
       <div class="text-white">
         <div class="flex flex-row justify-between">
@@ -13,6 +13,7 @@
             </h1>
             <p class="text-caramel text-1.5 flex items-center ml-3">({{ movie && movie.year }})</p>
           </div>
+
           <div
             class="flex flex-row bg-#24222F w-10 h-2.7 items-center rounded-md justify-center gap-12"
           >
@@ -21,7 +22,17 @@
             <iconDelete />
           </div>
         </div>
-        <h2 class="mt-2 text-whiteGray">
+        <div class="flex flex-row mt-2">
+          <div
+            v-for="genre in movie && movie.genres"
+            :key="genre.id"
+            class="text-white flex flex-row justify-between h-1.5 p-2 border ml-1 rounded-sm items-center bg-dark-gray border-none gap-2"
+          >
+            {{ genre.title }}
+          </div>
+        </div>
+        <h2 class="mt-2 text-whiteGray gap-3 text-1.25">
+          Director:
           {{ $i18n.locale === 'en' ? movie && movie.director.en : movie && movie.director.ka }}
         </h2>
         <p class="h-27 w-37.5 mt-2 text-whiteGray">
@@ -31,6 +42,16 @@
         </p>
       </div>
     </div>
+    <div class="flex flex-row mt-2 text-white items-center gap-3">
+      <h2 class="text-1.5">Quotes</h2>
+      <button
+        @click="toggleAddMovieModal"
+        class="bg-red w-9.7 h-2.3 border-none rounded-md text-white"
+      >
+        Add Quote
+      </button>
+    </div>
+    <QuoteList :movie="movie" />
   </DashboardLayout>
   <MovieEdit v-if="movie" :movie="movie" :genres="genres" />
 </template>
@@ -42,6 +63,7 @@ import DashboardLayout from '@/components/DashboardLayout.vue'
 import iconDelete from '@/components/icons/IconDelete.vue'
 import iconEdit from '@/components/icons/IconEdit.vue'
 import MovieEdit from '@/components/movies/MovieEdit.vue'
+import QuoteList from '@/components/quotes/QuoteList.vue'
 import { getMovies } from '@/services/api/movies.js'
 import { onMounted, ref, toRef } from 'vue'
 import { useRoute } from 'vue-router'

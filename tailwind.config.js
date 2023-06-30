@@ -27,6 +27,7 @@ export default {
       },
       height: {
         1.3: '1.3rem',
+        12: '12rem',
         2: '2rem',
         1.5: '1.5rem',
         3: '3rem',
@@ -47,8 +48,10 @@ export default {
         41: '41rem',
         9.6: '9.6rem',
         19: '19rem',
+        15: '15rem',
         0.05: '0.05rem',
-        27: '27rem'
+        27: '27rem',
+        8.75: '8.75rem'
       },
       borderRadius: {},
       textColor: {
@@ -67,6 +70,7 @@ export default {
         9.7: '9.6rem',
         6.8: '6.8rem',
         5.5: '5.5rem',
+        14: '14rem',
         6: '6rem',
         50: '50rem',
         48: '48rem',
