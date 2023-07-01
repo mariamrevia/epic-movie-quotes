@@ -14,7 +14,8 @@ export const useModalStore = defineStore('modal', {
     passwordEmailSentModalActive: false,
     AddMovieModalActive: false,
     editMovieModalActive: false,
-    addQuoteModalActive: false
+    addQuoteModalActive: false,
+    editQuoteModalActive: false
   }),
 
   getters: getters,

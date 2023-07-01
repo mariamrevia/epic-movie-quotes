@@ -37,6 +37,7 @@ export default {
         2.6: '2.6rem',
         53: '53rem',
         31: '31rem',
+        32: '32rem',
         44: '44rem',
         23.4: '23.4rem',
         33: '33rem',
@@ -140,6 +141,7 @@ export default {
         9: '9rem',
         10: '10rem',
         12: '12rem',
+        3.3: '3.3rem',
         4.4: '4.4rem',
         14: '15rem'
       }

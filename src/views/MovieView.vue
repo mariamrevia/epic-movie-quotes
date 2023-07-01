@@ -51,7 +51,7 @@
         Add Quote
       </button>
     </div>
-    <QuoteList :movie="movie" />
+    <QuoteList v-if="movie" :movie="movie" />
   </DashboardLayout>
   <MovieEdit v-if="movie" :movie="movie" :genres="genres" />
 </template>
@@ -64,6 +64,7 @@ import iconDelete from '@/components/icons/IconDelete.vue'
 import iconEdit from '@/components/icons/IconEdit.vue'
 import MovieEdit from '@/components/movies/MovieEdit.vue'
 import QuoteList from '@/components/quotes/QuoteList.vue'
+
 import { getMovies } from '@/services/api/movies.js'
 import { onMounted, ref, toRef } from 'vue'
 import { useRoute } from 'vue-router'

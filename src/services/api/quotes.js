@@ -8,3 +8,12 @@ export async function storeQuotes(data) {
     }
   })
 }
+
+export async function updateQuotes(data) {
+  return await axios.post(`/quotes${data.id}`, data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'X-HTTP-Method-Override': 'PATCH'
+    }
+  })
+}

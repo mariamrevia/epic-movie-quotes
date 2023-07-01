@@ -25,7 +25,7 @@
                 <span class="text-whiteGray">View Quote</span>
               </div>
               <div class="flex flex-row mt-1.25 gap-2">
-                <IconEdit />
+                <IconEdit @click="toggleEditQuoteModal(quote.id)" />
                 <span class="text-whiteGray">Edit </span>
               </div>
               <div class="flex flex-row mt-1.25 gap-2">
@@ -37,12 +37,15 @@
         </div>
       </div>
       <hr class="flex mx-1.25 h-0.05 bg-slate-700 border-none mt-1.25" />
+      <QuoteEdit :quoteToEdit="quoteToEdit" :movie="movie" />
     </div>
   </div>
 </template>
 
 <script setup>
 import { computed, ref } from 'vue'
+import QuoteEdit from '@/components/quotes/QuoteEdit.vue'
+import { useModalStore } from '@/stores/modal'
 import IconDelete from '@/components/icons/IconDelete.vue'
 import IconEdit from '@/components/icons/IconEdit.vue'
 import IconEye from '@/components/icons/IconEye.vue'
@@ -54,6 +57,8 @@ const props = defineProps({
   }
 })
 
+const movie = ref(props.movie)
+const modalStore = useModalStore()
 const movieQuotes = computed(() => (props.movie ? { ...props.movie } : null))
 const getImageURL = (image) => {
   return `${import.meta.env.VITE_API_BASE_URL}/storage/${image}`
@@ -69,5 +74,13 @@ const toggleDashboard = (id) => {
     activeQuoteId.value = id
     toggleDiv.value = true
   }
+}
+
+const quoteToEdit = ref(null)
+const toggleEditQuoteModal = (quoteId) => {
+  quoteToEdit.value = quoteId
+  console.log(quoteToEdit.value)
+  modalStore.openModal('editQuoteModalActive')
+  console.log('hehe')
 }
 </script>
