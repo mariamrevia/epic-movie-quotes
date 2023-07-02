@@ -17,3 +17,11 @@ export async function updateQuotes(data) {
     }
   })
 }
+
+export async function getQuotes() {
+  return axios.get('/quotes')
+}
+
+export async function storeComments(body, quote_id) {
+  return await axios.post('/comments', body, quote_id)
+}

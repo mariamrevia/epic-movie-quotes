@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 export const useQuoteStore = defineStore('quotes', {
   state: () => ({
     quotes: [],
+    comments: [],
     quoteData: {
       body: {
         en: '',
@@ -10,6 +11,10 @@ export const useQuoteStore = defineStore('quotes', {
       },
       movie_id: '',
       image: ''
+    },
+    commentData: {
+      body: '',
+      quote_id: ''
     }
   })
 })

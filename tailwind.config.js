@@ -41,6 +41,7 @@ export default {
         44: '44rem',
         23.4: '23.4rem',
         33: '33rem',
+
         35: '35rem',
         3.3: '3.3rem',
         4: '4rem',
@@ -65,6 +66,7 @@ export default {
       width: {
         1.3: '1.3rem',
         2: '2rem',
+        3.25: '3.25rem',
         43: '43rem',
         10: '9rem',
         8.3: '8.3rem',
@@ -87,6 +89,7 @@ export default {
         95: '95rem',
         88: '88rem',
         56: '56rem',
+
         60: '60rem',
         4: '4rem'
       },
@@ -132,6 +135,7 @@ export default {
         landingPage2: "url('@/assets/images/landingPage-2.png')",
         landingPage3: "url('@/assets/images/landingPage-3.png')"
       },
+
       inset: {
         0.8: '0.8rem',
         2.5: '2.5rem',
