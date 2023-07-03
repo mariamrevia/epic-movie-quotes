@@ -45,12 +45,13 @@
     <div class="flex flex-row mt-2 text-white items-center gap-3">
       <h2 class="text-1.5">Quotes</h2>
       <button
-        @click="toggleAddMovieModal"
+        @click="toggleAddQuoteModal"
         class="bg-red w-9.7 h-2.3 border-none rounded-md text-white"
       >
         Add Quote
       </button>
     </div>
+    <MovieQuoteAdd v-if="movie" :movie="movie" />
     <QuoteList v-if="movie" :movie="movie" />
   </DashboardLayout>
   <MovieEdit v-if="movie" :movie="movie" :genres="genres" />
@@ -64,7 +65,7 @@ import iconDelete from '@/components/icons/IconDelete.vue'
 import iconEdit from '@/components/icons/IconEdit.vue'
 import MovieEdit from '@/components/movies/MovieEdit.vue'
 import QuoteList from '@/components/quotes/QuoteList.vue'
-
+import MovieQuoteAdd from '@/components/quotes/MovieQuoteAdd.vue'
 import { getMovies } from '@/services/api/movies.js'
 import { onMounted, ref, toRef } from 'vue'
 import { useRoute } from 'vue-router'
@@ -99,6 +100,9 @@ const getImageURL = (image) => {
   return `${import.meta.env.VITE_API_BASE_URL}/storage/${image}`
 }
 
+const toggleAddQuoteModal = () => {
+  modalStore.openModal('createQuoteModalActive')
+}
 const toggleEditMovieModal = () => {
   modalStore.openModal('editMovieModalActive')
 }

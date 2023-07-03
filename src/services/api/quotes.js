@@ -25,3 +25,6 @@ export async function getQuotes() {
 export async function storeComments(body, quote_id) {
   return await axios.post('/comments', body, quote_id)
 }
+export async function storeLikes(quote_id, is_liked) {
+  return await axios.post('/likes', quote_id, is_liked)
+}

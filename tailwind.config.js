@@ -41,7 +41,7 @@ export default {
         44: '44rem',
         23.4: '23.4rem',
         33: '33rem',
-
+        10: '10rem',
         35: '35rem',
         3.3: '3.3rem',
         4: '4rem',
@@ -89,7 +89,7 @@ export default {
         95: '95rem',
         88: '88rem',
         56: '56rem',
-
+        18: '18rem',
         60: '60rem',
         4: '4rem'
       },

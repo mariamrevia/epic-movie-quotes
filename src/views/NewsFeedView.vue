@@ -36,7 +36,12 @@
             </h2>
             <IconComments />
           </div>
-          <IconLike />
+          <div class="flex flex-row items-center gap-2">
+            <p class="text-white text-1.5">{{ quote.likes_count }}</p>
+            <div @click="toggleLike(quote.id)">
+              <IconLike :isLiked="quote.isLiked" />
+            </div>
+          </div>
         </div>
         <hr class="flex h-0.05 bg-slate-700 border-none mt-1.25" />
 
@@ -95,7 +100,7 @@ import { Form, Field } from 'vee-validate'
 import { useQuoteStore } from '@/stores/quotes/index.js'
 import { useModalStore } from '@/stores/modal/index.js'
 import { useUserStore } from '@/stores/authUser/index.js'
-import { getQuotes, storeComments } from '@/services/api/quotes'
+import { getQuotes, storeComments, storeLikes } from '@/services/api/quotes'
 import { onMounted, ref } from 'vue'
 const modalStore = useModalStore()
 const quoteStore = useQuoteStore()
@@ -114,7 +119,9 @@ onMounted(async () => {
       commentData: {
         body: '',
         quote_id: quote.id
-      }
+      },
+      isLiked: false,
+      likes: 0
     }))
     console.log(quoteStore.quote)
   } catch (error) {
@@ -122,6 +129,22 @@ onMounted(async () => {
   }
 })
 
+const toggleLike = async (quoteId) => {
+  const quote = quoteStore.quote.find((quote) => quote.id === quoteId)
+  if (quote) {
+    quote.isLiked = !quote.isLiked
+    if (quote.isLiked) {
+      quote.likes_count++
+    } else {
+      quote.likes_count--
+    }
+    try {
+      await storeLikes({ quote_id: quoteId, is_liked: quote.isLiked })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 const submitData = async (id) => {
   const quote_id = id
   const quote = quoteStore.quote.find((quote) => quote.id === id)
