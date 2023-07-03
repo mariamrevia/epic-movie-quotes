@@ -11,10 +11,6 @@ export const useQuoteStore = defineStore('quotes', {
       },
       movie_id: '',
       image: ''
-    },
-    commentData: {
-      body: '',
-      quote_id: ''
     }
   })
 })

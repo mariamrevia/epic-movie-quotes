@@ -29,19 +29,30 @@
         <div class="m-auto mt-2">
           <img class="w-56 h-31 rounded-lg" :src="getImageURL(quote.image)" />
         </div>
+        <div class="flex flex-row gap-3 mt-2">
+          <div class="flex flex-row items-center gap-2">
+            <h2 class="text-white text-1.5">
+              {{ quote.comments.length }}
+            </h2>
+            <IconComments />
+          </div>
+          <IconLike />
+        </div>
         <hr class="flex h-0.05 bg-slate-700 border-none mt-1.25" />
 
         <div
-          class="mt-1.5 flex flex-row items-center"
+          class="mt-1.5 flex flex-col"
           v-for="comment in quote && quote.comments"
           :key="comment.id"
         >
-          <img class="h-3.25 w-3.25 rounded-full bg-slate-500" />
-          <div class="ml-2 flex flex-col align-middle justify-center">
-            <h2 class="text-white">{{ comment.user }}</h2>
-            <p class="text-white">{{ comment.body }}</p>
+          <div class="mt-1.5 flex flex-row items-center">
+            <img class="h-3.25 w-3.25 rounded-full bg-slate-500" />
+            <div class="ml-2 flex flex-col align-middle justify-center">
+              <h2 class="text-white">{{ comment.user }}</h2>
+              <p class="text-white">{{ comment.body }}</p>
+            </div>
+            <hr class="flex h-0.05 bg-slate-700 border-none mt-1.25" />
           </div>
-          <hr class="flex h-0.05 bg-slate-700 border-none mt-1.25" />
         </div>
         <div
           class="mt-1.5 flex flex-row items-center"
@@ -61,7 +72,7 @@
             >
               <Field
                 class="h-2.3 placeholder-white text-white bg-transparent w-50 ml-1.5 border-none outline-none"
-                v-model="quoteStore.commentData.body"
+                v-model="quote.commentData.body"
                 name="body"
                 @keydown.enter.prevent="submitData(quote.id)"
               />
@@ -78,6 +89,8 @@
 import dashboardLayout from '@/components/DashboardLayout.vue'
 import iconPencil from '@/components/icons/IconPencil.vue'
 import quoteCreate from '@/components/quotes/QuoteCreate.vue'
+import IconLike from '@/components/icons/IconLike.vue'
+import IconComments from '@/components/icons/IconComments.vue'
 import { Form, Field } from 'vee-validate'
 import { useQuoteStore } from '@/stores/quotes/index.js'
 import { useModalStore } from '@/stores/modal/index.js'
@@ -96,7 +109,13 @@ const toggleAddQuoteModal = () => {
 onMounted(async () => {
   try {
     const response = await getQuotes()
-    quoteStore.quote = response.data
+    quoteStore.quote = response.data.map((quote) => ({
+      ...quote,
+      commentData: {
+        body: '',
+        quote_id: quote.id
+      }
+    }))
     console.log(quoteStore.quote)
   } catch (error) {
     console.log(error)
@@ -104,17 +123,16 @@ onMounted(async () => {
 })
 
 const submitData = async (id) => {
-  console.log(id)
   const quote_id = id
-  comments.value.push({
-    body: quoteStore.commentData.body,
-    username: userStore.username
+  const quote = quoteStore.quote.find((quote) => quote.id === id)
+  quote.comments.push({
+    body: quote.commentData.body,
+    user: userStore.username
   })
 
-  console.log(comments.value)
   try {
     await storeComments({
-      body: quoteStore.commentData.body,
+      body: quote.commentData.body,
       quote_id: quote_id
     })
   } catch (error) {
