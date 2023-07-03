@@ -1,9 +1,9 @@
 <template>
   <Field v-slot="{ field }" :name="props.name" :rules="rules" :value="modelValue">
     <div
-      class="flex relative mt-1.5 flex-row border-[#6C757D] w-56 rounded-md border-0.1 bg-transparen focus-within:ring focus:shadow-shadow outline-none"
+      class="flex relative mt-1.5 flex-row border-dark-gray w-56 rounded-md border-0.1 bg-transparen focus-within:ring focus:shadow-shadow outline-none"
     >
-      <span class="ml-[1%] mt-0.5 text-[#6C757D]">
+      <span class="ml-[1%] mt-0.5 text-dark-gray">
         {{ props.text }}
       </span>
       <textarea
@@ -11,9 +11,9 @@
         :name="props.name"
         :placeholder="placeholder"
         @input="updateText($event.target.value)"
-        class="h-5 mt-0.5 placeholder-white text-white bg-transparent w-45 ml-1.5 border-[#6C757D] outline-none"
+        class="h-5 mt-0.5 placeholder-white text-white bg-transparent w-45 ml-1.5 border-dark-gray outline-none"
       ></textarea>
-      <span class="absolute z-999 ml-[95%] text-[#6C757D]">{{ props.lang }}</span>
+      <span class="absolute z-999 ml-[95%] text-dark-gray">{{ props.lang }}</span>
     </div>
   </Field>
   <ErrorMessage class="text-red-700" :name="name" />

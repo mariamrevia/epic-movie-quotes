@@ -6,9 +6,9 @@
     <LandingModal :modalActive="isModalActive('AddMovieModalActive')">
       <Form
         @submit="submitData(movieStore.createMovieData)"
-        class="w-60 z-10 fixed flex flex-col md:mt-13.6 pb-13 md:pb-4 items-center bg-darkgray md:bg-gray rounded-lg"
+        class="w-60 z-10 fixed flex flex-col md:mt-13.6 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
       >
-        <h2 class="text-white text-2 mt-2">Add Movie</h2>
+        <HeaderEditAdd heading="Add Movie" />
         <InputMovie
           name="name[en]"
           v-model="movieStore.createMovieData.name.en"
@@ -40,7 +40,7 @@
               class="text-white justify-between h-1.5 p-2 border ml-1 rounded-sm flex items-center bg-[#6C757D] border-none gap-2"
             >
               {{ title }}
-              <iconCross @click.stop="deleteGenre(title)" />
+              <IconCross @click.stop="deleteGenre(title)" />
             </div>
 
             <div
@@ -114,7 +114,7 @@
           />
           <ErrorMessage class="text-red-700" name="image" />
         </div>
-        <buttonMovie type="submit" />
+        <ButtonBase type="submit" text="Add Movie" />
       </Form>
     </LandingModal>
   </div>
@@ -123,9 +123,10 @@
 <script setup>
 import TextAreaBase from '@/components/ui/TextAreaBase.vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
-import iconCross from '@/components/icons/IconCross.vue'
+import IconCross from '@/components/icons/IconCross.vue'
 import InputMovie from '@/components/ui/InputMovie.vue'
-import buttonMovie from '@/components/ui/ButtonMovie.vue'
+import ButtonBase from '@/components/ui/ButtonBase.vue'
+import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
 import { useModalStore } from '@/stores/modal'
 import { Field, ErrorMessage } from 'vee-validate'
 import { ref } from 'vue'

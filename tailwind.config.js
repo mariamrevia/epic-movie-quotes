@@ -22,29 +22,38 @@ export default {
         0.5: '0.5rem',
         5: '5rem',
         13.6: '13.6rem',
-        26: '26rem'
+        26: '26rem',
+        95: '95%'
       },
       height: {
         1.3: '1.3rem',
+        12: '12rem',
         2: '2rem',
         1.5: '1.5rem',
         3: '3rem',
+        3.25: '3.25rem',
         2.7: '2.7',
         2.3: '2.4rem',
         2.6: '2.6rem',
         53: '53rem',
         31: '31rem',
+        32: '32rem',
         44: '44rem',
         23.4: '23.4rem',
         33: '33rem',
+        10: '10rem',
         35: '35rem',
         3.3: '3.3rem',
+        4: '4rem',
         5: '5rem',
         25: '25rem',
         41: '41rem',
         9.6: '9.6rem',
         19: '19rem',
-        27: '27rem'
+        15: '15rem',
+        0.05: '0.05rem',
+        27: '27rem',
+        8.75: '8.75rem'
       },
       borderRadius: {},
       textColor: {
@@ -57,14 +66,17 @@ export default {
       width: {
         1.3: '1.3rem',
         2: '2rem',
+        3.25: '3.25rem',
         43: '43rem',
         10: '9rem',
         8.3: '8.3rem',
         9.7: '9.6rem',
         6.8: '6.8rem',
         5.5: '5.5rem',
+        14: '14rem',
         6: '6rem',
         50: '50rem',
+        48: '48rem',
         22: '22rem',
         17.5: '17.5rem',
         15.6: '15.6rem',
@@ -77,7 +89,9 @@ export default {
         95: '95rem',
         88: '88rem',
         56: '56rem',
-        60: '60rem'
+        18: '18rem',
+        60: '60rem',
+        4: '4rem'
       },
       padding: {
         13: '13rem'
@@ -121,6 +135,7 @@ export default {
         landingPage2: "url('@/assets/images/landingPage-2.png')",
         landingPage3: "url('@/assets/images/landingPage-3.png')"
       },
+
       inset: {
         0.8: '0.8rem',
         2.5: '2.5rem',
@@ -130,6 +145,7 @@ export default {
         9: '9rem',
         10: '10rem',
         12: '12rem',
+        3.3: '3.3rem',
         4.4: '4.4rem',
         14: '15rem'
       }
