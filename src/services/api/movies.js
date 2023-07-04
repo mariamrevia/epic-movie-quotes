@@ -19,3 +19,7 @@ export async function updateMovies(data) {
     }
   })
 }
+
+export async function getSearchResults(query) {
+  return axios.get('/movies/search', { params: { search: query } })
+}

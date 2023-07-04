@@ -23,7 +23,7 @@ export async function getQuotes() {
 }
 
 export async function getSearchResults(query) {
-  return axios.get('/search', { params: { search: query } })
+  return axios.get('/quotes/search', { params: { search: query } })
 }
 export async function storeComments(body, quote_id) {
   return await axios.post('/comments', body, quote_id)

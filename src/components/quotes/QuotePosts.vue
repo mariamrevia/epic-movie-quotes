@@ -13,7 +13,10 @@
         <p class="text-white">{{ quote.body.en }}</p>
         <div class="flex flex-row ml-2">
           <h2 class="text-white">Movie -</h2>
-          <p class="text-caramel ml-1">{{ quote.movie.name.en }}</p>
+
+          <p class="text-caramel ml-1">
+            {{ $i18n.locale === 'en' ? quote.movie.name.en : quote.movie.name.ka }}
+          </p>
           <span class="text-white ml-1">({{ quote.movie.year }})</span>
         </div>
       </div>

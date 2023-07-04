@@ -21,7 +21,9 @@
 
         <div class="flex flex-row left-4.4 absolute top-12">
           <IconHouse class="h-1.3 w-1.3" />
-          <button class="text-white h-6 flex border-none ml-2">news feed</button>
+          <button @click="navigateTo('newsFeed')" class="text-white h-6 flex border-none ml-2">
+            news feed
+          </button>
         </div>
 
         <div class="flex flex-row absolute left-4.4 top-14 items-center">
@@ -58,7 +60,11 @@ const toggleListDiv = () => {
   listDivVisible.value = !listDivVisible.value
 }
 
-const navigateTo = (listofmovies) => {
-  router.push({ name: listofmovies })
+const navigateTo = (routeName) => {
+  if (routeName === 'newsFeed') {
+    router.push({ name: routeName })
+  } else if (routeName === 'list-of-movies') {
+    router.push({ name: routeName })
+  }
 }
 </script>
