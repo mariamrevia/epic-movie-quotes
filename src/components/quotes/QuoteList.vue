@@ -29,7 +29,7 @@
                 <span class="text-whiteGray">Edit </span>
               </div>
               <div class="flex flex-row mt-1.25 gap-2">
-                <IconDelete />
+                <IconDelete @click="quoteDelete(quote.id)" />
                 <span class="text-whiteGray">Delete </span>
               </div>
             </div>
@@ -50,6 +50,7 @@ import IconDelete from '@/components/icons/IconDelete.vue'
 import IconEdit from '@/components/icons/IconEdit.vue'
 import IconEye from '@/components/icons/IconEye.vue'
 import IconThreeDots from '@/components/icons/IconThreeDots.vue'
+import { deleteQuote } from '@/services/api/quotes'
 const props = defineProps({
   movie: {
     type: Object,
@@ -74,6 +75,17 @@ const toggleDashboard = (id) => {
     activeQuoteId.value = id
     toggleDiv.value = true
   }
+}
+const quoteToDelete = ref(null)
+const quoteDelete = async (id) => {
+  quoteToDelete.value = id
+  try {
+    await deleteQuote(quoteToDelete.value)
+  } catch (error) {
+    console.log(error)
+  }
+
+  console.log(quoteToDelete.value)
 }
 
 const quoteToEdit = ref(null)

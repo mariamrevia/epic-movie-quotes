@@ -18,13 +18,20 @@ export async function updateQuotes(data) {
   })
 }
 
-export async function getQuotes() {
-  return axios.get('/quotes')
+export async function getQuotes(page) {
+  return axios.get('/quotes', {
+    params: { page: page }
+  })
 }
-
+export async function getSearchResults(query) {
+  return axios.get('/quotes/search', { params: { search: query } })
+}
 export async function storeComments(body, quote_id) {
   return await axios.post('/comments', body, quote_id)
 }
 export async function storeLikes(quote_id, is_liked) {
   return await axios.post('/likes', quote_id, is_liked)
+}
+export async function deleteQuote(quote_id) {
+  return await axios.delete(`/quotes/${quote_id}`)
 }

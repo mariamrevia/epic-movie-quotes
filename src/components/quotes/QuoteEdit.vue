@@ -11,7 +11,7 @@
         class="w-60 z-10 fixed flex flex-col md:mt-13.6 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
       >
         <div class="flex flex-row gap-2 absolute left-3 top-3.3">
-          <IconDelete />
+          <IconDelete @click="quoteDelete(quote.id)" />
           <p>Delete</p>
         </div>
         <HeaderEditAdd heading="Edit quote" />
@@ -49,6 +49,7 @@ import { Form, Field } from 'vee-validate'
 import { useModalStore } from '@/stores/modal'
 import { computed, ref } from 'vue'
 import { updateQuotes } from '@/services/api/quotes.js'
+import { deleteQuote } from '@/services/api/quotes'
 
 const props = defineProps({
   quoteToEdit: {
@@ -92,6 +93,16 @@ const submitData = async () => {
     console.log(error)
   }
 }
+const quoteToDelete = ref(null)
+const quoteDelete = async (id) => {
+  quoteToDelete.value = id
+  try {
+    await deleteQuote(quoteToDelete.value)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const initialImageUrl = computed(() => {
   if (getFilteredQuotes.value.length > 0) {
     const image = getFilteredQuotes.value[0].image
