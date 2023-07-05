@@ -96,24 +96,12 @@
           rules="required"
         />
 
-        <div
-          class="w-56 h-5 mt-0.5 rounded-md border-0.1 flex items-center placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
-        >
-          <label
-            for="file-upload"
-            class="h-2.6 ml-2 text-center flex p-3 rounded-sm items-center bg-[#9747FF]"
-          >
-            choose file
-          </label>
-          <Field
-            id="file-upload"
-            name="image"
-            v-model="movieStore.createMovieData.image"
-            type="file"
-            :rules="movieStore.createMovieData.image ? '' : 'required'"
-          />
-          <ErrorMessage class="text-red-700" name="image" />
-        </div>
+        <imageUpload
+          v-model="movieStore.createMovieData.image"
+          name="image"
+          :rules="movieStore.createMovieData.image ? '' : 'required'"
+          @update:imageUpload="updateImageUpload"
+        />
         <ButtonBase type="submit" text="Add Movie" />
       </Form>
     </LandingModal>
@@ -126,7 +114,9 @@ import LandingModal from '@/components/ui/LandingModal.vue'
 import IconCross from '@/components/icons/IconCross.vue'
 import InputMovie from '@/components/ui/InputMovie.vue'
 import ButtonBase from '@/components/ui/ButtonBase.vue'
+import imageUpload from '@/components/shared/ImageUpload.vue'
 import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
+
 import { useModalStore } from '@/stores/modal'
 import { Field, ErrorMessage } from 'vee-validate'
 import { ref } from 'vue'
@@ -139,6 +129,9 @@ const movieStore = useMovieStore()
 const isDropdownOpen = ref(false)
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value
+}
+const updateImageUpload = (file) => {
+  movieStore.createMovieData.image = file
 }
 const selectedGenre = (genre, title) => {
   movieStore.createMovieData.genre.push(genre.id)
