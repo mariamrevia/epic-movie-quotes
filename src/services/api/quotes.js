@@ -32,3 +32,6 @@ export async function storeComments(body, quote_id) {
 export async function storeLikes(quote_id, is_liked) {
   return await axios.post('/likes', quote_id, is_liked)
 }
+export async function deleteQuote(quote_id) {
+  return await axios.delete(`/quotes/${quote_id}`)
+}

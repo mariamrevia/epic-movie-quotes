@@ -19,7 +19,7 @@
           >
             <iconEdit @click="toggleEditMovieModal" />
 
-            <iconDelete />
+            <iconDelete @click="movieDelete(movie.id)" />
           </div>
         </div>
         <div class="flex flex-row mt-2">
@@ -66,7 +66,7 @@ import iconEdit from '@/components/icons/IconEdit.vue'
 import MovieEdit from '@/components/movies/MovieEdit.vue'
 import QuoteList from '@/components/quotes/QuoteList.vue'
 import MovieQuoteAdd from '@/components/quotes/MovieQuoteAdd.vue'
-import { getMovies } from '@/services/api/movies.js'
+import { getMovies, deleteMovie } from '@/services/api/movies.js'
 import { onMounted, ref, toRef } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -96,6 +96,15 @@ onMounted(async () => {
   }
 })
 
+const movieToDelete = ref(null)
+const movieDelete = async (id) => {
+  movieToDelete.value = id
+  try {
+    await deleteMovie(movieToDelete.value)
+  } catch (error) {
+    console.log(error)
+  }
+}
 const getImageURL = (image) => {
   return `${import.meta.env.VITE_API_BASE_URL}/storage/${image}`
 }
