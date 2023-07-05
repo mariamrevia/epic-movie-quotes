@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import actions from './actions'
 
 export const useQuoteStore = defineStore('quotes', {
   state: () => ({
@@ -12,5 +13,6 @@ export const useQuoteStore = defineStore('quotes', {
       movie_id: '',
       image: ''
     }
-  })
+  }),
+  actions: actions
 })

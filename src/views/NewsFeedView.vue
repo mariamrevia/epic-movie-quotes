@@ -44,7 +44,8 @@ async function performSearch() {
     try {
       const response = await getSearchResults(searchQuery.value)
       searchResults.value = response.data
-      quoteStore.quote = response.data.map((quote) => ({
+      console.log(searchResults.value)
+      quoteStore.quotes = searchResults.value.map((quote) => ({
         ...quote,
         commentData: {
           body: '',

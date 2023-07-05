@@ -1,7 +1,7 @@
 <template>
   <div
     class="bg-darkgray pb-7 flex flex-col w-60 pt-4 rounded-2xl mt-2"
-    v-for="quote in quoteStore.quote"
+    v-for="quote in quoteStore.quotes"
     :key="quote.id"
   >
     <div class="m-auto">
@@ -87,33 +87,75 @@ import IconLike from '@/components/icons/IconLike.vue'
 import IconComments from '@/components/icons/IconComments.vue'
 import { Form, Field } from 'vee-validate'
 import { getQuotes, storeComments, storeLikes } from '@/services/api/quotes'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, onUnmounted } from 'vue'
 import { useQuoteStore } from '@/stores/quotes/index.js'
 import { useUserStore } from '@/stores/authUser/index.js'
 const userStore = useUserStore()
 const comments = ref([])
 const quoteStore = useQuoteStore()
 
+const currentPage = ref(1)
+const hasMoreQuotes = ref(true)
+
+const fetchQuotes = async () => {
+  try {
+    const response = await getQuotes(currentPage.value)
+    const newQuotes = response.data
+
+    if (newQuotes.length === 0) {
+      hasMoreQuotes.value = false
+    } else {
+      const updatedQuotes = newQuotes.map((quote) => ({
+        ...quote,
+        commentData: {
+          body: '',
+          quote_id: quote.id
+        },
+        isLiked: false,
+        likes: 0
+      }))
+
+      const uniqueQuotes = updatedQuotes.filter((quote) => {
+        return !quoteStore.quotes.some((existingQuote) => existingQuote.id === quote.id)
+      })
+
+      quoteStore.updateQuotes([...quoteStore.quotes, ...uniqueQuotes])
+      console.log(quoteStore.quotes)
+      console.log(hasMoreQuotes.value)
+      currentPage.value++
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 onMounted(async () => {
   try {
-    const response = await getQuotes()
-    quoteStore.quote = response.data.map((quote) => ({
-      ...quote,
-      commentData: {
-        body: '',
-        quote_id: quote.id
-      },
-      isLiked: false,
-      likes: 0
-    }))
-    console.log(quoteStore.quote)
+    await fetchQuotes()
   } catch (error) {
     console.log(error)
   }
 })
 
+const handleScroll = () => {
+  const scrollPosition = window.scrollY
+  const documentHeight = document.documentElement.offsetHeight
+
+  if (scrollPosition + window.innerHeight >= documentHeight && hasMoreQuotes.value) {
+    fetchQuotes()
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
+
 const toggleLike = async (quoteId) => {
-  const quote = quoteStore.quote.find((quote) => quote.id === quoteId)
+  const quote = quoteStore.quotes.find((quote) => quote.id === quoteId)
   if (!quote) {
     return
   }
@@ -134,7 +176,7 @@ const toggleLike = async (quoteId) => {
 
 const submitData = async (id) => {
   const quote_id = id
-  const quote = quoteStore.quote.find((quote) => quote.id === id)
+  const quote = quoteStore.quotes.find((quote) => quote.id === id)
   quote.comments.push({
     body: quote.commentData.body,
     user: userStore.username

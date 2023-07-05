@@ -18,10 +18,11 @@ export async function updateQuotes(data) {
   })
 }
 
-export async function getQuotes() {
-  return axios.get('/quotes')
+export async function getQuotes(page) {
+  return axios.get('/quotes', {
+    params: { page: page }
+  })
 }
-
 export async function getSearchResults(query) {
   return axios.get('/quotes/search', { params: { search: query } })
 }
