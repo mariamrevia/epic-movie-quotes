@@ -13,14 +13,18 @@ export default {
     extend: {
       margin: {
         2: '2rem',
+        2.5: '2.5rem',
         1.5: '1.5rem',
         1.25: '1.25rem',
         4.4: '4.4rem',
         3.3: '3.3rem',
+        3: '3rem',
+
         7.4: '7.4rem',
         9: '9rem',
         0.5: '0.5rem',
         5: '5rem',
+        6: '6rem',
         13.6: '13.6rem',
         26: '26rem',
         95: '95%'
@@ -32,6 +36,7 @@ export default {
         1.5: '1.5rem',
         3: '3rem',
         3.25: '3.25rem',
+        3.6: '3.6rem',
         2.7: '2.7',
         2.3: '2.4rem',
         2.6: '2.6rem',
@@ -53,7 +58,8 @@ export default {
         15: '15rem',
         0.05: '0.05rem',
         27: '27rem',
-        8.75: '8.75rem'
+        8.75: '8.75rem',
+        8.3: '8.3rem'
       },
       borderRadius: {},
       textColor: {
@@ -67,8 +73,10 @@ export default {
         1.3: '1.3rem',
         2: '2rem',
         3.25: '3.25rem',
+        3.6: '3.6rem',
         43: '43rem',
         10: '9rem',
+        12: '12rem',
         8.3: '8.3rem',
         9.7: '9.6rem',
         6.8: '6.8rem',
@@ -82,6 +90,7 @@ export default {
         15.6: '15.6rem',
         37.5: '37.5rem',
         33.6: '33.6rem',
+        30: '30rem',
         35: '35rem',
         27: '26rem',
         27.5: '27.5rem',
@@ -91,10 +100,12 @@ export default {
         56: '56rem',
         18: '18rem',
         60: '60rem',
+        62: '62rem',
         4: '4rem'
       },
       padding: {
-        13: '13rem'
+        13: '13rem',
+        10: '10rem'
       },
       fontSize: {
         2: '2rem',
@@ -149,6 +160,7 @@ export default {
         4.4: '4.4rem',
         14: '15rem',
         18: '18.2rem',
+        38: '38rem',
         6.25: '6.25rem'
       }
     }

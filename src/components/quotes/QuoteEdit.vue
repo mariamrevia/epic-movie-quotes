@@ -20,9 +20,7 @@
         <div
           class="w-56 mt-1.25 rounded-md border-0.1 flex items-center text-white border-[#6C757D] focus-within:ring focus:shadow-shadow outline-none"
         >
-          <div>
-            <img class="w-56 h-32" :src="imageUrl || initialImageUrl" />
-          </div>
+          <img class="w-56 h-32" :src="imageUrl || initialImageUrl" />
         </div>
 
         <Field
@@ -32,6 +30,7 @@
           type="file"
           @change="onFileChange"
         />
+
         <label for="file-upload" class="bg-black h-9 w-10 absolute top-[70%]">Choose Image</label>
         <ButtonBase type="submit" text="Save Changes" />
       </Form>

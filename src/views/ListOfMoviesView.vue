@@ -87,7 +87,7 @@ onMounted(async () => {
   try {
     const response = await getMovies()
     const data = response.data
-    movieStore.setMovies(data.movies)
+    movieStore.setMovies(data.data)
     movieStore.setGenres(data.genres)
     console.log(response)
   } catch (error) {

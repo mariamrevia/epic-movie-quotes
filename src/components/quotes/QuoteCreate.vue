@@ -120,7 +120,7 @@ onMounted(async () => {
     const response = await getMovies()
     const data = response.data
     console.log(data)
-    movieStore.setMovies(data.movies)
+    movieStore.setMovies(data.data)
   } catch (error) {
     console.error(error)
   }
