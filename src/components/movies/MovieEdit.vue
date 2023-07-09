@@ -11,14 +11,14 @@
         <HeaderEditAdd heading="Edit Movie" />
         <inputEdit
           name="name[en]"
-          rules="required"
+          rules="required|alphabetEn"
           v-model="editMovie.name.en"
           text="Movie name:"
           lang="Eng"
         />
         <inputEdit
           name="name[ka]"
-          rules="required"
+          rules="required|alphabetKa"
           v-model="editMovie.name.ka"
           text="ფილმის სახელი:"
           lang="Geo"
@@ -71,14 +71,14 @@
           v-model="editMovie.director.en"
           text="director:"
           lang="Eng"
-          rules="required"
+          rules="required|alphabetEn"
         />
         <InputEdit
           name="director[ka]"
           v-model="editMovie.director.ka"
           text="რეჟისორი:"
           lang="Geo"
-          rules="required"
+          rules="required|alphabetKa"
         />
         <TextAreaEdit
           name="description[en]"
@@ -88,11 +88,11 @@
           rules="required"
         />
         <TextAreaEdit
-          name="description[en]"
+          name="description[ka]"
           v-model="editMovie.description.ka"
           text="აღწერა:"
           lang="Geo"
-          rules="required"
+          rules="required|alphabetKa"
         />
         <div
           class="w-56 mt-0.5 rounded-md border-0.1 flex items-center placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"

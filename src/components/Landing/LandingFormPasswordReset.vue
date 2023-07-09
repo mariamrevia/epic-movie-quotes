@@ -18,7 +18,7 @@
             name="password"
             :label="$t('passwordReset.password')"
             type="password"
-            rules="required"
+            rules="required|minLength:8|maxLength:15|lowercase"
             :placeholder="$t('placeholders.password')"
           />
           <InputText

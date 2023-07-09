@@ -33,8 +33,22 @@ defineRule('maxLength', (value, [limit]) => {
   return true
 })
 defineRule('lowercase', (value) => {
-  if (value !== value.toLowerCase()) {
+  const regex = /^[a-z0-9]+$/
+  if (!regex.test(value)) {
     return i18n.global.t('validation.lowerCase')
+  }
+  return true
+})
+
+defineRule('alphabetKa', (value) => {
+  if (!/^[ა-ჰ]+$/gm.test(value)) {
+    return i18n.global.t('validation.alphabetKa')
+  }
+  return true
+})
+defineRule('alphabetEn', (value) => {
+  if (!/^[a-zA-Z]+$/gm.test(value)) {
+    return i18n.global.t('validation.alphabetEn')
   }
   return true
 })

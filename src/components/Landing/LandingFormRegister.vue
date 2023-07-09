@@ -33,7 +33,7 @@
             name="password"
             :label="$t('register.password')"
             type="password"
-            rules="required|lowercase"
+            rules="required|minLength:8|maxLength:15|lowercase"
             :placeholder="$t('placeholders.password')"
           />
           <InputText
