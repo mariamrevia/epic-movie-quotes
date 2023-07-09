@@ -45,3 +45,7 @@ export async function verifyNewEmail(id, hash, expires, new_email, signature) {
     }
   })
 }
+
+export async function logOut() {
+  return axios.post('/logout')
+}

@@ -6,6 +6,7 @@
 
       <button
         class="md:w-6 hidden md:flex items-center justify-center h-2.3 border rounded-md text-white"
+        @click="handlelogOut"
       >
         log out
       </button>
@@ -15,4 +16,12 @@
 
 <script setup>
 import LanguageSwitch from '@/components/shared/LanguageSwitch.vue'
+import { logOut } from '@/services/api/auth.js'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const handlelogOut = async () => {
+  await logOut()
+  router.push({ name: 'landing' })
+}
 </script>
