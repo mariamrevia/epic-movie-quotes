@@ -58,7 +58,7 @@ const { errorMessage, meta } = useField(props.name)
 
 const fieldClasses = computed(() => {
   let classes =
-    ' h-2.3 rounded-md border-0.1 bg-light-gray  focus-within:ring focus:shadow-shadow outline-none '
+    ' h-2.3 rounded-md border-0.1 md:bg-light-gray  focus-within:ring focus:shadow-shadow outline-none '
   if (meta.touched && errorMessage.value) {
     classes += ' border-red-700'
   }

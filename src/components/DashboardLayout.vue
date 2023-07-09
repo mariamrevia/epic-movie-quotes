@@ -1,17 +1,17 @@
 <template>
-  <div class="bg-lightBlack h-full w-full">
+  <div class="bg-lightBlack min-h-screen w-screen">
     <div class="relative">
       <HeaderDashboard />
     </div>
     <button @click="toggleListDiv" class="z-10 absolute top-3 md:hidden flex left-3">
       <IconList />
     </button>
-    <div class="flex flex-row h-full w-full">
+    <div class="flex flex-row h-screen w-screen justify-center">
       <div
         :class="
           listDivVisible
-            ? 'md:h-screen absolute top-2 h-41 w-22 md:w-17.5 left-0 bg-lightBlack md:flex flex-col'
-            : 'md:h-screen h-41 w-22 md:w-17.5 bg-lightBlack md:flex flex-col hidden'
+            ? 'md:h-22 absolute top-2 h-41 w-22 md:w-17.5 left-0 bg-lightBlack md:flex flex-col'
+            : 'md:h-22 h-41 w-22 md:w-17.5 bg-lightBlack md:flex flex-col hidden'
         "
       >
         <div class="left-4.4 top-7 flex flex-col fixed">
@@ -45,7 +45,7 @@
           </div>
         </div>
       </div>
-      <div class="ml-6">
+      <div class="md:ml-6 ml-0">
         <slot></slot>
       </div>
     </div>

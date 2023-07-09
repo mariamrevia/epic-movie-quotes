@@ -1,128 +1,138 @@
 <template>
   <dashboardLayout>
-    <h2 class="text-white text-1.5 flex ml-13.6 mt-1.5">My Profile</h2>
-    <Form
-      v-slot="{ meta }"
-      @submit="submitData"
-      class="relative mt-3.3 ml-9 flex flex-col items-center"
-    >
-      <div class="absolute z-999 flex flex-col items-center top-5">
-        <img
-          :src="userStore.google_id ? userStore.image : imageUrl"
-          class="h-12 w-12 bg-slate-500 rounded-full"
-        />
-        <input id="file-upload" class="hidden" name="image" type="file" @change="onFileChange" />
-        <label v-if="!userStore.google_id" for="file-upload" class="text-white text-1.25"
-          >Upload new photo</label
-        >
-      </div>
-      <div class="mt-9 flex flex-col items-center">
-        <div class="w-62 pb-10 bg-darkgray rounded-lg flex items-center justify-center">
-          <div class="w-30 mt-9 pt-4 flex flex-col gap-4">
-            <div class="flex flex-row items-end">
+    <h2 class="text-white md:flex hidden text-1.5 ml-13.6 md:mt-1.5 mt-0">My Profile</h2>
+    <div>
+      <Form
+        v-slot="{ meta }"
+        @submit="submitData"
+        class="relative md:mt-3.3 mt-0 lg:ml-9 md:ml-3 ml-0 flex flex-col items-center"
+      >
+        <div class="absolute z-999 flex w-22 flex-col items-center top-5">
+          <img
+            :src="userStore.google_id ? userStore.image : imageUrl"
+            class="h-12 w-12 bg-slate-500 rounded-full"
+          />
+          <input id="file-upload" class="hidden" name="image" type="file" @change="onFileChange" />
+          <label v-if="!userStore.google_id" for="file-upload" class="text-white text-1.25"
+            >Upload new photo</label
+          >
+        </div>
+        <div class="md:mt-9 mt-9 flex flex-col items-center">
+          <div
+            class="md:w-62 w-22 md:pb-10 pb-6 md:bg-darkgray bg-[#24222F] rounded-lg m-auto md:m-0 flex items-center justify-center"
+          >
+            <div class="w-30 md:mt-9 mt-13.6 pt-4 flex flex-col gap-4">
+              <div class="flex flex-row items-end md:justify-normal justify-center">
+                <InputText
+                  class="md:w-30 sm:22 bg-transparent border-none placeholder-slate-700"
+                  name="disabledUsername"
+                  :placeholder="userStore.username"
+                  label="username"
+                  disabled
+                />
+                <p class="text-white text-1.25 ml-2" @click="openEdit('username')">Edit</p>
+              </div>
+
+              <ValidationProfile
+                v-if="isEdit && name === 'username'"
+                name="username"
+                :valid="meta.valid"
+                :items="[
+                  'Minimum 3 characters',
+                  'Maximum 15 characters',
+                  'Only lowercase characters'
+                ]"
+              />
               <InputText
+                v-if="isEdit && name === 'username'"
+                v-model="userInfoStore.userData.username"
                 class="w-30 placeholder-slate-700"
-                name="disabledUsername"
-                :placeholder="userStore.username"
+                name="username"
+                rules="minLength:3|maxLength:15|lowercase"
                 label="username"
-                disabled
               />
-              <p class="text-white text-1.25 ml-2" @click="openEdit('username')">Edit</p>
-            </div>
+              <p class="text-white md:flex sm:hidden">{{ console.log(meta) }}</p>
 
-            <ValidationProfile
-              v-if="isEdit && name === 'username'"
-              name="username"
-              :valid="meta.valid"
-              :items="[
-                'Minimum 3 characters',
-                'Maximum 15 characters',
-                'Only lowercase characters'
-              ]"
-            />
-            <InputText
-              v-if="isEdit && name === 'username'"
-              v-model="userInfoStore.userData.username"
-              class="w-30 placeholder-slate-700"
-              name="username"
-              rules="minLength:3|maxLength:15|lowercase"
-              label="username"
-            />
-            <p class="text-white">{{ console.log(meta) }}</p>
-
-            <div class="flex flex-row items-end">
+              <div class="flex flex-row items-end md:justify-normal justify-center">
+                <InputText
+                  class="md:w-30 sm:22 bg-transparent border-none placeholder-slate-700"
+                  name="disabledEmail"
+                  label="Email"
+                  :placeholder="userStore.email"
+                  disabled
+                />
+                <p
+                  v-if="!userStore.google_id"
+                  class="text-white text-1.25 ml-2"
+                  @click="openEdit('email')"
+                >
+                  Edit
+                </p>
+              </div>
+              <ValidationProfile
+                v-if="isEdit && name === 'email'"
+                :valid="meta.valid"
+                name="email"
+                :items="['Must be tyoe of an Email']"
+              />
               <InputText
+                v-if="isEdit && name === 'email'"
                 class="w-30 placeholder-slate-700"
-                name="disabledEmail"
+                v-model="userInfoStore.userData.email"
+                name="email"
                 label="Email"
-                :placeholder="userStore.email"
-                disabled
+                rules="email"
               />
-              <p
-                v-if="!userStore.google_id"
-                class="text-white text-1.25 ml-2"
-                @click="openEdit('email')"
+              <div
+                :class="
+                  userStore.google_id
+                    ? 'hidden'
+                    : 'flex flex-row items-end md:justify-normal justify-center '
+                "
               >
-                Edit
-              </p>
-            </div>
-            <ValidationProfile
-              v-if="isEdit && name === 'email'"
-              :valid="meta.valid"
-              name="email"
-              :items="['Must be tyoe of an Email']"
-            />
-            <InputText
-              v-if="isEdit && name === 'email'"
-              class="w-30 placeholder-slate-700"
-              v-model="userInfoStore.userData.email"
-              name="email"
-              label="Email"
-              rules="email"
-            />
-            <div :class="userStore.google_id ? 'hidden' : 'flex flex-row items-end'">
-              <InputText
-                class="w-30 placeholder-slate-700"
-                name="disabledPassword"
-                label="Password"
-                disabled
+                <InputText
+                  class="md:w-30 sm:22 bg-transparent border-none placeholder-slate-700"
+                  name="disabledPassword"
+                  label="Password"
+                  disabled
+                />
+                <p class="text-white text-1.25 ml-2" @click="openEdit('password')">Edit</p>
+              </div>
+              <ValidationProfile
+                v-if="isEdit && name === 'password'"
+                name="password"
+                :valid="meta.valid"
+                :items="['Password must match']"
               />
-              <p class="text-white text-1.25 ml-2" @click="openEdit('password')">Edit</p>
+              <InputText
+                v-if="isEdit && name === 'password'"
+                class="w-30 placeholder-slate-700"
+                v-model="userInfoStore.userData.password"
+                name="password"
+                type="password"
+                label="new password"
+                rules="required"
+              />
+              <InputText
+                v-if="isEdit && name === 'password'"
+                class="w-30 placeholder-slate-700"
+                type="password"
+                v-model="userInfoStore.userData.password_confirmation"
+                name="password_confirmation"
+                label="confirm new password"
+                rules="required|confirmed:password"
+              />
             </div>
-            <ValidationProfile
-              v-if="isEdit && name === 'password'"
-              name="password"
-              :valid="meta.valid"
-              :items="['Password must match']"
-            />
-            <InputText
-              v-if="isEdit && name === 'password'"
-              class="w-30 placeholder-slate-700"
-              v-model="userInfoStore.userData.password"
-              name="password"
-              type="password"
-              label="new password"
-              rules="required"
-            />
-            <InputText
-              v-if="isEdit && name === 'password'"
-              class="w-30 placeholder-slate-700"
-              type="password"
-              v-model="userInfoStore.userData.password_confirmation"
-              name="password_confirmation"
-              label="confirm new password"
-              rules="required|confirmed:password"
-            />
           </div>
         </div>
-      </div>
-      <div class="flex flex-row w-full justify-end items-center gap-3 mt-3.3">
-        <p @click="cancell" class="text-white text-1.5">Cancell</p>
-        <button class="bg-red w-9.7 h-2.3 border-none rounded-md self-end text-white">
-          Save Changes
-        </button>
-      </div>
-    </Form>
+        <div class="md:flex flex-row w-full hidden justify-end items-center gap-3 mt-3.3">
+          <p @click="cancell" class="text-white text-1.5">Cancell</p>
+          <button class="bg-red w-9.7 h-2.3 border-none rounded-md self-end text-white">
+            Save Changes
+          </button>
+        </div>
+      </Form>
+    </div>
   </dashboardLayout>
 </template>
 
