@@ -9,7 +9,8 @@ export const useUserInfoStore = defineStore('userInfo', {
       username: '',
       email: '',
       password: '',
-      password_confirmation: ''
+      password_confirmation: '',
+      image: ''
     }
   }),
   actions: actions

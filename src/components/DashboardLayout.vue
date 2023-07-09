@@ -16,7 +16,11 @@
       >
         <div class="left-4.4 top-7 flex flex-col fixed">
           <div class="flex flex-row">
-            <img class="h-3.6 w-3.6 border-white border-2 rounded-full" />
+            <img
+              :src="authUserStore.google_id ? authUserStore.image : imageUrl"
+              @onChange="onFileChange"
+              class="h-3.6 w-3.6 border-none bg-slate-400 border-2 rounded-full"
+            />
             <div class="flex flex-col items-start ml-2.5">
               <h2 class="text-white h-6 flex text-1.5">{{ authUserStore.username }}</h2>
               <p class="text-white text-1 mt-4" @click="navigateTo('profile')">Edit your profile</p>
@@ -72,6 +76,14 @@ const navigateTo = (routeName) => {
     router.push({ name: routeName })
   } else if (routeName === 'profile') {
     router.push({ name: routeName })
+  }
+}
+
+const imageUrl = ref(`${import.meta.env.VITE_API_BASE_URL}/storage/${authUserStore.image}`)
+const onFileChange = (event) => {
+  const file = event.target.files[0]
+  if (file) {
+    imageUrl.value = URL.createObjectURL(file)
   }
 }
 </script>

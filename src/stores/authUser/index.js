@@ -7,6 +7,7 @@ export const useUserStore = defineStore('authUser', {
     username: null,
     email: null,
     google_id: null,
+    image: null,
     isAuthenticated: false
   }),
   actions: actions

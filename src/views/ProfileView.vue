@@ -7,7 +7,10 @@
       class="relative mt-3.3 ml-9 flex flex-col items-center"
     >
       <div class="absolute z-999 flex flex-col items-center top-5">
-        <img :src="imageUrl" class="h-12 w-12 bg-slate-500 rounded-full" />
+        <img
+          :src="userStore.google_id ? userStore.image : imageUrl"
+          class="h-12 w-12 bg-slate-500 rounded-full"
+        />
         <input id="file-upload" class="hidden" name="image" type="file" @change="onFileChange" />
         <label v-if="!userStore.google_id" for="file-upload" class="text-white text-1.25"
           >Upload new photo</label
@@ -168,24 +171,25 @@ onMounted(async () => {
   }
 })
 
+const image = ref(null)
+
 const submitData = async () => {
-  console.log(userStore.user)
   await updateUsersInfo({
     user: userInfoStore.user.id,
     username: userInfoStore.userData.username,
     email: userInfoStore.userData.email,
     password: userInfoStore.userData.password,
-    password_confirmation: userInfoStore.userData.password_confirmation
+    password_confirmation: userInfoStore.userData.password_confirmation,
+    image: image.value
   })
 
   await userStore.fetchUser()
 }
-
-const image = ref(null)
-const imageUrl = ref(null)
+const imageUrl = ref(`${import.meta.env.VITE_API_BASE_URL}/storage/${userStore.image}`)
 const onFileChange = (event) => {
   const file = event.target.files[0]
   image.value = file
+
   if (file) {
     imageUrl.value = URL.createObjectURL(file)
   }
