@@ -43,7 +43,7 @@ async function performSearch() {
   if (searchQuery.value.length > 0) {
     try {
       const response = await getSearchResults(searchQuery.value)
-      searchResults.value = response.data
+      searchResults.value = response.data.data
       console.log(searchResults.value)
       quoteStore.quotes = searchResults.value.map((quote) => ({
         ...quote,

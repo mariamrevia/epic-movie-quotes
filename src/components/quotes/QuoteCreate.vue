@@ -16,14 +16,14 @@
         lang="Eng"
         placeholder="Start create a new quote"
         v-model="quoteStore.quoteData.body.en"
-        rules="required"
+        rules="required|alphabetEn"
       />
       <TextAreaBase
         name="body[ka]"
         lang="Geo"
         placeholder="შექმენი ახალი ციტატა"
         v-model="quoteStore.quoteData.body.ka"
-        rules="required"
+        rules="required|alphabetKa"
       />
 
       <div
@@ -120,7 +120,7 @@ onMounted(async () => {
     const response = await getMovies()
     const data = response.data
     console.log(data)
-    movieStore.setMovies(data.movies)
+    movieStore.setMovies(data.data)
   } catch (error) {
     console.error(error)
   }

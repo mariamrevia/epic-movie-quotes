@@ -11,10 +11,14 @@
         :name="props.name"
         :rules="props.rules"
       />
-      <iconValid v-if="meta.valid && !errorMessage" class="absolute flex right-0.8 z-100" />
+      <iconValid
+        v-if="meta.valid && !errorMessage && !meta.initialValue"
+        class="absolute flex right-0.8 z-100"
+      />
       <iconInvalid v-if="errorMessage" class="absolute flex right-0.8 z-100" />
     </div>
   </div>
+
   <ErrorMessage class="text-red-700" :name="name" />
 </template>
 
@@ -54,7 +58,7 @@ const { errorMessage, meta } = useField(props.name)
 
 const fieldClasses = computed(() => {
   let classes =
-    'w-22 h-2.3 rounded-md border-0.1 bg-light-gray focus-within:ring focus:shadow-shadow outline-none '
+    ' h-2.3 rounded-md border-0.1 md:bg-light-gray  focus-within:ring focus:shadow-shadow outline-none '
   if (meta.touched && errorMessage.value) {
     classes += ' border-red-700'
   }
@@ -66,6 +70,7 @@ const fieldClasses = computed(() => {
 
 const emits = defineEmits(['input'])
 const updateText = (newValue) => {
+  console.log(newValue)
   emits('input', newValue)
 }
 </script>

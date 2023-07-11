@@ -15,7 +15,7 @@
             name="username"
             :label="$t('login.name')"
             v-model="loginStore.username"
-            rules="required|minLength:3|maxLength:15"
+            rules="required"
             :placeholder="$t('placeholders.email')"
           />
           <InputText

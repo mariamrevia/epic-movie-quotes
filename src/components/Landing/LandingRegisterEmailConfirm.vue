@@ -36,10 +36,12 @@ const modalStore = useModalStore()
 const isModalActive = modalStore.isModalActive
 const route = useRoute()
 
-onMounted(() => {
-  const confirmed = route.query.confirmed
-  console.log(confirmed)
-  if (confirmed === 'true') {
+onMounted(async () => {
+  console.log(route.query)
+
+  const { verify } = route.query
+
+  if (verify === 'true') {
     modalStore.openModal('confirmModalActive')
   }
 })

@@ -13,14 +13,14 @@
           name="name[en]"
           v-model="movieStore.createMovieData.name.en"
           placeholder="Movie name"
-          rules="required"
+          rules="required|alphabetEn"
           lang="Eng"
         />
         <InputMovie
           name="name[ka]"
           v-model="movieStore.createMovieData.name.ka"
           placeholder="ფილმის სახელი"
-          rules="required"
+          rules="required|alphabetKa"
           lang="Geo"
         />
 
@@ -72,28 +72,28 @@
           name="director[en]"
           v-model="movieStore.createMovieData.director.en"
           placeholder="Director"
-          rules="required"
+          rules="required|alphabetEn"
           lang="Eng"
         />
         <InputMovie
           name="director[ka]"
           v-model="movieStore.createMovieData.director.ka"
           placeholder="რეჟისორი"
-          rules="required"
+          rules="required|alphabetKa"
           lang="Geo"
         />
         <TextAreaBase
           name="description[en]"
           v-model="movieStore.createMovieData.description.en"
           placeholder="Movie description"
-          rules="required"
+          rules="required|alphabetEn"
         />
 
         <TextAreaBase
           name="description[ka]"
           v-model="movieStore.createMovieData.description.ka"
           placeholder="ფილმის აღწერა"
-          rules="required"
+          rules="required|alphabetKa"
         />
 
         <imageUpload

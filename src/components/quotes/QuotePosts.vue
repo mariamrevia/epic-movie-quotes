@@ -100,7 +100,7 @@ const hasMoreQuotes = ref(true)
 const fetchQuotes = async () => {
   try {
     const response = await getQuotes(currentPage.value)
-    const newQuotes = response.data
+    const newQuotes = response.data.data
 
     if (newQuotes.length === 0) {
       hasMoreQuotes.value = false
