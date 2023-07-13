@@ -29,8 +29,17 @@ export async function getSearchResults(query) {
 export async function storeComments(body, quote_id) {
   return await axios.post('/comments', body, quote_id)
 }
-export async function storeLikes(quote_id, is_liked) {
-  return await axios.post('/likes', quote_id, is_liked)
+export async function storeLikes(quote_id) {
+  return await axios.post(`/likes`, { quote_id: quote_id })
+}
+export async function likeNotification(movie_id) {
+  return await axios.post(`/notification/${movie_id}/like`)
+}
+export async function commentNotification(movie_id) {
+  return await axios.post(`/notification/${movie_id}/comment`)
+}
+export async function destroyLikes(quote_id) {
+  return await axios.delete(`/likes/${quote_id.quote_id}`)
 }
 export async function deleteQuote(quote_id) {
   return await axios.delete(`/quotes/${quote_id}`)

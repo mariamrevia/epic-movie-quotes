@@ -31,9 +31,9 @@
           <IconComments />
         </div>
         <div class="flex flex-row items-center gap-2">
-          <p class="text-white text-1.5">{{ quote.likes_count }}</p>
-          <div @click="toggleLike(quote.id)">
-            <IconLike :isLiked="quote.isLiked" />
+          <p class="text-white text-1.5">{{ quote.likes.length }}</p>
+          <div @click="toggleLike(quote.id, quote.movie_id)">
+            <IconLike :class="getQuoteColor(quote.id)" />
           </div>
         </div>
       </div>
@@ -53,16 +53,7 @@
           <hr class="flex h-0.05 bg-slate-700 border-none mt-1.25" />
         </div>
       </div>
-      <div
-        class="mt-1.5 flex flex-row items-center"
-        v-for="comment in comments"
-        :key="comment.index"
-      >
-        <div class="ml-2 flex flex-col align-middle justify-center">
-          <h2 class="text-white">{{ comment.username }}</h2>
-          <p class="text-white">{{ comment.body }}</p>
-        </div>
-      </div>
+
       <div class="flex flex-row items-center mt-3.3">
         <img class="h-3.25 w-3.25 rounded-full bg-slate-500" />
         <Form class="ml-2" @submit="submitData(quote.id)">
@@ -73,7 +64,7 @@
               class="h-2.3 placeholder-white text-white bg-transparent w-50 ml-1.5 border-none outline-none"
               v-model="quote.commentData.body"
               name="body"
-              @keydown.enter.prevent="submitData(quote.id)"
+              @keydown.enter.prevent="submitData(quote.id, quote.movie_id)"
             />
           </div>
         </Form>
@@ -86,14 +77,21 @@
 import IconLike from '@/components/icons/IconLike.vue'
 import IconComments from '@/components/icons/IconComments.vue'
 import { Form, Field } from 'vee-validate'
-import { getQuotes, storeComments, storeLikes } from '@/services/api/quotes'
+import {
+  getQuotes,
+  storeComments,
+  storeLikes,
+  destroyLikes,
+  likeNotification,
+  commentNotification
+} from '@/services/api/quotes'
 import { onMounted, ref, onUnmounted } from 'vue'
 import { useQuoteStore } from '@/stores/quotes/index.js'
 import { useUserStore } from '@/stores/authUser/index.js'
-const userStore = useUserStore()
-const comments = ref([])
-const quoteStore = useQuoteStore()
+import instantiatePusher from '@/helpers/instantiatePusher'
 
+const userStore = useUserStore()
+const quoteStore = useQuoteStore()
 const currentPage = ref(1)
 const hasMoreQuotes = ref(true)
 
@@ -101,7 +99,6 @@ const fetchQuotes = async () => {
   try {
     const response = await getQuotes(currentPage.value)
     const newQuotes = response.data.data
-
     if (newQuotes.length === 0) {
       hasMoreQuotes.value = false
     } else {
@@ -110,9 +107,7 @@ const fetchQuotes = async () => {
         commentData: {
           body: '',
           quote_id: quote.id
-        },
-        isLiked: false,
-        likes: 0
+        }
       }))
 
       const uniqueQuotes = updatedQuotes.filter((quote) => {
@@ -120,8 +115,6 @@ const fetchQuotes = async () => {
       })
 
       quoteStore.updateQuotes([...quoteStore.quotes, ...uniqueQuotes])
-      console.log(quoteStore.quotes)
-      console.log(hasMoreQuotes.value)
       currentPage.value++
     }
   } catch (error) {
@@ -154,44 +147,75 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
 
-const toggleLike = async (quoteId) => {
-  const quote = quoteStore.quotes.find((quote) => quote.id === quoteId)
-  if (!quote) {
-    return
-  }
+let userLikes = {}
+onMounted(async () => {
+  const response = await getQuotes()
+  quoteStore.updateQuotes(response.data.data)
 
-  quote.isLiked = !quote.isLiked
-  if (quote.isLiked) {
-    quote.likes_count++
+  quoteStore.quotes.forEach((quote) => {
+    quote.commentData = {
+      body: '',
+      quote_id: quote.id
+    }
+    const foundLike = quote.likes.find((like) => like.user_id === userStore.user)
+    userLikes[quote.id] = !!foundLike
+  })
+})
+
+const getQuoteColor = (quoteId) => {
+  return userLikes[quoteId] ? 'bg-[#F3426C]' : 'bg-white'
+}
+const toggleLike = async (quoteId, movieId) => {
+  const isLiked = userLikes[quoteId]
+
+  if (isLiked) {
+    userLikes[quoteId] = false
+    await destroyLikes({ quote_id: quoteId })
   } else {
-    quote.likes_count--
-  }
-
-  try {
-    await storeLikes({ quote_id: quoteId, is_liked: quote.isLiked })
-  } catch (error) {
-    console.log(error)
+    userLikes[quoteId] = true
+    await storeLikes(quoteId)
+    await likeNotification(movieId)
   }
 }
 
-const submitData = async (id) => {
-  const quote_id = id
+const quote_id = ref(null)
+const submitData = async (id, movieId) => {
+  quote_id.value = id
   const quote = quoteStore.quotes.find((quote) => quote.id === id)
-  quote.comments.push({
-    body: quote.commentData.body,
-    user: userStore.username
-  })
-
   try {
     await storeComments({
       body: quote.commentData.body,
-      quote_id: quote_id
+      quote_id: quote_id.value
     })
+    await commentNotification(movieId)
   } catch (error) {
     console.log(error)
   }
 }
 
+onMounted(() => {
+  instantiatePusher()
+  window.Echo.channel('commentQuote').listen('CommentPosted', (comment) => {
+    const quote = quoteStore.quotes.find((quote) => quote.id === comment.comment.quote_id)
+    quote.comments.push({
+      body: comment.comment.body,
+      user: userStore.username
+    })
+  })
+  window.Echo.channel('likeQuotes').listen('LikeQuote', (like) => {
+    const quote = quoteStore.quotes.find((quote) => quote.id === like.like.quote_id)
+    quote.likes.push({ id: like.like.id })
+  })
+
+  window.Echo.channel('unlike').listen('UnLikeQuote', (like) => {
+    const quote = quoteStore.quotes.find((quote) => quote.id === like.like.quote_id)
+    quote.likes.pop({ id: like.like.id })
+  })
+})
+onUnmounted(() => {
+  window.Echo.leaveChannel('commentQuote')
+  window.Echo.leaveChannel('likeQuotes')
+})
 const getImageURL = (image) => {
   return `${import.meta.env.VITE_API_BASE_URL}/storage/${image}`
 }
