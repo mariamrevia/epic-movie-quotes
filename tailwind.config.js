@@ -59,7 +59,8 @@ export default {
         0.05: '0.05rem',
         27: '27rem',
         8.75: '8.75rem',
-        8.3: '8.3rem'
+        8.3: '8.3rem',
+        7.3: '7.3rem'
       },
       borderRadius: {},
       textColor: {
@@ -71,6 +72,7 @@ export default {
       },
       width: {
         1.3: '1.3rem',
+        1.5: '1.5rem',
         2: '2rem',
         3.25: '3.25rem',
         3.6: '3.6rem',
@@ -83,6 +85,7 @@ export default {
         5.5: '5.5rem',
         14: '14rem',
         6: '6rem',
+        54: '54rem',
         50: '50rem',
         48: '48rem',
         22: '22rem',
@@ -100,6 +103,7 @@ export default {
         88: '88rem',
         56: '56rem',
         18: '18rem',
+        58: '58rem',
         60: '60rem',
         62: '62rem',
         4: '4rem'
@@ -127,6 +131,7 @@ export default {
       },
 
       backgroundColor: {
+        lightRed: '#E33812',
         red: '#E31221',
         gray: '#222030',
         'light-gray': '#CED4DA',

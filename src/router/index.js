@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useUserStore } from '@/stores/authUser'
+import { useUserStore } from '@/stores/authUser/index.js'
 import { verifyEmail, verifyNewEmail } from '@/services/api/auth.js'
+import { useNotificationStore } from '@/stores/notification/index.js'
 import ProfileView from '@/views/ProfileView.vue'
 import LandingView from '@/views/LandingView.vue'
 import ListOfMoviesView from '@/views/ListOfMoviesView.vue'
@@ -66,9 +67,10 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   try {
+    const notificationStore = useNotificationStore()
     const authUserStore = useUserStore()
     await authUserStore.fetchUser()
-    console.log(authUserStore)
+    await notificationStore.fetchNotifications(authUserStore.user)
     if (to.meta.requiresAuth && (!authUserStore.isAuthenticated || authUserStore.verified)) {
       next({ name: 'landing' })
     } else {
@@ -76,6 +78,7 @@ router.beforeEach(async (to, from, next) => {
     }
   } catch (error) {
     console.error(error)
+    next(error)
   }
 })
 

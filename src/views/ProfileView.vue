@@ -169,8 +169,8 @@ const cancell = () => {
 }
 const userStore = useUserStore()
 onMounted(async () => {
-  console.log(userStore.google_id)
   try {
+    await userStore.fetchUser()
     const response = await getUser()
     const data = response.data
     userInfoStore.setUser(data)

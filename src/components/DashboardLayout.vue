@@ -6,7 +6,7 @@
     <button @click="toggleListDiv" class="z-10 absolute top-3 md:hidden flex left-3">
       <IconList />
     </button>
-    <div class="flex flex-row h-screen w-screen justify-center">
+    <div class="flex flex-row h-full w-full justify-center">
       <div
         :class="
           listDivVisible

@@ -8,8 +8,8 @@ import router from './router/index'
 import i18n from './i18n'
 import '@/plugins/vee-validate/rules'
 
-const app = createApp(App)
 const pinia = createPinia()
+const app = createApp(App)
 
 app.use(pinia)
 app.use(router)

@@ -44,3 +44,15 @@ export async function destroyLikes(quote_id) {
 export async function deleteQuote(quote_id) {
   return await axios.delete(`/quotes/${quote_id}`)
 }
+export async function getNotifications(user) {
+  console.log(user)
+  return await axios.get(`/notification/${user}`)
+}
+
+export async function markAsRead(user) {
+  return await axios.patch(`notification/markread/${user}`, {
+    headers: {
+      'X-HTTP-Method-Override': 'PATCH'
+    }
+  })
+}
