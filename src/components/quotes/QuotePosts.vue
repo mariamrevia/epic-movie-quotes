@@ -1,10 +1,10 @@
 <template>
   <div
-    class="bg-darkgray pb-7 flex flex-col w-60 pt-4 rounded-2xl mt-2"
+    class="bg-darkgray pb-7 flex flex-col lg:w-60 md:w-43 w-22 pt-4 rounded-2xl mt-2"
     v-for="quote in quoteStore.quotes"
     :key="quote.id"
   >
-    <div class="m-auto">
+    <div class="m-auto lg:w-56 md:w-43 w-22 items-center">
       <div class="flex flex-row items-center gap-2">
         <img class="h-4 w-4 rounded-full bg-slate-500" />
         <h2 class="text-white">{{ quote.movie.user }}</h2>
@@ -20,8 +20,8 @@
           <span class="text-white ml-1">({{ quote.movie.year }})</span>
         </div>
       </div>
-      <div class="m-auto mt-2">
-        <img class="w-56 h-31 rounded-lg" :src="getImageURL(quote.image)" />
+      <div class="m-auto mt-2 flex justify-center">
+        <img class="lg:w-56 md:w-43 md:h-31 w-22 h-15 rounded-lg" :src="getImageURL(quote.image)" />
       </div>
       <div class="flex flex-row gap-3 mt-2">
         <div class="flex flex-row items-center gap-2">
@@ -55,13 +55,13 @@
       </div>
 
       <div class="flex flex-row items-center mt-3.3">
-        <img class="h-3.25 w-3.25 rounded-full bg-slate-500" />
-        <Form class="ml-2" @submit="submitData(quote.id)">
+        <img class="h-3 w-3 rounded-full bg-slate-500" />
+        <Form class="md:ml-2 ml-1" @submit="submitData(quote.id)">
           <div
-            class="flex relative ml-2 h-3 flex-row items-center bg-#24222F w-50 rounded-md border-none bg-transparen focus-within:ring focus:shadow-shadow outline-none"
+            class="flex relative h-3 flex-row items-center bg-#24222F lg:w-50 md:w-30 w-17.5 rounded-md border-none bg-transparen focus-within:ring focus:shadow-shadow outline-none"
           >
             <Field
-              class="h-2.3 placeholder-white text-white bg-transparent w-50 ml-1.5 border-none outline-none"
+              class="h-2.3 placeholder-white text-white bg-transparent lg:w-50 md:w-30 w-17.5 md:ml-1.5 ml-0 border-none outline-none"
               v-model="quote.commentData.body"
               name="body"
               @keydown.enter.prevent="submitData(quote.id, quote.movie_id)"

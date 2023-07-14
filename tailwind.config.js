@@ -13,6 +13,7 @@ export default {
     extend: {
       margin: {
         2: '2rem',
+        1: '1rem',
         2.5: '2.5rem',
         1.5: '1.5rem',
         1.25: '1.25rem',
@@ -25,12 +26,16 @@ export default {
         0.5: '0.5rem',
         5: '5rem',
         6: '6rem',
+        6.5: '6.5rem',
         13.6: '13.6rem',
+        17: '17rem',
         26: '26rem',
-        95: '95%'
+        95: '95%',
+        90: '90%'
       },
       height: {
         1.3: '1.3rem',
+        48: '48rem',
         12: '12rem',
         2: '2rem',
         1.5: '1.5rem',
@@ -45,6 +50,7 @@ export default {
         32: '32rem',
         44: '44rem',
         23.4: '23.4rem',
+        45: '45rem',
         33: '33rem',
         10: '10rem',
         35: '35rem',
@@ -74,6 +80,7 @@ export default {
         1.3: '1.3rem',
         1.5: '1.5rem',
         2: '2rem',
+        3: '3rem',
         3.25: '3.25rem',
         3.6: '3.6rem',
         43: '43rem',
@@ -89,6 +96,7 @@ export default {
         50: '50rem',
         48: '48rem',
         22: '22rem',
+        20: '20rem',
         17.5: '17.5rem',
         15.6: '15.6rem',
         37.5: '37.5rem',
@@ -163,6 +171,7 @@ export default {
         10: '10rem',
         12: '12rem',
         3.3: '3.3rem',
+        4: '4rem',
         4.4: '4.4rem',
         14: '15rem',
         18: '18.2rem',

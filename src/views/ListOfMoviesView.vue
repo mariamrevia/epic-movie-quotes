@@ -1,10 +1,10 @@
 <template>
   <DashboardLayout>
     <div class="flex flex-col md:ml-4.4 md:mr-4.4 m-auto md:mt-2">
-      <div class="flex items-center h-3.3 md:mt-0 mt-3 justify-between">
+      <div class="flex items-center h-3.3 md:mt-4.4 mt-6 justify-between">
         <p class="text-white">My List of Movies</p>
         <div class="flex flex-row items-center">
-          <div class="flex flex-row gap-2 ml-1.5">
+          <div class="md:flex flex-row gap-2 ml-1.5 hidden">
             <IconSearch />
             <input
               class="bg-transparent relative outline-none text-white"
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div
-        class="md:grid grid-cols-3 gap-3 flex flex-col rounded-md justify-center align-middle w-full"
+        class="md:grid grid-cols-3 gap-3 md:mt-0 mt-2 flex flex-col rounded-md justify-center align-middle w-full"
       >
         <div
           class="rounded-md border-none"
@@ -32,7 +32,7 @@
           :key="movie.id"
         >
           <img
-            class="md:w-27.5 md:h-23.4 w-22 h-19 object-cover border-none rounded-md"
+            class="md:w-27.5 md:h-23.4 w-22 h-19 object-fit border-none rounded-xl"
             :src="getImageURL(movie.image)"
             alt="Movie Image"
           />
@@ -40,7 +40,11 @@
             <h2 class="text-white text-1.5 flex items-center">
               {{ $i18n.locale === 'en' ? movie.name?.en : movie.name?.ka }}
             </h2>
-            <p class="text-white text-1.5 flex items-center ml-3">({{ movie.year }})</p>
+            <p class="text-white text-1.5 flex items-center ml-2">({{ movie.year }})</p>
+          </div>
+          <div class="flex flex-row items-center text-1.25 gap-2 mt-1">
+            <p class="text-white">{{ movie.quotes.length }}</p>
+            <IconChat />
           </div>
         </div>
       </div>
@@ -53,6 +57,7 @@
 import DashboardLayout from '@/components/DashboardLayout.vue'
 import movieCreate from '@/components/movies/MovieCreate.vue'
 import IconSearch from '@/components/icons/IconSearch.vue'
+import IconChat from '@/components/icons/IconChat.vue'
 import { getSearchResults } from '@/services/api/movies.js'
 import { getMovies } from '@/services/api/movies.js'
 import { onMounted, ref } from 'vue'

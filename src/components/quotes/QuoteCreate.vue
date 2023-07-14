@@ -8,7 +8,7 @@
   >
     <Form
       @submit="submitData"
-      class="w-60 fixed flex flex-col md:mt-7.4 pb-13 md:pb-4 items-center bg-[#11101A] rounded-lg"
+      class="md:w-60 w-25 h-48 flex flex-col md:mt-7.4 pb-13 md:pb-4 items-center bg-[#11101A] rounded-lg"
     >
       <HeaderEditAdd heading="Write new Quote" />
       <TextAreaBase
@@ -25,26 +25,14 @@
         v-model="quoteStore.quoteData.body.ka"
         rules="required|alphabetKa"
       />
+      <imageUpload
+        v-model="quoteStore.quoteData.image"
+        name="image"
+        :rules="quoteStore.quoteData.image ? '' : 'required'"
+        @update:imageUpload="updateImageUpload"
+      />
 
-      <div
-        class="w-56 h-5 mt-1.25 rounded-md border-0.1 flex items-center placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
-      >
-        <label
-          for="file-upload"
-          class="h-2.6 ml-2 text-center flex p-3 rounded-sm items-center bg-[#9747FF]"
-        >
-          choose file
-        </label>
-        <Field
-          id="file-upload"
-          name="image"
-          class="hidden"
-          v-model="quoteStore.quoteData.image"
-          type="file"
-          :rules="quoteStore.quoteData.image ? '' : 'required'"
-        />
-        <ErrorMessage class="text-red-700" name="image" />
-      </div>
+      <ErrorMessage class="text-red-700" name="image" />
 
       <Field
         class="w-56 h-2.3 rounded-md border-0.1 placeholder-white text-white bg-transparent border-dark-gray bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
@@ -54,15 +42,15 @@
       >
         <div
           @click="toggleDropdown"
-          class="w-56 h-5 mt-1.25 rounded-md items-center border-0.1 gap-2 placeholder-white text-white bg-black relative border-dark-gray border-none focus-within:ring focus:shadow-shadow outline-none flex flex-row"
+          class="md:w-56 w-20 h-5 py-4 mt-1.25 rounded-md items-center border-0.1 gap-2 placeholder-white text-white bg-black relative border-dark-gray border-none focus-within:ring focus:shadow-shadow outline-none flex flex-row"
         >
-          <div class="text-white text-1.5 ml-2 flex flex-row items-center gap-2">
-            <IconMovie />
+          <div class="text-white md:text-1.5 text-1.25 ml-2 flex flex-row items-center gap-2">
+            <IconMovie class="h-2 w-2" />
             {{ movieTitle ? movieTitle : 'Choose Movie' }}
           </div>
 
           <div
-            class="w-56 bg-lightBlack text-white absolute z-50 top-4.4 rounded-b-lg p-3 pr-2"
+            class="md:w-56 w-20 bg-lightBlack text-white absolute z-50 md:top-4.4 top-4 no-scrollbar overflow-y-auto rounded-b-lg p-3 pr-2"
             v-if="isDropdownOpen"
           >
             <div
@@ -93,6 +81,7 @@ import TextAreaBase from '@/components/ui/TextAreaBase.vue'
 import ButtonBase from '@/components/ui/ButtonBase.vue'
 import IconMovie from '@/components/icons/IconMovie.vue'
 import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
+import imageUpload from '@/components/shared/ImageUpload.vue'
 import { useQuoteStore } from '@/stores/quotes/index.js'
 import { useMovieStore } from '@/stores/movies/index.js'
 import { getMovies } from '@/services/api/movies.js'
@@ -126,6 +115,9 @@ onMounted(async () => {
   }
 })
 
+const updateImageUpload = (file) => {
+  quoteStore.quoteData.image = file
+}
 const selectedMovie = (id, title) => {
   quoteStore.quoteData.movie = id
   movieTitle.value = title

@@ -1,6 +1,6 @@
 <template>
   <button
-    class="bg-red w-56 h-2.3 border-none rounded-md text-white mt-1.5 text-1.25"
+    class="bg-red md:w-56 w-20 h-2.3 border-none rounded-md text-white mt-1.5 text-1.25"
     :type="props.type"
   >
     {{ text }}
