@@ -1,23 +1,28 @@
 <template>
-  <div class="flex flex-col gap-3 mt-2">
+  <div class="flex flex-col lg:w-50 md:37.5 w-22 gap-3 mt-2">
     <div
       v-for="quote in movieQuotes && movieQuotes.quotes"
       :key="quote.id"
-      class="w-50 h-15 bg-darkgray text-whiteGray rounded-md"
+      class="lg:w-50 md:37.5 w-22 md:h-15 h-19 bg-darkgray text-whiteGray rounded-md"
     >
       <div class="flex flex-row justify-between">
-        <div class="flex flex-row items-center gap-7">
+        <div class="flex md:flex-row flex-col items-center gap-7">
           <img
             class="w-14 h-8.75 mt-1.25 ml-1.25 rounded-md"
             :src="getImageURL(quote && quote.image)"
           />
-          <p>"{{ quote.body }}"</p>
+          <div class="w-full items-start">
+            <p class="ml-1.5">"{{ $i18n.locale === 'en' ? quote.body.en : quote.body.ka }}"</p>
+          </div>
         </div>
-        <div class="relative">
-          <IconThreeDots class="flex mr-2 mt-1.25 relative" @click="toggleDashboard(quote.id)" />
+        <div class="flex items-end md:items-start">
+          <IconThreeDots
+            class="flex mr-2 mt-1.25 relative align-bottom"
+            @click="toggleDashboard(quote.id)"
+          />
           <div
             v-if="quote.id === activeQuoteId"
-            class="w-15.6 h-12 bg-#24222F flex flex-col absolute rounded-lg justify-center"
+            class="w-15.6 h-12 bg-#24222F flex flex-col absolute left-7 mb-2 rounded-lg justify-center"
           >
             <div class="flex flex-col ml-2">
               <div class="flex flex-row gap-2">
@@ -37,6 +42,17 @@
         </div>
       </div>
       <hr class="flex mx-1.25 h-0.05 bg-slate-700 border-none mt-1.25" />
+      <div class="flex flex-row gap-4 mt-1.25 ml-1.25">
+        <div class="flex flex-row items-center gap-2">
+          <p>{{ quote.comments.length }}</p>
+          <IconComment class="h-2 w-2" />
+        </div>
+        <div class="flex flex-row items-center gap-2">
+          <p>{{ quote.likes.length }}</p>
+          <IconLike class="h-2 w-2" />
+        </div>
+      </div>
+
       <QuoteEdit :quoteToEdit="quoteToEdit" :movie="movie" />
     </div>
   </div>
@@ -51,6 +67,8 @@ import IconEdit from '@/components/icons/IconEdit.vue'
 import IconEye from '@/components/icons/IconEye.vue'
 import IconThreeDots from '@/components/icons/IconThreeDots.vue'
 import { deleteQuote } from '@/services/api/quotes'
+import IconLike from '@/components/icons/IconLike.vue'
+import IconComment from '@/components/icons/IconComments.vue'
 const props = defineProps({
   movie: {
     type: Object,

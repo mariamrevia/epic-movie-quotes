@@ -1,6 +1,6 @@
 <template>
   <div
-    class="md:w-56 w-20 h-5 mt-0.5 p-2 rounded-md border-0.1 flex items-center placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
+    class="md:w-56 sm:w-37.5 w-20 h-5 mt-0.5 p-2 rounded-md border-0.1 flex items-center placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
     @dragleave.prevent="onDragLeave"
     @drop.prevent="onDrop"
     @dragover="onDragOver"

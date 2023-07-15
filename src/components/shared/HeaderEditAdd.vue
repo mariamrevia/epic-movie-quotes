@@ -1,5 +1,8 @@
 <template>
-  <h1 class="text-white text-2 mt-2">{{ props.heading }}</h1>
+  <div class="w-full flex flex-row mt-2 items-center gap-5 md:justify-end justify-center">
+    <h1 class="text-white text-2 flex items-center md:mr-21 mr-0">{{ props.heading }}</h1>
+    <IconCross class="w-2 h-2 md:mr-1.25 mr-0" @click="closeModal(modalName)" />
+  </div>
   <hr class="w-full h-0.05 bg-dark-gray border-none mt-1.25" />
   <div class="flex flex-row gap-2 items-center mt-1.25 mb-1.25 w-full justify-start">
     <img
@@ -12,17 +15,27 @@
 </template>
 
 <script setup>
+import IconCross from '@/components/icons/IconCross.vue'
 import { useUserStore } from '@/stores/authUser'
 import { ref } from 'vue'
 const userStore = useUserStore()
-
+const modalStore = useModalStore()
+import { useModalStore } from '@/stores/modal'
 const props = defineProps({
   heading: {
+    type: String,
+    requred: true,
+    default: ''
+  },
+  modalName: {
     type: String,
     requred: true,
     default: ''
   }
 })
 
+const closeModal = (modalName) => {
+  modalStore.closeModal(modalName)
+}
 const imageUrl = ref(`${import.meta.env.VITE_API_BASE_URL}/storage/${userStore.image}`)
 </script>

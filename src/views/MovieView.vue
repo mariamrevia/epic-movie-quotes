@@ -1,58 +1,68 @@
 <template>
   <DashboardLayout>
-    <div class="flex flex-row gap-4 mt-2">
-      <div class="flex flex-col text-white">
-        <h2 class="mb-1.5 text-1.5 text-whiteGray">Movie discription</h2>
-        <img class="w-50 object-center rounded-2xl" :src="getImageURL(movie && movie.image)" />
-      </div>
-      <div class="text-white">
-        <div class="flex flex-row justify-between">
-          <div class="flex flex-row">
-            <h1 class="text-1.5 text-caramel">
-              {{ $i18n.locale === 'en' ? movie && movie.name.en : movie && movie.name.ka }}
-            </h1>
-            <p class="text-caramel text-1.5 flex items-center ml-3">({{ movie && movie.year }})</p>
-          </div>
-
-          <div
-            class="flex flex-row bg-#24222F w-10 h-2.7 items-center rounded-md justify-center gap-12"
-          >
-            <iconEdit @click="toggleEditMovieModal" />
-
-            <iconDelete @click="movieDelete(movie.id)" />
-          </div>
+    <div>
+      <div class="flex lg:flex-row md:flex-col flex-col gap-4 mt-7.4">
+        <div class="flex flex-col text-white">
+          <h2 class="mb-1.5 text-1.5 text-whiteGray">Movie discription</h2>
+          <img
+            class="lg:w-50 md:37.5 w-22 md:h-27 h-23.4 object-center rounded-2xl"
+            :src="getImageURL(movie && movie.image)"
+          />
         </div>
-        <div class="flex flex-row mt-2">
-          <div
-            v-for="genre in movie && movie.genres"
-            :key="genre.id"
-            class="text-white flex flex-row justify-between h-1.5 p-2 border ml-1 rounded-sm items-center bg-dark-gray border-none gap-2"
-          >
-            {{ genre.title }}
+        <div class="text-white">
+          <div class="flex flex-row justify-between">
+            <div class="flex flex-row">
+              <h1 class="text-1.5 text-caramel">
+                {{ $i18n.locale === 'en' ? movie && movie.name.en : movie && movie.name.ka }}
+              </h1>
+              <p class="text-caramel text-1.5 flex items-center ml-1.5">
+                ({{ movie && movie.year }})
+              </p>
+            </div>
+
+            <div
+              class="flex flex-row bg-#24222F w-10 h-2.7 items-center rounded-md justify-center gap-12"
+            >
+              <iconEdit @click="toggleEditMovieModal" />
+
+              <iconDelete @click="movieDelete(movie.id)" />
+            </div>
           </div>
+          <div class="flex flex-row mt-2">
+            <div
+              v-for="genre in movie && movie.genres"
+              :key="genre.id"
+              class="text-white flex flex-row justify-between h-1.5 p-2 border rounded-sm items-center bg-dark-gray border-none gap-2"
+            >
+              {{ genre.title }}
+            </div>
+          </div>
+          <h2 class="mt-2 text-whiteGray gap-3 text-1.25">
+            Director:
+            {{ $i18n.locale === 'en' ? movie && movie.director.en : movie && movie.director.ka }}
+          </h2>
+          <p class="md:h-27 flex md:w-37.5 w-20 mt-2 text-whiteGray">
+            {{
+              $i18n.locale === 'en' ? movie && movie.description.en : movie && movie.description.ka
+            }}
+          </p>
         </div>
-        <h2 class="mt-2 text-whiteGray gap-3 text-1.25">
-          Director:
-          {{ $i18n.locale === 'en' ? movie && movie.director.en : movie && movie.director.ka }}
-        </h2>
-        <p class="h-27 w-37.5 mt-2 text-whiteGray">
-          {{
-            $i18n.locale === 'en' ? movie && movie.description.en : movie && movie.description.ka
-          }}
-        </p>
       </div>
+      <div class="flex md:flex-row flex-col mt-2 text-white md:items-center items-start gap-2">
+        <button
+          @click="toggleAddQuoteModal"
+          class="bg-red w-9.7 h-2.3 border-none rounded-md text-white"
+        >
+          Add Quote
+        </button>
+        <div class="flex flex-row gap-1 md:mt-0 mt-1.25">
+          <h2 class="text-1.5">Quotes</h2>
+          <p class="text-1.5">Total({{ movie.quotes.length }})</p>
+        </div>
+      </div>
+      <MovieQuoteAdd v-if="movie" :movie="movie" />
+      <QuoteList v-if="movie" :movie="movie" />
     </div>
-    <div class="flex flex-row mt-2 text-white items-center gap-3">
-      <h2 class="text-1.5">Quotes</h2>
-      <button
-        @click="toggleAddQuoteModal"
-        class="bg-red w-9.7 h-2.3 border-none rounded-md text-white"
-      >
-        Add Quote
-      </button>
-    </div>
-    <MovieQuoteAdd v-if="movie" :movie="movie" />
-    <QuoteList v-if="movie" :movie="movie" />
   </DashboardLayout>
   <MovieEdit v-if="movie" :movie="movie" :genres="genres" />
 </template>
@@ -86,7 +96,7 @@ onMounted(async () => {
     } else {
       const response = await getMovies()
       console.log(response)
-      movie.value = response.data.movies.find((movie) => movie.id === destinationId.value)
+      movie.value = response.data.data.find((movie) => movie.id === destinationId.value)
       movieStore.setMovies([movie])
       movieStore.setGenres(response.data.genres)
       genres.value = response.data.genres

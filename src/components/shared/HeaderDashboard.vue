@@ -7,7 +7,7 @@
     "
   >
     <h2 class="text-caramel md:ml-4.4 hidden items-center ml-4 md:flex">MOVIE QUOTES</h2>
-    <button @click="toggleListDiv" class="md:hidden flex mr-[30%]">
+    <button @click="toggleListDiv" class="lg:hidden flex mr-[30%]">
       <IconList />
     </button>
     <div class="md:mr-4.4 mr-4 flex flex-row items-center">

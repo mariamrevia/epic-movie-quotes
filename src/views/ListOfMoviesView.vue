@@ -79,7 +79,7 @@ async function performSearch() {
       const response = await getSearchResults(searchQuery.value)
       searchResults.value = response.data
       console.log(searchResults.value)
-      movieStore.movieData = response.data.movies.map((movie) => ({
+      movieStore.movieData = response.data.data.map((movie) => ({
         ...movie
       }))
     } catch (error) {

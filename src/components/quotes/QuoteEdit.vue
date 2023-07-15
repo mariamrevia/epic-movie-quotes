@@ -8,19 +8,19 @@
         @submit="submitData"
         v-for="quote in getFilteredQuotes"
         :key="quote.id"
-        class="w-60 z-10 fixed flex flex-col md:mt-13.6 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
+        class="md:w-60 w-full z-10 fixed flex flex-col md:mt-13.6 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
       >
         <div class="flex flex-row gap-2 absolute left-3 top-3.3">
           <IconDelete @click="quoteDelete(quote.id)" />
-          <p>Delete</p>
+          <p class="md:flex hidden">Delete</p>
         </div>
-        <HeaderEditAdd heading="Edit quote" />
+        <HeaderEditAdd modalName="editQuoteModalActive" heading="Edit quote" />
         <TextAreaBase name="body[en]" v-model="quote.body.en" lang="Eng" rules="required" />
         <TextAreaBase name="body[ka]" v-model="quote.body.ka" lang="Geo" rules="required" />
         <div
-          class="w-56 mt-1.25 rounded-md border-0.1 flex items-center text-white border-[#6C757D] focus-within:ring focus:shadow-shadow outline-none"
+          class="md:w-56 mt-1.25 rounded-md border-0.1 flex items-center text-white border-[#6C757D] focus-within:ring focus:shadow-shadow outline-none"
         >
-          <img class="w-56 h-32" :src="imageUrl || initialImageUrl" />
+          <img class="md:w-56 md:h-32 w-20 h-19" :src="imageUrl || initialImageUrl" />
         </div>
 
         <Field
