@@ -8,7 +8,7 @@
   >
     <Form
       @submit="submitData"
-      class="md:w-60 w-full fixed flex flex-col md:mt-7.4 pb-13 md:pb-10 items-center bg-[#11101A] rounded-lg"
+      class="md:w-60 w-full fixed flex flex-col md:mt-5 pb-13 md:pb-10 items-center bg-[#11101A] rounded-lg"
     >
       <HeaderEditAdd modalName="createQuoteModalActive" heading="Add Quote" />
       <div class="flex flex-row gap-4 md:w-56 md:bg-transparent bg-black md:p-0 p-3 w-20 m-auto">

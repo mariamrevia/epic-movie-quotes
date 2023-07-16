@@ -26,7 +26,7 @@
     <div
       class="md:min-h-screen items-center h-31 w-screen sm:min-w-full flex bg-landingPage1 bg-no-repeat md:bg-cover bg-[length:700px_600px] bg-center"
     >
-      <div class="pl-10 md:pl-52">
+      <div class="pl-2 md:pl-52">
         <h2 class="text-white text-1.25 md:text-3 w-17.5 md:w-45">
           “You have to leave somethig behind to go forward”
         </h2>
@@ -36,7 +36,7 @@
     <div
       class="md:min-h-screen h-31 items-center w-screen sm:min-w-full flex bg-landingPage2 md:bg-fixed bg-no-repeat bg-[length:900px_600px] md:bg-cover bg-50% bg-center"
     >
-      <div class="pl-10 md:pl-52">
+      <div class="pl-2 md:pl-52">
         <h2 class="text-white text-1.25 md:text-3 w-15.6 md:w-45">
           “I think we’re just gonna have to be secretly in love with earch other and leave it that”
         </h2>
@@ -46,7 +46,7 @@
     <div
       class="md:min-h-screen items-center h-31 w-screen sm:min-w-full flex bg-landingPage3 md:bg-fixed bg-no-repeat bg-[length:800px_600px] bg-right md:bg-cover md:bg-center"
     >
-      <div class="pl-10 md:pl-52">
+      <div class="pl-2 md:pl-52">
         <h2 class="text-white text-1.25 md:text-3 w-17.5 md:w-45">
           “I see in your eyes the same fear that would take the heart of me....”
         </h2>

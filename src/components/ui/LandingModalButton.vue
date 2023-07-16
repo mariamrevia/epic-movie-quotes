@@ -1,5 +1,5 @@
 <template>
-  <button :type="type" class="bg-red md:w-22 w-56 h-2.3 border-none rounded-md text-white mt-1.5">
+  <button :type="type" class="bg-red w-22 h-2.3 border-none rounded-md text-white mt-1.5">
     {{ props.text }}
   </button>
 </template>

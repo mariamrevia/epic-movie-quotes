@@ -112,7 +112,6 @@
       <p>Enter # to search quotes</p>
     </div>
   </div>
-  <!-- <TheDashboard v-if="listDivVisible" class="left-0 bg-[#12101A] flex mr-7 top-0 z-30" /> -->
 </template>
 
 <script setup>

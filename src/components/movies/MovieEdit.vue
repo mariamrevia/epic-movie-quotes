@@ -6,7 +6,7 @@
     <LandingModal :modalActive="isModalActive('editMovieModalActive')">
       <Form
         @submit="submitData"
-        class="md:w-60 w-full z-10 fixed flex flex-col md:mt-13.6 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
+        class="md:w-60 w-full z-10 fixed flex flex-col md:mt-5 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
       >
         <HeaderEditAdd modalName="editMovieModalActive" heading="Edit Movie" />
         <inputEdit

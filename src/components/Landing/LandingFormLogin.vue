@@ -6,13 +6,14 @@
     <LandingModal :modalActive="isModalActive('loginModalActive')">
       <Form
         @submit="handleSubmit"
-        class="w-37.5 z-10 fixed flex flex-col md:mt-13.6 pb-13 md:pb-4 items-center bg-darkgray md:bg-gray rounded-lg"
+        class="md:w-37.5 w-full z-10 fixed flex flex-col md:mt-13.6 pb-13 md:pb-4 items-center bg-darkgray md:bg-gray rounded-lg"
       >
         <div class="flex flex-col items-center">
           <h1 class="text-white text-2 mt-3.3">{{ $t('login.title') }}</h1>
           <p class="text-dark-gray">{{ $t('login.welcome') }}</p>
           <InputText
             name="username"
+            class="w-22"
             :label="$t('login.name')"
             v-model="loginStore.username"
             rules="required"
@@ -21,6 +22,7 @@
           <InputText
             v-model="loginStore.password"
             name="password"
+            class="w-22"
             :label="$t('login.password')"
             type="password"
             rules="required"

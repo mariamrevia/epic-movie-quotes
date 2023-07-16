@@ -14,7 +14,7 @@
       >
         <iconCheckSend />
         <h2 class="text-white text-2 mt-1.5">{{ $t('register.email_sent.thank_you') }}</h2>
-        <p class="mt-4 text-white w-60 md:w-96 text-center">
+        <p class="mt-4 text-white w-22 md:w-96 text-center">
           {{ $t('register.email_sent.note') }}
         </p>
         <a

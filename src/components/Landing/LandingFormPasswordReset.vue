@@ -8,7 +8,7 @@
   >
     <div class="h-screen w-screen flex justify-center md:h-0 md:w-0 bg-lightBlack">
       <LandingModal
-        class="w-33.6 pb-10 pt-10 z-10 mt-5 md:mt-13.6 fixed flex flex-col items-center justify-center bg-gradient md:bg-gray rounded-lg"
+        class="md:w-33.6 w-full pb-10 pt-10 z-10 mt-5 md:mt-13.6 fixed flex flex-col items-center justify-center bg-gradient md:bg-gray rounded-lg"
         :modalActive="isModalActive('passwordResetModalActive')"
       >
         <Form class="flex justify-center flex-col" @submit="handleSubmit">
@@ -16,6 +16,7 @@
           <InputText
             v-model="resetPasswordDataStore.password"
             name="password"
+            class="w-22"
             :label="$t('passwordReset.password')"
             type="password"
             rules="required|minLength:8|maxLength:15|lowercase"
@@ -24,6 +25,7 @@
           <InputText
             v-model="resetPasswordDataStore.password_confirmation"
             name="password_confirmation"
+            class="w-22"
             :label="$t('passwordReset.confirm_password')"
             type="password"
             rules="required|confirmed:password"

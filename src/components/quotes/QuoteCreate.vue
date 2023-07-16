@@ -8,9 +8,9 @@
   >
     <Form
       @submit="submitData"
-      class="md:w-60 w-25 h-48 flex flex-col md:mt-7.4 pb-13 md:pb-4 items-center bg-[#11101A] rounded-lg"
+      class="md:w-60 w-25 h-48 flex flex-col md:mt-5 pb-13 md:pb-4 items-center bg-[#11101A] rounded-lg"
     >
-      <HeaderEditAdd heading="Write new Quote" />
+      <HeaderEditAdd modalName="addQuoteModalActive" heading="Write new Quote" />
       <TextAreaBase
         name="body[en]"
         lang="Eng"

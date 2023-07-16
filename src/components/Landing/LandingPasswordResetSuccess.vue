@@ -13,13 +13,13 @@
       >
         <iconDone />
         <h2 class="text-white text-2 mt-1.5">{{ $t('passwordReset.reset_success.success') }}</h2>
-        <p class="mt-4 text-white w-60 md:w-96 text-center">
+        <p class="mt-4 text-white w-22 md:w-96 text-center">
           {{ $t('passwordReset.reset_success.note') }}
         </p>
         <button
           type="button"
           @click="goToLogIn"
-          class="bg-red md:w-22 w-56 h-2.3 border-none rounded-md text-white mt-1.5"
+          class="bg-red w-20 h-2.3 border-none rounded-md text-white mt-1.5"
         >
           {{ $t('passwordReset.reset_success.log_in') }}
         </button>

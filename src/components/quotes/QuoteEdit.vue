@@ -8,7 +8,7 @@
         @submit="submitData"
         v-for="quote in getFilteredQuotes"
         :key="quote.id"
-        class="md:w-60 w-full z-10 fixed flex flex-col md:mt-13.6 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
+        class="md:w-60 w-full z-10 fixed flex flex-col md:mt-5 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
       >
         <div class="flex flex-row gap-2 absolute left-3 top-3.3">
           <IconDelete @click="quoteDelete(quote.id)" />

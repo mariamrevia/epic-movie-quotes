@@ -1,11 +1,11 @@
 <template>
   <dashboardLayout>
-    <h2 class="text-white md:flex hidden text-1.5 ml-13.6 md:mt-1.5 mt-0">My Profile</h2>
+    <h2 class="text-white text-1.5 mt-6 md:flex hidden">My Profile</h2>
     <div class="hidden md:flex">
       <Form
         v-slot="{ meta }"
         @submit="submitData"
-        class="relative hidden md:mt-3.3 mt-5 lg:ml-9 md:ml-3 ml-0 md:flex flex-col items-center"
+        class="relative hidden md:mt-3.3 mt-5 md:flex flex-col items-center"
       >
         <div class="md:flex hidden absolute z-999 w-22 flex-col items-center top-5">
           <img
@@ -19,7 +19,7 @@
         </div>
         <div class="md:mt-9 mt-9 flex flex-col items-center">
           <div
-            class="md:w-62 w-22 md:pb-10 pb-6 md:bg-darkgray bg-[#24222F] rounded-lg m-auto md:m-0 flex items-center justify-center"
+            class="lg:w-62 md:w-45 w-22 md:pb-10 pb-6 md:bg-darkgray bg-[#24222F] rounded-lg m-auto md:m-0 flex items-center justify-center"
           >
             <div class="w-30 md:mt-9 mt-13.6 pt-4 flex flex-col gap-4">
               <div class="flex flex-row items-end md:justify-normal justify-center">
@@ -125,10 +125,10 @@
             </div>
           </div>
         </div>
-        <div class="md:flex flex-row w-full hidden justify-end items-center gap-3 mt-3.3">
+        <div class="md:flex mb-1.5 flex-row w-full hidden justify-end items-center gap-3 mt-3.3">
           <p @click="cancell" class="text-white text-1.5">Cancell</p>
           <button
-            class="bg-red md:flex hidden w-9.7 h-2.3 border-none rounded-md self-end text-white"
+            class="bg-red md:flex hidden items-center justify-center w-9.7 h-2.3 border-none rounded-md self-end text-white"
           >
             Save Changes
           </button>
@@ -144,9 +144,9 @@
 <script setup>
 import dashboardLayout from '@/components/DashboardLayout.vue'
 import InputText from '@/components/ui/InputText.vue'
-import ValidationProfile from '@/components/ValidationProfile.vue'
-import ProfileUpdate from '@/components/ProfileUpdate.vue'
-import ProfileUpdateSuccessModal from '@/components/ProfileUpdateSuccessModal.vue'
+import ValidationProfile from '@/components/profile/ValidationProfile.vue'
+import ProfileUpdate from '@/components/profile/ProfileUpdate.vue'
+import ProfileUpdateSuccessModal from '@/components/profile/ProfileUpdateSuccessModal.vue'
 import { useModalStore } from '@/stores/modal/index.js'
 import { useUserStore } from '@/stores/authUser/index.js'
 import { updateUsersInfo } from '@/services/api/profileUpdate.js'
@@ -155,10 +155,12 @@ import { getUser } from '@/services/api/auth.js'
 import { onMounted, ref } from 'vue'
 import { Form } from 'vee-validate'
 
-const isEdit = ref(false)
-const name = ref('')
 const userInfoStore = useUserInfoStore()
 const modalStore = useModalStore()
+const userStore = useUserStore()
+const isEdit = ref(false)
+const name = ref('')
+const image = ref(null)
 
 const openEdit = (inputName) => {
   if (inputName === 'username') {
@@ -176,7 +178,7 @@ const openEdit = (inputName) => {
 const cancell = () => {
   isEdit.value = !isEdit.value
 }
-const userStore = useUserStore()
+
 onMounted(async () => {
   try {
     await userStore.fetchUser()
@@ -189,8 +191,6 @@ onMounted(async () => {
     console.error(error)
   }
 })
-
-const image = ref(null)
 
 const submitData = async () => {
   try {

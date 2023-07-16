@@ -9,13 +9,14 @@
     >
       <Form
         @submit="handleSubmit"
-        class="w-37.5 z-10 fixed flex flex-col pb-13 md:pb-4 items-center bg-darkgray md:bg-gray rounded-lg mt-0 md:mt-7.4"
+        class="md:w-37.5 w-full z-10 fixed flex flex-col pb-13 md:pb-4 items-center bg-darkgray md:bg-gray rounded-lg mt-0 md:mt-7.4"
       >
         <div class="flex flex-col items-center">
           <h1 class="text-white text-2 mt-3.3">{{ $t('register.create_account') }}</h1>
           <p class="text-dark-gray">{{ $t('register.start_journey') }}</p>
           <InputText
             name="username"
+            class="w-22"
             :label="$t('register.name')"
             v-model="registerStore.username"
             rules="required|minLength:3|maxLength:15|lowercase"
@@ -23,12 +24,14 @@
           />
           <InputText
             name="email"
+            class="w-22"
             v-model="registerStore.email"
             :label="$t('register.email')"
             rules="required|email"
             :placeholder="$t('placeholders.email')"
           />
           <InputText
+            class="w-22"
             v-model="registerStore.password"
             name="password"
             :label="$t('register.password')"
@@ -37,6 +40,7 @@
             :placeholder="$t('placeholders.password')"
           />
           <InputText
+            class="w-22"
             v-model="registerStore.confirm_password"
             name="password_confirmation"
             :label="$t('register.confirm_password')"

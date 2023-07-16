@@ -143,8 +143,8 @@ import { useModalStore } from '@/stores/modal/index.js'
 import { useUserInfoStore } from '@/stores/updateUserInfo/index.js'
 import { Form } from 'vee-validate'
 import { ref } from 'vue'
-import ProfileUpdateSuccessModal from '@/components/ProfileUpdateSuccessModal.vue'
-import ProfileUpdateModal from '@/components/ProfileUpdateModal.vue'
+import ProfileUpdateSuccessModal from '@/components/profile/ProfileUpdateSuccessModal.vue'
+import ProfileUpdateModal from '@/components/profile/ProfileUpdateModal.vue'
 import InputText from '@/components/ui/InputText.vue'
 const userStore = useUserStore()
 const userInfoStore = useUserInfoStore()

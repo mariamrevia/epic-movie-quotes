@@ -19,6 +19,7 @@
           <h2 class="text-2 text-white mt-1.5">{{ $t('passwordReset.forgot_password') }}</h2>
           <InputText
             name="email"
+            class="w-22"
             v-model="resetPasswordEmailStore.email"
             rules="required|email"
             :placeholder="$t('placeholders.email')"
@@ -28,7 +29,7 @@
           </p>
           <LandingModalButton type="submit" text="Send instructions" />
 
-          <button @click="goToLogIn" class="border-none text-dark-gray mt-6">
+          <button @click="goToLogIn" class="border-none text-dark-gray mt-2">
             {{ $t('passwordReset.back_log_in') }}
           </button>
         </Form>
