@@ -22,6 +22,8 @@
             rules="required|minLength:3|maxLength:15|lowercase"
             :placeholder="$t('placeholders.name')"
           />
+          <div v-if="errors.username" class="text-red-500 mt-1">{{ errors.username[0] }}</div>
+          <ErrorMessage name="username" as="div" class="text-red-500 mt-1" />
           <InputText
             name="email"
             class="w-22"
@@ -30,6 +32,7 @@
             rules="required|email"
             :placeholder="$t('placeholders.email')"
           />
+          <div v-if="errors.email" class="text-red-500 mt-1">{{ errors.email[0] }}</div>
           <InputText
             class="w-22"
             v-model="registerStore.password"
@@ -39,6 +42,7 @@
             rules="required|minLength:8|maxLength:15|lowercase"
             :placeholder="$t('placeholders.password')"
           />
+          <div v-if="errors.password" class="text-red-500 mt-1">{{ errors.password[0] }}</div>
           <InputText
             class="w-22"
             v-model="registerStore.confirm_password"
@@ -70,13 +74,14 @@
 </template>
 
 <script setup>
-import { Form } from 'vee-validate'
+import { Form, ErrorMessage } from 'vee-validate'
 import { useModalStore } from '@/stores/modal/index.js'
 import { useRegisterStore } from '@/stores/register'
 import InputText from '@/components/ui/InputText.vue'
 import LandingModalButton from '@/components/ui/LandingModalButton.vue'
 import { register } from '@/services/api/auth.js'
 import { authGoogle } from '@/services/api/oauth'
+import { ref } from 'vue'
 import csrf from '@/services/api/csrf.js'
 import LandingModal from '@/components/ui/LandingModal.vue'
 
@@ -93,6 +98,7 @@ const closeModal = (event) => {
   }
 }
 
+const errors = ref({})
 const handleSubmit = async (values) => {
   try {
     await csrf.getCookie()
@@ -105,9 +111,10 @@ const handleSubmit = async (values) => {
     if (response.status === 200) {
       modalStore.openModal('emailSentModalActive')
     }
-    console.log('sdfsdfs')
   } catch (error) {
-    console.log(error)
+    if (error.response && error.response.data && error.response.data.errors) {
+      errors.value = error.response.data.errors
+    }
   }
 }
 const registerWithGoogle = async () => {

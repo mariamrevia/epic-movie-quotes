@@ -19,6 +19,7 @@
             rules="required"
             :placeholder="$t('placeholders.email')"
           />
+          <div v-if="errors.username" class="text-red-500 mt-1">{{ errors.username[0] }}</div>
           <InputText
             v-model="loginStore.password"
             name="password"
@@ -28,6 +29,7 @@
             rules="required"
             :placeholder="$t('placeholders.enter_password')"
           />
+          <div v-if="errors.password" class="text-red-500 mt-1">{{ errors.password[0] }}</div>
 
           <div class="flex flex-row justify-between text-white w-full mt-4">
             <div>
@@ -67,15 +69,17 @@ import { useModalStore } from '@/stores/modal'
 import { authGoogle } from '@/services/api/oauth'
 import { login } from '@/services/api/auth.js'
 import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import LandingModalButton from '@/components/ui/LandingModalButton.vue'
 import InputText from '@/components/ui/InputText.vue'
 import csrf from '@/services/api/csrf.js'
 
 const modalStore = useModalStore()
+const loginStore = useLoginStore()
+const errors = ref({})
 const isModalActive = modalStore.isModalActive
 const router = useRouter()
-
 const signUp = () => {
   modalStore.openModal('registerModalActive')
 }
@@ -84,17 +88,18 @@ const resetPassword = () => {
   modalStore.openModal('passwordModalActive')
 }
 
-const loginStore = useLoginStore()
 const handleSubmit = async (values) => {
   try {
     await csrf.getCookie()
     const response = await login(values.username, values.password)
     if (response.status === 200) {
       router.push({ name: 'newsFeed' })
-      console.log(response)
     }
   } catch (error) {
     console.log(error)
+    if (error.response && error.response.data && error.response.data.errors) {
+      errors.value = error.response.data.errors
+    }
   }
 }
 const loginWithGoogle = async () => {

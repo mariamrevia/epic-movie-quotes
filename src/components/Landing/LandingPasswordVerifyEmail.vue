@@ -24,6 +24,7 @@
             rules="required|email"
             :placeholder="$t('placeholders.email')"
           />
+          <div v-if="errors.email" class="text-red-500 mt-1">{{ errors.email[0] }}</div>
           <p class="mt-4 text-dark-gray w-96 text-center">
             {{ $t('passwordReset.note_instractions') }}
           </p>
@@ -46,13 +47,14 @@ import LandingModal from '@/components/ui/LandingModal.vue'
 import LandingModalButton from '@/components/ui/LandingModalButton.vue'
 import { useResetPasswordEmailStore } from '@/stores/passwordEmailVerify'
 import { resetPasswordVerifyEmail } from '@/services/api/auth.js'
+import { ref } from 'vue'
 import csrf from '@/services/api/csrf.js'
 import iconcheckSend from '@/components/icons/IconCheckSend.vue'
 
 const resetPasswordEmailStore = useResetPasswordEmailStore()
 const modalStore = useModalStore()
+const errors = ref({})
 const isModalActive = modalStore.isModalActive
-console.log(resetPasswordEmailStore)
 
 const handleSubmit = async (value) => {
   try {
@@ -63,7 +65,9 @@ const handleSubmit = async (value) => {
     }
     console.log('sdfsdfs')
   } catch (error) {
-    console.log(error)
+    if (error.response && error.response.data && error.response.data.errors) {
+      errors.value = error.response.data.errors
+    }
   }
 }
 const goToLogIn = () => {

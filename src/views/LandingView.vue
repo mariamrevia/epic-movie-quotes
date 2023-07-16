@@ -18,7 +18,10 @@
           {{ $t('landing.title') }}
         </h1>
       </div>
-      <button class="bg-red w-8.3 h-3 border-none rounded-md text-white mt-[1.5rem]">
+      <button
+        @click="goToLogIn"
+        class="bg-red w-8.3 h-3 border-none rounded-md text-white mt-[1.5rem]"
+      >
         {{ $t('landing.get_started') }}
       </button>
     </div>
@@ -65,4 +68,10 @@ import LandingPasswordVerifyEmail from '@/components/Landing/LandingPasswordVeri
 import LandingFormPasswordReset from '@/components/Landing/LandingFormPasswordReset.vue'
 import LandingPasswordEmailSent from '@/components/Landing/LandingPasswordEmailSent.vue'
 import TheHeader from '@/components/shared/TheHeader.vue'
+import { useModalStore } from '@/stores/modal'
+
+const modalStore = useModalStore()
+const goToLogIn = () => {
+  modalStore.openModal('loginModalActive')
+}
 </script>

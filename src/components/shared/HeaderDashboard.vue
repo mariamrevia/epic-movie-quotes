@@ -11,7 +11,11 @@
       <IconList />
     </button>
     <div class="md:mr-4.4 mr-4 flex flex-row items-center">
-      <IconSearch @click="openSearchModal" class="md:hidden h-1.3 w-1.3 mr-1.25" />
+      <IconSearch
+        v-if="isNewsfeedPage"
+        @click="openSearchModal"
+        class="md:hidden h-1.3 w-1.3 mr-1.25"
+      />
 
       <div class="relative flex items-center">
         <IconBell @click="toggle" class="mr-1.25 h-1.5 w-1.5" />
@@ -68,7 +72,6 @@
                     Commented to you movie Quote
                   </p>
                 </div>
-
                 <div class="mr-1.25 text-1.25 flex flex-col items-end">
                   <p class="text-1">{{ timeDifferences[index] }}</p>
                   <p
@@ -84,7 +87,6 @@
         </div>
       </div>
       <LanguageSwitch class="md:flex" />
-
       <button
         class="md:w-6 md:p-0 p-2 md:flex items-center justify-center h-2.3 border rounded-md text-white"
         @click="handlelogOut"
@@ -119,9 +121,10 @@ import { logOut } from '@/services/api/auth.js'
 import { markAsRead } from '@/services/api/quotes.js'
 import { useRouter } from 'vue-router'
 import { useNotificationStore } from '@/stores/notification/index.js'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { formatDistanceToNow } from 'date-fns'
 import { useUserStore } from '@/stores/authUser/index.js'
+import { useRoute } from 'vue-router'
 import TheDashboard from '@/components/shared/TheDashboard.vue'
 import IconList from '@/components/icons/IconList.vue'
 import TheSearch from '@/components/TheSearch.vue'
@@ -136,8 +139,10 @@ const router = useRouter()
 const notificationStore = useNotificationStore()
 const timeDifferences = ref([])
 const open = ref(false)
+const route = useRoute()
 const searchModal = ref(false)
 const userStore = useUserStore()
+
 onMounted(() => {
   notificationStore.notificationCount = notificationStore.notifications.reduce(
     (count, notification) => {
@@ -145,6 +150,7 @@ onMounted(() => {
     },
     0
   )
+
   notificationStore.notifications.forEach((notification) => {
     const notificationTimestamp = new Date(notification.created_at)
     console.log(notificationTimestamp)
@@ -155,9 +161,11 @@ onMounted(() => {
     })
     timeDifferences.value.push(timeDifference)
   })
-  console.log(userStore.image)
 })
 
+const isNewsfeedPage = computed(() => {
+  return route.name === 'newsFeed'
+})
 const openSearchModal = () => {
   searchModal.value = !searchModal.value
 }

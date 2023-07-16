@@ -129,7 +129,8 @@ export default {
         1.5: '1.5rem',
         1.25: '1.25rem',
         1: '1rem',
-        3: '3rem'
+        3: '3rem',
+        4: '4rem'
       },
 
       colors: {
