@@ -4,24 +4,41 @@
       <img
         :src="authUserStore.google_id ? authUserStore.image : imageUrl"
         @onChange="onFileChange"
-        class="h-3.6 w-3.6 border-none bg-slate-400 border-2 rounded-full"
+        :class="
+          isActivePage('profile')
+            ? 'h-3.6 w-3.6 border-red-700 bg-slate-400 border-2 rounded-full'
+            : 'h-3.6 w-3.6 border-none bg-slate-400 border-2 rounded-full'
+        "
       />
       <div class="flex flex-col items-start ml-2.5">
         <h2 class="text-white h-6 flex text-1.5">{{ authUserStore.username }}</h2>
-        <p class="text-white text-1 mt-4" @click="navigateTo('profile')">Edit your profile</p>
+        <p class="text-white cursor-pointer text-1 mt-4" @click="navigateTo('profile')">
+          Edit your profile
+        </p>
       </div>
     </div>
 
     <div class="flex flex-row mt-2 ml-4 items-center">
-      <IconHouse class="h-2 w-2" />
-      <button @click="navigateTo('newsFeed')" class="text-white h-6 flex border-none ml-3.3">
+      <IconHouse
+        :class="isActivePage('newsFeed') ? 'h-2 w-2 fill-red-700' : 'h-2 w-2 fill-white'"
+      />
+
+      <button
+        @click="navigateTo('newsFeed')"
+        :class="'text-white  cursor-pointer text-1.25 h-6 flex border-none ml-3.3'"
+      >
         news feed
       </button>
     </div>
 
     <div class="flex flex-row items-center mt-2 ml-1.25">
-      <IconCamera class="h-2 w-2" />
-      <button class="text-white h-6 flex border-none ml-3" @click="navigateTo('list-of-movies')">
+      <IconCamera
+        :class="isActivePage('list-of-movies') ? 'h-2 w-2 fill-red-700' : 'h-2 w-2 fill-white'"
+      />
+      <button
+        class="text-white cursor-pointer h-6 flex border-none text-1.25 ml-3"
+        @click="navigateTo('list-of-movies')"
+      >
         List of movies
       </button>
     </div>
@@ -36,6 +53,13 @@ import IconHouse from '@/components/icons/IconHouse.vue'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+const isActivePage = (pageName) => {
+  return route.name.includes(pageName)
+}
 const authUserStore = useUserStore()
 const router = useRouter()
 const navigateTo = (routeName) => {

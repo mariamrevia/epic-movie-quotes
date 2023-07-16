@@ -40,7 +40,7 @@
               class="text-white justify-between h-1.5 p-2 border ml-1 rounded-sm flex items-center bg-[#6C757D] border-none gap-2"
             >
               {{ title }}
-              <IconCross @click.stop="deleteGenre(title)" />
+              <IconCross class="fill-white" @click.stop="deleteGenre(title)" />
             </div>
 
             <div

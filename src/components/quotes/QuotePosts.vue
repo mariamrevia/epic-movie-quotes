@@ -167,7 +167,7 @@ onMounted(async () => {
 })
 
 const getQuoteColor = (quoteId) => {
-  return userLikes[quoteId] ? 'bg-[#F3426C]' : 'bg-white'
+  return userLikes[quoteId] ? 'fill-[#F3426C]' : 'fill-white'
 }
 const toggleLike = async (quoteId, movieId) => {
   const isLiked = userLikes[quoteId]
