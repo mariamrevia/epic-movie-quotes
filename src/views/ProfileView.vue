@@ -1,13 +1,13 @@
 <template>
   <dashboardLayout>
     <h2 class="text-white md:flex hidden text-1.5 ml-13.6 md:mt-1.5 mt-0">My Profile</h2>
-    <div>
+    <div class="hidden md:flex">
       <Form
         v-slot="{ meta }"
         @submit="submitData"
-        class="relative md:mt-3.3 mt-0 lg:ml-9 md:ml-3 ml-0 flex flex-col items-center"
+        class="relative hidden md:mt-3.3 mt-5 lg:ml-9 md:ml-3 ml-0 md:flex flex-col items-center"
       >
-        <div class="absolute z-999 flex w-22 flex-col items-center top-5">
+        <div class="md:flex hidden absolute z-999 w-22 flex-col items-center top-5">
           <img
             :src="userStore.google_id ? userStore.image : imageUrl"
             class="h-12 w-12 bg-slate-500 rounded-full"
@@ -127,12 +127,17 @@
         </div>
         <div class="md:flex flex-row w-full hidden justify-end items-center gap-3 mt-3.3">
           <p @click="cancell" class="text-white text-1.5">Cancell</p>
-          <button class="bg-red w-9.7 h-2.3 border-none rounded-md self-end text-white">
+          <button
+            class="bg-red md:flex hidden w-9.7 h-2.3 border-none rounded-md self-end text-white"
+          >
             Save Changes
           </button>
         </div>
       </Form>
     </div>
+    <ProfileUpdate />
+    <ProfileUpdateSuccessModal name="profileUpdateSuccess" text="Profile Updated successfully" />
+    <ProfileUpdateSuccessModal name="profileEmailUpdate" text="Check email for verification" />
   </dashboardLayout>
 </template>
 
@@ -140,6 +145,9 @@
 import dashboardLayout from '@/components/DashboardLayout.vue'
 import InputText from '@/components/ui/InputText.vue'
 import ValidationProfile from '@/components/ValidationProfile.vue'
+import ProfileUpdate from '@/components/ProfileUpdate.vue'
+import ProfileUpdateSuccessModal from '@/components/ProfileUpdateSuccessModal.vue'
+import { useModalStore } from '@/stores/modal/index.js'
 import { useUserStore } from '@/stores/authUser/index.js'
 import { updateUsersInfo } from '@/services/api/profileUpdate.js'
 import { useUserInfoStore } from '@/stores/updateUserInfo/index.js'
@@ -150,6 +158,7 @@ import { Form } from 'vee-validate'
 const isEdit = ref(false)
 const name = ref('')
 const userInfoStore = useUserInfoStore()
+const modalStore = useModalStore()
 
 const openEdit = (inputName) => {
   if (inputName === 'username') {
@@ -184,16 +193,26 @@ onMounted(async () => {
 const image = ref(null)
 
 const submitData = async () => {
-  await updateUsersInfo({
-    user: userInfoStore.user.id,
-    username: userInfoStore.userData.username,
-    email: userInfoStore.userData.email,
-    password: userInfoStore.userData.password,
-    password_confirmation: userInfoStore.userData.password_confirmation,
-    image: image.value
-  })
-
-  await userStore.fetchUser()
+  try {
+    const response = await updateUsersInfo({
+      user: userInfoStore.user.id,
+      username: userInfoStore.userData.username,
+      email: userInfoStore.userData.email,
+      password: userInfoStore.userData.password,
+      password_confirmation: userInfoStore.userData.password_confirmation,
+      image: image.value
+    })
+    if (response.data.message.includes('UserInfo updated successfully')) {
+      modalStore.openModal('profileUpdateSuccess')
+    } else if (
+      response.data.message.includes('Please check your email to verify the new email address')
+    ) {
+      modalStore.openModal('profileEmailUpdate')
+    }
+    await userStore.fetchUser()
+  } catch (error) {
+    console.log(error)
+  }
 }
 const imageUrl = ref(`${import.meta.env.VITE_API_BASE_URL}/storage/${userStore.image}`)
 const onFileChange = (event) => {

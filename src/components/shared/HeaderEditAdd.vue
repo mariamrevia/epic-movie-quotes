@@ -1,7 +1,7 @@
 <template>
   <div class="w-full flex flex-row mt-2 items-center gap-5 md:justify-end justify-center">
     <h1 class="text-white text-2 flex items-center md:mr-21 mr-0">{{ props.heading }}</h1>
-    <IconCross class="w-2 h-2 md:mr-1.25 mr-0" @click="closeModal(modalName)" />
+    <IconCross class="w-2 h-2 md:mr-1.25 mr-0 fill-white" @click="closeModal(modalName)" />
   </div>
   <hr class="w-full h-0.05 bg-dark-gray border-none mt-1.25" />
   <div class="flex flex-row gap-2 items-center mt-1.25 mb-1.25 w-full justify-start">

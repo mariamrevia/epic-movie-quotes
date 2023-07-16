@@ -57,7 +57,7 @@
         </button>
         <div class="flex flex-row gap-1 md:mt-0 mt-1.25">
           <h2 class="text-1.5">Quotes</h2>
-          <p class="text-1.5">Total({{ movie.quotes.length }})</p>
+          <!-- <p class="text-1.5">Total({{ movie.quotes.length }})</p> -->
         </div>
       </div>
       <MovieQuoteAdd v-if="movie" :movie="movie" />

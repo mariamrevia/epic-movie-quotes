@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col">
-    <label class="text-caramel mb-0.5 mt-0.5">{{ label }}</label>
+    <label class="text-white mb-0.5 mt-0.5">{{ label }}</label>
     <div class="flex relative h-3 flex-row items-center">
       <Field
         v-bind="$attrs"
@@ -12,7 +12,7 @@
         :rules="props.rules"
       />
       <iconValid
-        v-if="meta.valid && !errorMessage && !meta.initialValue"
+        v-if="meta.valid && !errorMessage && !meta.initialValue && meta.dirty"
         class="absolute flex right-0.8 z-100"
       />
       <iconInvalid v-if="errorMessage" class="absolute flex right-0.8 z-100" />

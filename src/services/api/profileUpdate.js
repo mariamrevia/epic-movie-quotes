@@ -8,7 +8,6 @@ export async function updateUsersInfo({
   password_confirmation,
   image
 }) {
-  console.log(image)
   return axios.post(
     `/user/${user}`,
     {
@@ -16,7 +15,7 @@ export async function updateUsersInfo({
       email: email,
       password: password,
       password_confirmation: password_confirmation,
-      image
+      image: image
     },
     {
       headers: {

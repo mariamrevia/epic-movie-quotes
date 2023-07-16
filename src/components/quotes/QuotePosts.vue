@@ -6,7 +6,7 @@
   >
     <div class="m-auto lg:w-56 md:w-43 w-22 items-center">
       <div class="flex flex-row items-center gap-2">
-        <img class="h-4 w-4 rounded-full bg-slate-500" />
+        <img :src="getImage(quote.movie.image)" class="h-4 w-4 rounded-full bg-slate-500" />
         <h2 class="text-white">{{ quote.movie.user }}</h2>
       </div>
       <div class="flex flex-row mt-2">
@@ -45,9 +45,12 @@
         :key="comment.id"
       >
         <div class="mt-1.5 flex flex-row items-center">
-          <img class="h-3.25 w-3.25 rounded-full bg-slate-500" />
+          <img
+            :src="getImage(comment.user.image)"
+            class="h-3.25 w-3.25 rounded-full bg-slate-500"
+          />
           <div class="ml-2 flex flex-col align-middle justify-center">
-            <h2 class="text-white">{{ comment.user }}</h2>
+            <h2 class="text-white">{{ comment.user.username }}</h2>
             <p class="text-white">{{ comment.body }}</p>
           </div>
           <hr class="flex h-0.05 bg-slate-700 border-none mt-1.25" />
@@ -125,6 +128,7 @@ const fetchQuotes = async () => {
 onMounted(async () => {
   try {
     await fetchQuotes()
+    console.log(quoteStore.quotes)
   } catch (error) {
     console.log(error)
   }
@@ -216,7 +220,24 @@ onUnmounted(() => {
   window.Echo.leaveChannel('commentQuote')
   window.Echo.leaveChannel('likeQuotes')
 })
+const getImage = (image) => {
+  if (image.startsWith('images')) {
+    return `${import.meta.env.VITE_API_BASE_URL}/storage/${image}`
+  } else {
+    return image
+  }
+}
+// const userImage = (image) => {
+//   if (image.startsWith('images')) {
+//     return `${import.meta.env.VITE_API_BASE_URL}/storage/${image}`
+//   } else {
+//     return image
+//   }
+
+// }
+
 const getImageURL = (image) => {
   return `${import.meta.env.VITE_API_BASE_URL}/storage/${image}`
 }
+// const imageUrl = ref(`${import.meta.env.VITE_API_BASE_URL}/storage/${}`)
 </script>

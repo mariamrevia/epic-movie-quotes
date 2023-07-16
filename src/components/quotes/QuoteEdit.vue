@@ -24,14 +24,14 @@
         </div>
 
         <Field
-          id="file-upload"
-          class="absolute top-[70%]"
+          id="fileImage"
+          class="hidden absolute top-[70%]"
           name="image"
           type="file"
           @change="onFileChange"
         />
 
-        <label for="file-upload" class="bg-black h-9 w-10 absolute top-[70%]">Choose Image</label>
+        <label for="fileImage" class="bg-black h-9 w-10 absolute top-[70%]">Choose Image</label>
         <ButtonBase type="submit" text="Save Changes" />
       </Form>
     </LandingModal>
