@@ -30,7 +30,7 @@
       </div>
       <div
         v-if="open"
-        class="no-scrollbar flex overflow-y-auto h-41 flex-col md:w-58 w-25 absolute md:right-[5%] right-0 top-[90%] rounded-lg bg-black gap-2 z-999 p-8"
+        class="no-scrollbar z-10 flex overflow-y-auto h-41 flex-col md:w-58 w-25 absolute md:right-[5%] right-0 top-[90%] rounded-lg bg-black gap-2 z-999 p-8"
       >
         <div class="flex flex-row justify-between">
           <h2 class="text-white text-1.5">{{ $t('dashboard.notifications') }}</h2>

@@ -58,7 +58,10 @@
       </div>
 
       <div class="flex flex-row items-center mt-3.3">
-        <img class="h-3 w-3 rounded-full bg-slate-500" />
+        <img
+          :src="userStore.google_id ? userStore.image : imageUrl"
+          class="h-3 w-3 rounded-full bg-slate-500"
+        />
         <Form class="md:ml-2 ml-1" @submit="submitData(quote.id)">
           <div
             class="flex relative h-3 flex-row items-center bg-#24222F lg:w-50 md:w-30 w-17.5 rounded-md border-none bg-transparen focus-within:ring focus:shadow-shadow outline-none"
@@ -242,5 +245,5 @@ const getImage = (image) => {
 const getImageURL = (image) => {
   return `${import.meta.env.VITE_API_BASE_URL}/storage/${image}`
 }
-// const imageUrl = ref(`${import.meta.env.VITE_API_BASE_URL}/storage/${}`)
+const imageUrl = ref(`${import.meta.env.VITE_API_BASE_URL}/storage/${userStore.image}`)
 </script>

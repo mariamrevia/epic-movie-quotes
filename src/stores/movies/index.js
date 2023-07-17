@@ -5,6 +5,7 @@ export const useMovieStore = defineStore('movies', {
     movieData: [],
     genreData: [],
     genreTitle: [],
+    movie: [],
     createMovieData: {
       name: {
         en: '',

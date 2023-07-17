@@ -104,6 +104,8 @@ onMounted(async () => {
   } catch (error) {
     console.log(error)
   }
+
+  movieStore.getMovies(movie.value)
 })
 
 const movieToDelete = ref(null)

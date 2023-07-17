@@ -26,11 +26,11 @@
           >
             <div class="flex flex-col ml-2">
               <div class="flex flex-row gap-2">
-                <IconEye />
+                <IconEye @click="toggleQuoteModal(quote.id, 'viewQuoteModalActive')" />
                 <span class="text-whiteGray">{{ $t('quote.view_quote') }}</span>
               </div>
               <div class="flex flex-row mt-1.25 gap-2">
-                <IconEdit @click="toggleEditQuoteModal(quote.id)" />
+                <IconEdit @click="toggleQuoteModal(quote.id, 'editQuoteModalActive')" />
                 <span class="text-whiteGray">{{ $t('quote.edit') }} </span>
               </div>
               <div class="flex flex-row mt-1.25 gap-2">
@@ -54,6 +54,7 @@
       </div>
 
       <QuoteEdit :quoteToEdit="quoteToEdit" :movie="movie" />
+      <QuoteView :quoteToEdit="quoteToEdit" />
     </div>
   </div>
 </template>
@@ -67,6 +68,7 @@ import IconEdit from '@/components/icons/IconEdit.vue'
 import IconEye from '@/components/icons/IconEye.vue'
 import IconThreeDots from '@/components/icons/IconThreeDots.vue'
 import { deleteQuote } from '@/services/api/quotes'
+import QuoteView from '@/components/quotes/QuoteView.vue'
 import IconLike from '@/components/icons/IconLike.vue'
 import IconComment from '@/components/icons/IconComments.vue'
 const props = defineProps({
@@ -99,18 +101,18 @@ const quoteDelete = async (id) => {
   quoteToDelete.value = id
   try {
     await deleteQuote(quoteToDelete.value)
+    movie.value.quotes = movie.value.quotes.filter((quote) => quote.id !== id)
   } catch (error) {
     console.log(error)
   }
-
-  console.log(quoteToDelete.value)
+  return movieQuotes.value
 }
 
 const quoteToEdit = ref(null)
-const toggleEditQuoteModal = (quoteId) => {
+const toggleQuoteModal = (quoteId, modalName) => {
   quoteToEdit.value = quoteId
   console.log(quoteToEdit.value)
-  modalStore.openModal('editQuoteModalActive')
+  modalStore.openModal(modalName)
   console.log('hehe')
 }
 </script>

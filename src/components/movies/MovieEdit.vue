@@ -115,6 +115,7 @@
             @change="onFileChange"
           />
         </div>
+
         <ButtonBase type="submit" :text="$t('movie.edit_movie')" />
       </Form>
     </LandingModal>
@@ -179,7 +180,7 @@ const submitData = async () => {
       },
       year: editMovie.value.year,
       genres: editMovie.value.genres.map((genre) => genre.id),
-      movieId: editMovie.value.id,
+      movie: editMovie.value.id,
       image: image.value
     })
     console.log(image.value)

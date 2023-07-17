@@ -6,5 +6,9 @@ export default {
   setGenres(genreData) {
     this.genreData = genreData
     console.log(genreData)
+  },
+  getMovies(movie) {
+    this.movie = movie
+    console.log(movie)
   }
 }

@@ -16,6 +16,7 @@ export const useModalStore = defineStore('modal', {
     editMovieModalActive: false,
     addQuoteModalActive: false,
     editQuoteModalActive: false,
+    viewQuoteModalActive: false,
     createQuoteModalActive: false,
     usernameUpdateModalActive: false,
     emailUpdateModalActive: false,

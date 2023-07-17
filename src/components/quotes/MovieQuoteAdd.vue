@@ -73,9 +73,9 @@
 import TextAreaBase from '@/components/ui/TextAreaBase.vue'
 import ButtonBase from '@/components/ui/ButtonBase.vue'
 import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
+import imageUpload from '@/components/shared/ImageUpload.vue'
 import { useModalStore } from '@/stores/modal/index.js'
 import { Form } from 'vee-validate'
-import imageUpload from '@/components/shared/ImageUpload.vue'
 import { useQuoteStore } from '@/stores/quotes/index.js'
 import { useMovieStore } from '@/stores/movies/index.js'
 import { getMovies } from '@/services/api/movies.js'
@@ -113,7 +113,7 @@ onMounted(async () => {
 
 const submitData = async () => {
   try {
-    await storeQuotes({
+    const response = await storeQuotes({
       body: {
         en: quoteStore.quoteData.body.en,
         ka: quoteStore.quoteData.body.ka
@@ -121,6 +121,14 @@ const submitData = async () => {
       image: quoteStore.quoteData.image,
       movie_id: movie.value.id
     })
+
+    if (response.data && response.data.data) {
+      const createdQuote = response.data.data
+      movie.value.quotes.push(createdQuote)
+    } else {
+      console.error('invalid response')
+    }
+    console.log(movie.value)
   } catch (errors) {
     console.log(errors)
   }
