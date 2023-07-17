@@ -12,9 +12,9 @@
       >
         <div class="flex flex-row gap-2 absolute left-3 top-3.3">
           <IconDelete @click="quoteDelete(quote.id)" />
-          <p class="md:flex hidden">Delete</p>
+          <p class="md:flex hidden">{{ $t('quote.delete') }}</p>
         </div>
-        <HeaderEditAdd modalName="editQuoteModalActive" heading="Edit quote" />
+        <HeaderEditAdd modalName="editQuoteModalActive" :heading="$t('quote.edit_quote')" />
         <TextAreaBase name="body[en]" v-model="quote.body.en" lang="Eng" rules="required" />
         <TextAreaBase name="body[ka]" v-model="quote.body.ka" lang="Geo" rules="required" />
         <div
@@ -24,15 +24,21 @@
         </div>
 
         <Field
-          id="fileImage"
-          class="hidden absolute top-[70%]"
+          :id="quote.id"
+          class="absolute hidden top-[70%]"
           name="image"
           type="file"
           @change="onFileChange"
         />
 
-        <label for="fileImage" class="bg-black h-9 w-10 absolute top-[70%]">Choose Image</label>
-        <ButtonBase type="submit" text="Save Changes" />
+        <label
+          :for="quote.id"
+          class="bg-black rounded-lg flex flex-col justify-center items-center opacity-70 h-5 w-8.3 absolute top-[60%]"
+        >
+          <IconPhoto />
+          {{ $t('quote.choose_image') }}</label
+        >
+        <ButtonBase type="submit" :text="$t('quote.save_changes')" />
       </Form>
     </LandingModal>
   </div>
@@ -44,9 +50,10 @@ import TextAreaBase from '@/components/ui/TextAreaBase.vue'
 import ButtonBase from '@/components/ui/ButtonBase.vue'
 import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
 import IconDelete from '@/components/icons/IconDelete.vue'
+import IconPhoto from '@/components/icons/IconPhoto.vue'
 import { Form, Field } from 'vee-validate'
 import { useModalStore } from '@/stores/modal'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { updateQuotes } from '@/services/api/quotes.js'
 import { deleteQuote } from '@/services/api/quotes'
 
@@ -62,7 +69,7 @@ const props = defineProps({
 })
 
 const imageUrl = ref(null)
-const image = ref(null)
+
 const editQuote = computed(() => (props.movie ? { ...props.movie } : null))
 const modalStore = useModalStore()
 const isModalActive = modalStore.isModalActive
@@ -78,14 +85,30 @@ const closeModal = (event) => {
   }
 }
 
+onMounted(() => {
+  console.log(editQuote.value)
+  console.log(getFilteredQuotes.value[0])
+})
+
+const image = ref(null)
+const onFileChange = (event) => {
+  const file = event.target.files[0]
+  if (file) {
+    imageUrl.value = URL.createObjectURL(file)
+  }
+  image.value = file
+  console.log(image.value)
+}
 const submitData = async () => {
+  console.log(image.value)
+
   try {
     await updateQuotes({
       body: {
         en: getFilteredQuotes.value[0].body.en,
         ka: getFilteredQuotes.value[0].body.ka
       },
-      image: image.value,
+      image: image.value ? image.value : getFilteredQuotes.value[0].image,
       id: props.quoteToEdit
     })
   } catch (error) {
@@ -111,12 +134,4 @@ const initialImageUrl = computed(() => {
   }
   return ''
 })
-
-const onFileChange = (event) => {
-  const file = event.target.files[0]
-  image.value = file
-  if (file) {
-    imageUrl.value = URL.createObjectURL(file)
-  }
-}
 </script>

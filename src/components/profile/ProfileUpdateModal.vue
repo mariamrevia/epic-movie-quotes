@@ -12,28 +12,32 @@
         </div>
         <slot v-if="!confirm"></slot>
         <div v-if="!confirm" class="flex flex-row w-full justify-between gap-3 mt-3.3">
-          <p @click="closeModal(props.name)" class="text-white text-1.5 ml-1.25">Cancell</p>
+          <p @click="closeModal(props.name)" class="text-white text-1.5 ml-1.25">
+            {{ $t('profile.cancell_button') }}
+          </p>
           <button
             @click="openConfirm"
             class="bg-red flex w-6.8 h-2.3 items-center justify-center border-none rounded-md mr-1.25 text-white"
           >
-            Edit
+            {{ $t('profile.edit_button') }}
           </button>
         </div>
         <div
           v-if="confirm"
           class="w-22 bg-[#24222F] h-14 flex flex-col items-center text-whiteGray"
         >
-          <h2 class="text-whiteGray text-1.25 mt-4.4">Are you sure to make changes?</h2>
+          <h2 class="text-whiteGray text-1.25 mt-4.4">{{ $t('profile.make_changes') }}</h2>
           <hr class="w-full h-0 bg-whiteGray mt-2" />
           <div class="flex flex-row w-full justify-between mt-2">
-            <p @click="closeConfirm" class="text-white text-1.5 ml-1.25">Cancell</p>
+            <p @click="closeConfirm" class="text-white text-1.5 ml-1.25">
+              {{ $t('profile.cancell_button') }}
+            </p>
             <button
               type="submit"
               @click="confirmForm"
               class="bg-red flex w-6.8 h-2.3 items-center justify-center border-none rounded-md mr-1.25 text-white"
             >
-              Confirm
+              {{ $t('profile.confirm_button') }}
             </button>
           </div>
         </div>

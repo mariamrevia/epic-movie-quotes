@@ -31,9 +31,9 @@
     >
       <div class="pl-2 md:pl-52">
         <h2 class="text-white text-1.25 md:text-3 w-17.5 md:w-45">
-          “You have to leave somethig behind to go forward”
+          “{{ $t('landing.first_quote') }}”
         </h2>
-        <p class="text-white text-1">Interstellar, 2014</p>
+        <p class="text-white text-1">{{ $t('landing.first_movie') }}, 2014</p>
       </div>
     </div>
     <div
@@ -41,9 +41,9 @@
     >
       <div class="pl-2 md:pl-52">
         <h2 class="text-white text-1.25 md:text-3 w-15.6 md:w-45">
-          “I think we’re just gonna have to be secretly in love with earch other and leave it that”
+          “{{ $t('landing.second_quote') }},”
         </h2>
-        <p class="text-white text-1">The Royal Tenenbaums,2001</p>
+        <p class="text-white text-1">{{ $t('landing.second_movie') }},2001</p>
       </div>
     </div>
     <div
@@ -51,9 +51,9 @@
     >
       <div class="pl-2 md:pl-52">
         <h2 class="text-white text-1.25 md:text-3 w-17.5 md:w-45">
-          “I see in your eyes the same fear that would take the heart of me....”
+          “{{ $t('landing.third_quote') }}....”
         </h2>
-        <p class="text-white text-1">The Lord of the Rings, 2003</p>
+        <p class="text-white text-1">{{ $t('landing.third_movie') }}, 2003</p>
       </div>
     </div>
   </div>

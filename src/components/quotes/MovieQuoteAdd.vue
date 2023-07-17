@@ -10,7 +10,7 @@
       @submit="submitData"
       class="md:w-60 w-full fixed flex flex-col md:mt-5 pb-13 md:pb-10 items-center bg-[#11101A] rounded-lg"
     >
-      <HeaderEditAdd modalName="createQuoteModalActive" heading="Add Quote" />
+      <HeaderEditAdd modalName="createQuoteModalActive" :heading="$t('quote.add_quote')" />
       <div class="flex flex-row gap-4 md:w-56 md:bg-transparent bg-black md:p-0 p-3 w-20 m-auto">
         <img
           class="md:w-18 w-7 h-5 md:h-10 flex self-start rounded-xl"
@@ -37,7 +37,7 @@
             </div>
           </div>
           <h2 class="md:mt-2 mt-0 text-whiteGray gap-3 md:text-1.5 text-1">
-            Director:
+            {{ $t('movie.director') }}
             {{ $i18n.locale === 'en' ? movie && movie.director.en : movie && movie.director.ka }}
           </h2>
         </div>
@@ -64,7 +64,7 @@
         @update:imageUpload="updateImageUpload"
       />
 
-      <ButtonBase type="submit" text="Add Quote" />
+      <ButtonBase type="submit" :text="$t('quote.add_quote')" />
     </Form>
   </div>
 </template>

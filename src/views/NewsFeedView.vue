@@ -5,7 +5,7 @@
         class="md:w-50 text-1.25 w-12 h-3.25 md:bg-#24222F bg-transparent rounded-lg text-white flex flex-row gap-2 items-center"
       >
         <iconPencil class="md:ml-2 h-2 w-2 ml-0" @click="toggleAddQuoteModal" />
-        write new quote
+        {{ $t('quote.write_quote') }}
       </div>
       <TheSearch class="md:flex hidden" />
     </div>

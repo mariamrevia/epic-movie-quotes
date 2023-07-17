@@ -6,7 +6,7 @@
       type="text"
       v-model="searchQuery"
       @input="performSearch"
-      placeholder="Search by"
+      :placeholder="$t('dashboard.search')"
     />
   </div>
 </template>

@@ -8,7 +8,7 @@
     <div class="flex flex-row items-center ml-1.25">
       <IconPhoto />
       <span class="flex flex-row items-center relative ml-1.25" v-if="!isDragging">
-        {{ imageUploaded ? 'File uploaded' : 'Drag and drop image here or' }}
+        {{ imageUploaded ? $t('image.file_upload') : $t('image.drag_image') }}
         <Field
           class="hidden"
           @input="uploadFile($event.target.value)"
@@ -23,7 +23,7 @@
           for="file-upload"
           class="h-2.6 ml-3 md:mr-0 mr-2 text-center flex p-3 rounded-sm items-center bg-[#9747FF]"
         >
-          Choose file
+          {{ $t('image.choose_image') }}
         </label>
       </span>
     </div>

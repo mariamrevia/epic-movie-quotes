@@ -8,7 +8,7 @@
         @submit="submitData(movieStore.createMovieData)"
         class="md:w-60 w-full z-10 fixed flex flex-col md:mt-5 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
       >
-        <HeaderEditAdd heading="Add Movie" modalName="AddMovieModalActive" />
+        <HeaderEditAdd :heading="$t('movie.add_movie')" modalName="AddMovieModalActive" />
         <InputMovie
           name="name[en]"
           v-model="movieStore.createMovieData.name.en"
@@ -102,7 +102,7 @@
           :rules="movieStore.createMovieData.image ? '' : 'required'"
           @update:imageUpload="updateImageUpload"
         />
-        <ButtonBase type="submit" text="Add Movie" />
+        <ButtonBase type="submit" :text="$t('movie.add_moive')" />
       </Form>
     </LandingModal>
   </div>
@@ -122,7 +122,8 @@ import { Field, ErrorMessage } from 'vee-validate'
 import { ref } from 'vue'
 import { useMovieStore } from '@/stores/movies'
 import { Form } from 'vee-validate'
-import { storeMovies } from '@/services/api/movies'
+import { storeMovies, getMovies } from '@/services/api/movies'
+import i18n from '@/i18n'
 
 const modalStore = useModalStore()
 const movieStore = useMovieStore()
@@ -149,7 +150,7 @@ const select = () => {
   if (movieStore.genreTitle.length > 0) {
     return ''
   } else {
-    return 'select the genres'
+    return i18n.global.t('movie.select_genre')
   }
 }
 const isModalActive = modalStore.isModalActive
@@ -173,6 +174,10 @@ const submitData = async () => {
       genre: movieStore.createMovieData.genre,
       image: movieStore.createMovieData.image
     })
+
+    const response = await getMovies()
+    const data = response.data
+    movieStore.setMovies(data.data)
   } catch (error) {
     console.log(error)
   }

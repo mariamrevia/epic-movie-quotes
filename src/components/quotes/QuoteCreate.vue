@@ -10,7 +10,7 @@
       @submit="submitData"
       class="md:w-60 w-25 h-48 flex flex-col md:mt-5 pb-13 md:pb-4 items-center bg-[#11101A] rounded-lg"
     >
-      <HeaderEditAdd modalName="addQuoteModalActive" heading="Write new Quote" />
+      <HeaderEditAdd modalName="addQuoteModalActive" :heading="$t('quote.new_quote')" />
       <TextAreaBase
         name="body[en]"
         lang="Eng"
@@ -46,7 +46,7 @@
         >
           <div class="text-white md:text-1.5 text-1.25 ml-2 flex flex-row items-center gap-2">
             <IconMovie class="h-2 w-2" />
-            {{ movieTitle ? movieTitle : 'Choose Movie' }}
+            {{ movieTitle ? movieTitle : $t('quote.choose_movie') }}
           </div>
 
           <div
@@ -69,7 +69,7 @@
 
         <ErrorMessage class="text-red-700 mt-1.5" name="movie" />
       </Field>
-      <ButtonBase type="submit" text="Post" />
+      <ButtonBase type="submit" :text="$t('quote.post')" />
     </Form>
   </div>
 </template>
@@ -85,7 +85,7 @@ import imageUpload from '@/components/shared/ImageUpload.vue'
 import { useQuoteStore } from '@/stores/quotes/index.js'
 import { useMovieStore } from '@/stores/movies/index.js'
 import { getMovies } from '@/services/api/movies.js'
-import { storeQuotes } from '@/services/api/quotes.js'
+import { storeQuotes, getQuotes } from '@/services/api/quotes.js'
 import { onMounted, ref } from 'vue'
 
 const modalStore = useModalStore()
@@ -131,6 +131,15 @@ const submitData = async () => {
       },
       image: quoteStore.quoteData.image,
       movie_id: quoteStore.quoteData.movie
+    })
+    const response = await getQuotes()
+    quoteStore.updateQuotes(response.data.data)
+
+    quoteStore.quotes.forEach((quote) => {
+      quote.commentData = {
+        body: '',
+        quote_id: quote.id
+      }
     })
   } catch (errors) {
     console.log(errors)

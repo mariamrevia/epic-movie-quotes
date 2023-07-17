@@ -12,7 +12,7 @@
       <div class="flex flex-row mt-2">
         <p class="text-white">{{ quote.body.en }}</p>
         <div class="flex flex-row ml-2">
-          <h2 class="text-white">Movie -</h2>
+          <h2 class="text-white">{{ $t('quote.movie') }} -</h2>
 
           <p class="text-caramel ml-1">
             {{ $i18n.locale === 'en' ? quote.movie.name.en : quote.movie.name.ka }}
@@ -203,7 +203,10 @@ onMounted(() => {
     const quote = quoteStore.quotes.find((quote) => quote.id === comment.comment.quote_id)
     quote.comments.push({
       body: comment.comment.body,
-      user: userStore.username
+      user: {
+        image: comment.image,
+        username: userStore.username
+      }
     })
   })
   window.Echo.channel('likeQuotes').listen('LikeQuote', (like) => {

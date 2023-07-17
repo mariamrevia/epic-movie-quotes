@@ -2,7 +2,12 @@
   <DashboardLayout>
     <div class="flex flex-col md:ml-4.4 md:mr-4.4 m-auto md:mt-2">
       <div class="flex items-center h-3.3 md:mt-4.4 mt-6 justify-between">
-        <p class="text-white">My List of Movies</p>
+        <div class="flex flex-row items-center mb-1.25 gap-2">
+          <p class="text-white md:text-1.5 text-1.25">{{ $t('movie.list_of_movie') }}</p>
+          <!-- <p class="text-white text-1.5">
+            {{ $t('movie.total') }} ({{ movieStore.movieData.length }})
+          </p> -->
+        </div>
         <div class="flex flex-row items-center">
           <div class="md:flex flex-row gap-2 ml-1.5 hidden">
             <IconSearch />
@@ -11,14 +16,14 @@
               type="text"
               v-model="searchQuery"
               @input="performSearch"
-              placeholder="Search"
+              :placeholder="$t('movie.movid_search')"
             />
           </div>
           <button
             @click="toggleAddMovieModal"
-            class="bg-red w-9.7 h-2.3 border-none rounded-md text-white"
+            class="bg-red ml-1.25 w-9.7 md:text-1 text-1 h-2.3 border-none rounded-md text-white"
           >
-            Add Movie
+            {{ $t('movie.add_movie') }}
           </button>
         </div>
       </div>

@@ -3,7 +3,7 @@
     <div>
       <div class="flex lg:flex-row md:flex-col flex-col gap-4 mt-7.4">
         <div class="flex flex-col text-white">
-          <h2 class="mb-1.5 text-1.5 text-whiteGray">Movie discription</h2>
+          <h2 class="mb-1.5 text-1.5 text-whiteGray">{{ $t('movie.movie_discription') }}</h2>
           <img
             class="lg:w-50 md:37.5 w-22 md:h-27 h-23.4 object-center rounded-2xl"
             :src="getImageURL(movie && movie.image)"
@@ -38,7 +38,7 @@
             </div>
           </div>
           <h2 class="mt-2 text-whiteGray gap-3 text-1.25">
-            Director:
+            {{ $t('movie.director') }}
             {{ $i18n.locale === 'en' ? movie && movie.director.en : movie && movie.director.ka }}
           </h2>
           <p class="md:h-27 flex md:w-37.5 w-20 mt-2 text-whiteGray">
@@ -53,10 +53,10 @@
           @click="toggleAddQuoteModal"
           class="bg-red w-9.7 h-2.3 border-none rounded-md text-white"
         >
-          Add Quote
+          {{ $t('movie.add_quote') }}
         </button>
         <div class="flex flex-row gap-1 md:mt-0 mt-1.25">
-          <h2 class="text-1.5">Quotes</h2>
+          <h2 class="text-1.5">{{ $t('movie.quotes') }}</h2>
           <!-- <p class="text-1.5">Total({{ movie.quotes.length }})</p> -->
         </div>
       </div>

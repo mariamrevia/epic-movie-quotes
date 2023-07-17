@@ -1,6 +1,6 @@
 <template>
   <dashboardLayout>
-    <h2 class="text-white text-1.5 mt-6 md:flex hidden">My Profile</h2>
+    <h2 class="text-white text-1.5 mt-6 md:flex hidden">{{ $t('profile.header') }}</h2>
     <div class="hidden md:flex">
       <Form
         v-slot="{ meta }"
@@ -13,9 +13,9 @@
             class="h-12 w-12 bg-slate-500 rounded-full"
           />
           <input id="file-upload" class="hidden" name="image" type="file" @change="onFileChange" />
-          <label v-if="!userStore.google_id" for="file-upload" class="text-white text-1.25"
-            >Upload new photo</label
-          >
+          <label v-if="!userStore.google_id" for="file-upload" class="text-white text-1.25">{{
+            $t('profile.photo_upload')
+          }}</label>
         </div>
         <div class="md:mt-9 mt-9 flex flex-col items-center">
           <div
@@ -27,21 +27,19 @@
                   class="md:w-30 sm:22 bg-transparent border-none placeholder-slate-700"
                   name="disabledUsername"
                   :placeholder="userStore.username"
-                  label="username"
+                  :label="$t('profile.username')"
                   disabled
                 />
-                <p class="text-white text-1.25 ml-2" @click="openEdit('username')">Edit</p>
+                <p class="text-white text-1.25 ml-2" @click="openEdit('username')">
+                  {{ $t('profile.edit_button') }}
+                </p>
               </div>
 
               <ValidationProfile
                 v-if="isEdit && name === 'username'"
                 name="username"
                 :valid="meta.valid"
-                :items="[
-                  'Minimum 3 characters',
-                  'Maximum 15 characters',
-                  'Only lowercase characters'
-                ]"
+                :items="[$t('profile.minLength'), $t('profile.maxLength'), $t('profile.lowerCase')]"
               />
               <InputText
                 v-if="isEdit && name === 'username'"
@@ -49,7 +47,7 @@
                 class="w-30 placeholder-slate-700"
                 name="username"
                 rules="minLength:3|maxLength:15|lowercase"
-                label="username"
+                :label="$t('profile.username')"
               />
               <p class="text-white md:flex sm:hidden">{{ console.log(meta) }}</p>
 
@@ -57,7 +55,7 @@
                 <InputText
                   class="md:w-30 sm:22 bg-transparent border-none placeholder-slate-700"
                   name="disabledEmail"
-                  label="Email"
+                  :label="$t('profile.email')"
                   :placeholder="userStore.email"
                   disabled
                 />
@@ -66,7 +64,7 @@
                   class="text-white text-1.25 ml-2"
                   @click="openEdit('email')"
                 >
-                  Edit
+                  {{ $t('profile.edit_button') }}
                 </p>
               </div>
               <ValidationProfile
@@ -80,7 +78,7 @@
                 class="w-30 placeholder-slate-700"
                 v-model="userInfoStore.userData.email"
                 name="email"
-                label="Email"
+                :label="$t('profile.email')"
                 rules="email"
               />
               <div
@@ -93,10 +91,12 @@
                 <InputText
                   class="md:w-30 sm:22 bg-transparent border-none placeholder-slate-700"
                   name="disabledPassword"
-                  label="Password"
+                  :label="$t('profile.password')"
                   disabled
                 />
-                <p class="text-white text-1.25 ml-2" @click="openEdit('password')">Edit</p>
+                <p class="text-white text-1.25 ml-2" @click="openEdit('password')">
+                  {{ $t('profile.edit_button') }}
+                </p>
               </div>
               <ValidationProfile
                 v-if="isEdit && name === 'password'"
@@ -110,7 +110,7 @@
                 v-model="userInfoStore.userData.password"
                 name="password"
                 type="password"
-                label="new password"
+                :label="$t('profile.new_password')"
                 rules="required"
               />
               <InputText
@@ -119,25 +119,25 @@
                 type="password"
                 v-model="userInfoStore.userData.password_confirmation"
                 name="password_confirmation"
-                label="confirm new password"
+                :label="$t('profile.confirm_password')"
                 rules="required|confirmed:password"
               />
             </div>
           </div>
         </div>
         <div class="md:flex mb-1.5 flex-row w-full hidden justify-end items-center gap-3 mt-3.3">
-          <p @click="cancell" class="text-white text-1.5">Cancell</p>
+          <p @click="cancell" class="text-white text-1.5">{{ $t('profile.cancell_button') }}</p>
           <button
             class="bg-red md:flex hidden items-center justify-center w-9.7 h-2.3 border-none rounded-md self-end text-white"
           >
-            Save Changes
+            {{ $t('profile.save_button') }}
           </button>
         </div>
       </Form>
     </div>
     <ProfileUpdate />
-    <ProfileUpdateSuccessModal name="profileUpdateSuccess" text="Profile Updated successfully" />
-    <ProfileUpdateSuccessModal name="profileEmailUpdate" text="Check email for verification" />
+    <ProfileUpdateSuccessModal name="profileUpdateSuccess" :text="$t('profile.update_success')" />
+    <ProfileUpdateSuccessModal name="profileEmailUpdate" :text="$t('profile.update_email')" />
   </dashboardLayout>
 </template>
 

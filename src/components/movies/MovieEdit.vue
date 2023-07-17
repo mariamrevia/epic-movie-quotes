@@ -8,7 +8,7 @@
         @submit="submitData"
         class="md:w-60 w-full z-10 fixed flex flex-col md:mt-5 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
       >
-        <HeaderEditAdd modalName="editMovieModalActive" heading="Edit Movie" />
+        <HeaderEditAdd modalName="editMovieModalActive" :heading="$t('movie.edit_movie')" />
         <inputEdit
           name="name[en]"
           rules="required|alphabetEn"
@@ -101,13 +101,13 @@
             <img class="w-27 h-9.6" :src="imageUrl" />
           </div>
           <label
-            for="file-upload"
+            for="image-upload"
             class="h-2.6 ml-2 text-center flex p-3 rounded-sm items-center bg-[#9747FF]"
           >
             choose file
           </label>
           <Field
-            id="file-upload"
+            id="image-upload"
             name="image"
             v-model="editMovie.image"
             class="hidden"
@@ -115,7 +115,7 @@
             @change="onFileChange"
           />
         </div>
-        <ButtonBase type="submit" text="Edit Movie" />
+        <ButtonBase type="submit" :text="$t('movie.edit_movie')" />
       </Form>
     </LandingModal>
   </div>

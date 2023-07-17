@@ -22,20 +22,20 @@
           />
           <div
             v-if="quote.id === activeQuoteId"
-            class="w-15.6 h-12 bg-#24222F flex flex-col absolute left-7 mb-2 rounded-lg justify-center"
+            class="w-15.6 h-12 bg-#24222F flex flex-col absolute md:left-75 left-7 mb-2 rounded-lg justify-center"
           >
             <div class="flex flex-col ml-2">
               <div class="flex flex-row gap-2">
                 <IconEye />
-                <span class="text-whiteGray">View Quote</span>
+                <span class="text-whiteGray">{{ $t('quote.view_quote') }}</span>
               </div>
               <div class="flex flex-row mt-1.25 gap-2">
                 <IconEdit @click="toggleEditQuoteModal(quote.id)" />
-                <span class="text-whiteGray">Edit </span>
+                <span class="text-whiteGray">{{ $t('quote.edit') }} </span>
               </div>
               <div class="flex flex-row mt-1.25 gap-2">
                 <IconDelete @click="quoteDelete(quote.id)" />
-                <span class="text-whiteGray">Delete </span>
+                <span class="text-whiteGray">{{ $t('quote.delete') }} </span>
               </div>
             </div>
           </div>
@@ -49,7 +49,7 @@
         </div>
         <div class="flex flex-row items-center gap-2">
           <p>{{ quote.likes.length }}</p>
-          <IconLike class="h-2 w-2" />
+          <IconLike class="h-2 w-2 fill-white" />
         </div>
       </div>
 

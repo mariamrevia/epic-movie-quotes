@@ -6,7 +6,9 @@
         : 'w-screen flex fixed flex-row items-center bg-[#221f32] h-5 md:justify-between justify-end'
     "
   >
-    <h2 class="text-caramel md:ml-4.4 hidden items-center ml-4 md:flex">MOVIE QUOTES</h2>
+    <h2 class="text-caramel md:ml-4.4 hidden items-center ml-4 md:flex">
+      {{ $t('landing.movie_quotes') }}
+    </h2>
     <button @click="toggleListDiv" class="lg:hidden flex mr-[30%]">
       <IconList />
     </button>
@@ -31,8 +33,8 @@
         class="no-scrollbar flex overflow-y-auto h-41 flex-col md:w-58 w-25 absolute md:right-[5%] right-0 top-[90%] rounded-lg bg-black gap-2 z-999 p-8"
       >
         <div class="flex flex-row justify-between">
-          <h2 class="text-white text-1.5">Notifications</h2>
-          <h2 class="text-white underline" @click="markRead">Mark All as read</h2>
+          <h2 class="text-white text-1.5">{{ $t('dashboard.notifications') }}</h2>
+          <h2 class="text-white underline" @click="markRead">{{ $t('dashboard.all_read') }}</h2>
         </div>
         <div
           v-for="(notification, index) in notificationStore.notifications"
@@ -55,7 +57,7 @@
                   v-if="notification.is_read === 0 || notification.is_read === null"
                   class="text-green-600 md:hidden flex ml-1 mt-1"
                 >
-                  New
+                  {{ $t('dashboard.new') }}
                 </p>
               </div>
               <div
@@ -65,11 +67,11 @@
                   <h2>{{ notification.username }}</h2>
                   <p class="flex flex-row gap-1" v-if="notification.action_type === 'like'">
                     <IconHeartFill />
-                    Reacted to your quote
+                    {{ $t('dashboard.reacted_like') }}
                   </p>
                   <p class="flex flex-row gap-1" v-else>
                     <IconChat />
-                    Commented to you movie Quote
+                    {{ $t('dashboard.commented_quote') }}
                   </p>
                 </div>
                 <div class="mr-1.25 text-1.25 flex flex-col items-end">
@@ -78,7 +80,7 @@
                     v-if="notification.is_read === 0 || notification.is_read === null"
                     class="text-green-600 hidden md:flex"
                   >
-                    New
+                    {{ $t('dashboard.new') }}
                   </p>
                 </div>
               </div>
@@ -91,7 +93,7 @@
         class="md:w-6 md:p-0 p-2 md:flex items-center justify-center h-2.3 border rounded-md text-white"
         @click="handlelogOut"
       >
-        log out
+        {{ $t('dashboard.log_out') }}
       </button>
     </div>
   </div>
@@ -110,8 +112,8 @@
     </div>
     <hr class="max-h-0 mt-1.5 bg-whiteGray w-full" />
     <div class="text-whiteGray mt-3.3 ml-6 gap-2 flex flex-col">
-      <p>Enter @ to search movies</p>
-      <p>Enter # to search quotes</p>
+      <p>{{ $t('dashboard.search_with_movie') }}</p>
+      <p>{{ $t('dashboard.search_with_quote') }}</p>
     </div>
   </div>
 </template>

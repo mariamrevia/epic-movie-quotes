@@ -13,7 +13,7 @@
       <div class="flex flex-col items-start ml-2.5">
         <h2 class="text-white h-6 flex text-1.5">{{ authUserStore.username }}</h2>
         <p class="text-white cursor-pointer text-1 mt-4" @click="navigateTo('profile')">
-          Edit your profile
+          {{ $t('dashboard.edit_profile') }}
         </p>
       </div>
     </div>
@@ -27,19 +27,21 @@
         @click="navigateTo('newsFeed')"
         :class="'text-white  cursor-pointer text-1.25 h-6 flex border-none ml-3.3'"
       >
-        news feed
+        {{ $t('dashboard.news_feed') }}
       </button>
     </div>
 
     <div class="flex flex-row items-center mt-2 ml-1.25">
       <IconCamera
-        :class="isActivePage('list-of-movies') ? 'h-2 w-2 fill-red-700' : 'h-2 w-2 fill-white'"
+        :class="
+          isActivePage('list-of-movies' && 'movies') ? 'h-2 w-2 fill-red-700' : 'h-2 w-2 fill-white'
+        "
       />
       <button
         class="text-white cursor-pointer h-6 flex border-none text-1.25 ml-3"
         @click="navigateTo('list-of-movies')"
       >
-        List of movies
+        {{ $t('dashboard.list_movies') }}
       </button>
     </div>
   </div>
@@ -47,7 +49,6 @@
 
 <script setup>
 import { useUserStore } from '@/stores/authUser'
-
 import IconCamera from '@/components/icons/IconCamera.vue'
 import IconHouse from '@/components/icons/IconHouse.vue'
 import { useRouter } from 'vue-router'

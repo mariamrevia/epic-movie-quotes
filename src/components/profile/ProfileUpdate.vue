@@ -17,9 +17,9 @@
             type="file"
             @change="onFileChange"
           />
-          <label v-if="!userStore.google_id" for="file-uploaded" class="text-white text-1.25"
-            >Upload new photo</label
-          >
+          <label v-if="!userStore.google_id" for="file-uploaded" class="text-white text-1.25">{{
+            $t('profile.photo_upload')
+          }}</label>
         </div>
         <div class="flex flex-col items-start">
           <div class="flex flex-col items-end md:justify-normal justify-center mt-1">
@@ -28,14 +28,14 @@
                 class="w-14 border-none bg-transparent placeholder-whiteGray"
                 name="disabledUsername"
                 :placeholder="userStore.username"
-                label="username"
+                :label="$t('profile.username')"
                 disabled
               />
               <p
                 class="text-white text-1.25 ml-2 mb-0.5"
                 @click="toggleModal('usernameUpdateModalActive')"
               >
-                Edit
+                {{ $t('profile.edit_button') }}
               </p>
             </div>
             <hr class="w-full h-0 bg-whiteGray mt-1.25" />
@@ -45,7 +45,7 @@
               <InputText
                 class="w-14 border-none bg-transparent placeholder-whiteGray"
                 name="disabledEmail"
-                label="Email"
+                :label="$t('profile.email')"
                 :placeholder="userStore.email"
                 disabled
               />
@@ -54,7 +54,7 @@
                 class="text-white text-1.25 ml-2"
                 @click="toggleModal('emailUpdateModalActive')"
               >
-                Edit
+                {{ $t('profile.edit_button') }}
               </p>
             </div>
           </div>
@@ -72,14 +72,14 @@
                   class="w-14 border-none bg-transparent placeholder-whiteGray"
                   name="disabledPassword"
                   placeholder="***********"
-                  label="Password"
+                  :label="$t('profile.password')"
                   disabled
                 />
                 <p
                   class="text-white text-1.25 ml-2"
                   @click="toggleModal('passwordUpdateModalActive')"
                 >
-                  Edit
+                  {{ $t('profile.edit_button') }}
                 </p>
               </div>
             </div>
@@ -95,7 +95,7 @@
             class="w-20 placeholder-slate-700 bg-whiteGray"
             name="username"
             rules="minLength:3|maxLength:15|lowercase"
-            label="Enter new username"
+            :label="$t('profile.new_username')"
           />
         </div>
       </ProfileUpdateModal>
@@ -105,7 +105,7 @@
             class="w-20 placeholder-slate-700 bg-whiteGray"
             v-model="userInfoStore.userData.email"
             name="email"
-            label="Enter new Email"
+            :label="$t('profile.new_email')"
             rules="email"
           />
         </div>
@@ -117,7 +117,7 @@
             v-model="userInfoStore.userData.password"
             name="password"
             type="password"
-            label="Enter new password"
+            :label="$t('profile.new_password')"
             rules="required"
           />
           <InputText
@@ -125,15 +125,15 @@
             type="password"
             v-model="userInfoStore.userData.password_confirmation"
             name="password_confirmation"
-            label="confirm new password"
+            :label="$t('profile.confirm_password')"
             rules="required|confirmed:password"
           />
         </div>
       </ProfileUpdateModal>
     </Form>
   </div>
-  <ProfileUpdateSuccessModal name="profileUpdateSuccess" text="Profile Updated successfully" />
-  <ProfileUpdateSuccessModal name="profileEmailUpdate" text="Check email for verification" />
+  <ProfileUpdateSuccessModal name="profileUpdateSuccess" :text="$t('profile.update_success')" />
+  <ProfileUpdateSuccessModal name="profileEmailUpdate" :text="$t('profile.update_email')" />
 </template>
 
 <script setup>
