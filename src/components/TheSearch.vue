@@ -12,11 +12,11 @@
 </template>
 
 <script setup>
-import IconSearch from '@/components/icons/IconSearch.vue'
 import { getSearchResults } from '@/services/api/quotes.js'
 import { useQuoteStore } from '@/stores/quotes/index.js'
 import { onMounted, ref } from 'vue'
 import { debounce } from 'lodash'
+import IconSearch from '@/components/icons/IconSearch.vue'
 const quoteStore = useQuoteStore()
 const searchQuery = ref('')
 const searchResults = ref([])

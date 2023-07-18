@@ -13,7 +13,8 @@ const props = defineProps({
   },
   type: {
     type: String,
-    required: true
+    required: true,
+    default: ''
   }
 })
 </script>

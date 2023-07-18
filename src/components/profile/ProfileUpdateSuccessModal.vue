@@ -14,10 +14,10 @@
 </template>
 
 <script setup>
+import { useModalStore } from '@/stores/modal/index.js'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import IconValidGreen from '@/components/icons/IconValidGreen.vue'
 import IconCross from '@/components/icons/IconCross.vue'
-import { useModalStore } from '@/stores/modal/index.js'
 
 const props = defineProps({
   name: {

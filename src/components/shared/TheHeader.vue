@@ -19,7 +19,7 @@
 
 <script setup>
 import { useModalStore } from '@/stores/modal/index.js'
-import LanguageSwitch from './LanguageSwitch.vue'
+import LanguageSwitch from '@/components/shared/LanguageSwitch.vue'
 const Modal = useModalStore()
 const toggleRegisterModal = () => {
   Modal.openModal('registerModalActive')

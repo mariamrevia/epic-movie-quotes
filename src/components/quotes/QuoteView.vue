@@ -85,17 +85,17 @@
 </template>
 
 <script setup>
-import LandingModal from '@/components/ui/LandingModal.vue'
-import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
-import InputText from '@/components/ui/InputText.vue'
-import IconLike from '@/components/icons/IconLike.vue'
-import IconComments from '@/components/icons/IconComments.vue'
 import { Form, Field } from 'vee-validate'
 import { getQuotes, storeComments, storeLikes, destroyLikes } from '@/services/api/quotes'
 import { useQuoteStore } from '@/stores/quotes/index.js'
 import { useModalStore } from '@/stores/modal'
 import { onMounted, onUnmounted, computed } from 'vue'
 import { useUserStore } from '@/stores/authUser/index.js'
+import LandingModal from '@/components/ui/LandingModal.vue'
+import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
+import InputText from '@/components/ui/InputText.vue'
+import IconLike from '@/components/icons/IconLike.vue'
+import IconComments from '@/components/icons/IconComments.vue'
 
 const props = defineProps({
   quoteToEdit: {

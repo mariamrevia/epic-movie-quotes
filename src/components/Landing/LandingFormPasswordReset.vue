@@ -41,22 +41,22 @@
 </template>
 
 <script setup>
+import { usePasswordResetStore } from '@/stores/passwordReset'
+import { useModalStore } from '@/stores/modal'
+import { resetPassword } from '@/services/api/auth.js'
+import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { Form } from 'vee-validate'
 import InputText from '@/components/ui/InputText.vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import LandingModalButton from '@/components/ui/LandingModalButton.vue'
-import { usePasswordResetStore } from '@/stores/passwordReset'
-import { useModalStore } from '@/stores/modal'
-import { onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { resetPassword } from '@/services/api/auth.js'
 import csrf from '@/services/api/csrf.js'
 
 const modalStore = useModalStore()
 const resetPasswordDataStore = usePasswordResetStore()
+const route = useRoute()
 const isModalActive = modalStore.isModalActive
 
-const route = useRoute()
 onMounted(() => {
   const token = route.query.token
   if (token) {

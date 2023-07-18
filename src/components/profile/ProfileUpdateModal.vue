@@ -50,24 +50,21 @@
 import LandingModal from '@/components/ui/LandingModal.vue'
 import IconGoBack from '@/components/icons/IconGoBack.vue'
 import { useModalStore } from '@/stores/modal/index.js'
-import { useUserInfoStore } from '@/stores/updateUserInfo/index.js'
 import { defineEmits } from 'vue'
 import { ref } from 'vue'
 const props = defineProps({
   name: {
     type: String,
-    required: true
+    required: true,
+    default: ''
   }
 })
 
-const userInfoStore = useUserInfoStore()
 const modalStore = useModalStore()
 const confirm = ref(false)
 const isModalActive = modalStore.isModalActive
-
 const emits = defineEmits(['confirm'])
 const confirmForm = () => {
-  console.log(userInfoStore.userData.username)
   emits('confirm')
 }
 const closeModal = (modalName) => {

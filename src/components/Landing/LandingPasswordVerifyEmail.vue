@@ -40,14 +40,14 @@
 </template>
 
 <script setup>
-import { Form } from 'vee-validate'
+import { useResetPasswordEmailStore } from '@/stores/passwordEmailVerify'
+import { resetPasswordVerifyEmail } from '@/services/api/auth.js'
 import { useModalStore } from '@/stores/modal'
+import { Form } from 'vee-validate'
+import { ref } from 'vue'
 import InputText from '@/components/ui/InputText.vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import LandingModalButton from '@/components/ui/LandingModalButton.vue'
-import { useResetPasswordEmailStore } from '@/stores/passwordEmailVerify'
-import { resetPasswordVerifyEmail } from '@/services/api/auth.js'
-import { ref } from 'vue'
 import csrf from '@/services/api/csrf.js'
 import iconcheckSend from '@/components/icons/IconCheckSend.vue'
 

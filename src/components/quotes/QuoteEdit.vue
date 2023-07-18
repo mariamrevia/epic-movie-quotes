@@ -45,17 +45,17 @@
 </template>
 
 <script setup>
+import { Form, Field } from 'vee-validate'
+import { useModalStore } from '@/stores/modal'
+import { computed, onMounted, ref } from 'vue'
+import { updateQuotes } from '@/services/api/quotes.js'
+import { deleteQuote } from '@/services/api/quotes'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import TextAreaBase from '@/components/ui/TextAreaBase.vue'
 import ButtonBase from '@/components/ui/ButtonBase.vue'
 import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
 import IconDelete from '@/components/icons/IconDelete.vue'
 import IconPhoto from '@/components/icons/IconPhoto.vue'
-import { Form, Field } from 'vee-validate'
-import { useModalStore } from '@/stores/modal'
-import { computed, onMounted, ref } from 'vue'
-import { updateQuotes } from '@/services/api/quotes.js'
-import { deleteQuote } from '@/services/api/quotes'
 
 const props = defineProps({
   quoteToEdit: {

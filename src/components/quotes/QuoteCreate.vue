@@ -77,16 +77,16 @@
 <script setup>
 import { useModalStore } from '@/stores/modal/index.js'
 import { Field, Form, ErrorMessage } from 'vee-validate'
-import TextAreaBase from '@/components/ui/TextAreaBase.vue'
-import ButtonBase from '@/components/ui/ButtonBase.vue'
-import IconMovie from '@/components/icons/IconMovie.vue'
-import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
-import imageUpload from '@/components/shared/ImageUpload.vue'
 import { useQuoteStore } from '@/stores/quotes/index.js'
 import { useMovieStore } from '@/stores/movies/index.js'
 import { getMovies } from '@/services/api/movies.js'
 import { storeQuotes, getQuotes } from '@/services/api/quotes.js'
 import { onMounted, ref } from 'vue'
+import TextAreaBase from '@/components/ui/TextAreaBase.vue'
+import ButtonBase from '@/components/ui/ButtonBase.vue'
+import IconMovie from '@/components/icons/IconMovie.vue'
+import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
+import imageUpload from '@/components/shared/ImageUpload.vue'
 
 const modalStore = useModalStore()
 const movieStore = useMovieStore()

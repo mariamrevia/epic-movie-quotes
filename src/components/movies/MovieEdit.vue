@@ -123,16 +123,15 @@
 </template>
 
 <script setup>
+import { updateMovies } from '@/services/api/movies.js'
+import { Field, Form, ErrorMessage } from 'vee-validate'
+import { useModalStore } from '@/stores/modal'
+import { computed, ref } from 'vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import InputEdit from '@/components/ui/InputEdit.vue'
 import ButtonBase from '@/components/ui/ButtonBase.vue'
 import iconCross from '@/components/icons/IconCross.vue'
 import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
-import { updateMovies } from '@/services/api/movies.js'
-import { Field, Form, ErrorMessage } from 'vee-validate'
-import { useModalStore } from '@/stores/modal'
-import { computed, ref } from 'vue'
-
 import TextAreaEdit from '@/components/ui/TextAreaEdit.vue'
 
 const props = defineProps({
@@ -146,10 +145,11 @@ const props = defineProps({
   }
 })
 
+const modalStore = useModalStore()
+const isDropdownOpen = ref(false)
+const image = ref(null)
 const selectedGenre = (genre, title) => {
   editMovie.value.genres.push({ id: genre.id, title: title })
-
-  console.log(editMovie.value.genres)
 }
 const deleteGenre = (id) => {
   const index = editMovie.value.genres.findIndex((genre) => genre.id === id)
@@ -157,12 +157,11 @@ const deleteGenre = (id) => {
     editMovie.value.genres.splice(index, 1)
   }
 }
-const isDropdownOpen = ref(false)
+
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value
 }
 
-const image = ref(null)
 const submitData = async () => {
   try {
     await updateMovies({
@@ -190,7 +189,6 @@ const submitData = async () => {
 }
 
 const editMovie = computed(() => (props.movie ? { ...props.movie } : null))
-const modalStore = useModalStore()
 const isModalActive = modalStore.isModalActive
 const closeModal = (event) => {
   if (event.target.classList.contains('modal-wrapper')) {
@@ -209,6 +207,5 @@ const onFileChange = (event) => {
     }
     reader.readAsDataURL(file)
   }
-  console.log('editMovie.image:', editMovie.value.image)
 }
 </script>

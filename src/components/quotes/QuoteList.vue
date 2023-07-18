@@ -61,13 +61,13 @@
 
 <script setup>
 import { computed, ref } from 'vue'
-import QuoteEdit from '@/components/quotes/QuoteEdit.vue'
+import { deleteQuote } from '@/services/api/quotes'
 import { useModalStore } from '@/stores/modal'
+import QuoteEdit from '@/components/quotes/QuoteEdit.vue'
 import IconDelete from '@/components/icons/IconDelete.vue'
 import IconEdit from '@/components/icons/IconEdit.vue'
 import IconEye from '@/components/icons/IconEye.vue'
 import IconThreeDots from '@/components/icons/IconThreeDots.vue'
-import { deleteQuote } from '@/services/api/quotes'
 import QuoteView from '@/components/quotes/QuoteView.vue'
 import IconLike from '@/components/icons/IconLike.vue'
 import IconComment from '@/components/icons/IconComments.vue'

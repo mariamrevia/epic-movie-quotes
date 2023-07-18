@@ -109,6 +109,12 @@
 </template>
 
 <script setup>
+import { useModalStore } from '@/stores/modal'
+import { Field, ErrorMessage } from 'vee-validate'
+import { ref } from 'vue'
+import { useMovieStore } from '@/stores/movies'
+import { Form } from 'vee-validate'
+import { storeMovies, getMovies } from '@/services/api/movies'
 import TextAreaBase from '@/components/ui/TextAreaBase.vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import IconCross from '@/components/icons/IconCross.vue'
@@ -116,13 +122,6 @@ import InputMovie from '@/components/ui/InputMovie.vue'
 import ButtonBase from '@/components/ui/ButtonBase.vue'
 import imageUpload from '@/components/shared/ImageUpload.vue'
 import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
-
-import { useModalStore } from '@/stores/modal'
-import { Field, ErrorMessage } from 'vee-validate'
-import { ref } from 'vue'
-import { useMovieStore } from '@/stores/movies'
-import { Form } from 'vee-validate'
-import { storeMovies, getMovies } from '@/services/api/movies'
 import i18n from '@/i18n'
 
 const modalStore = useModalStore()
@@ -137,7 +136,6 @@ const updateImageUpload = (file) => {
 const selectedGenre = (genre, title) => {
   movieStore.createMovieData.genre.push(genre.id)
   movieStore.genreTitle.push(title)
-  console.log(movieStore.genreTitle)
 }
 const deleteGenre = (title) => {
   const index = movieStore.genreTitle.indexOf(title)

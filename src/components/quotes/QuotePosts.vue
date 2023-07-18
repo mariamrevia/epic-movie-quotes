@@ -83,8 +83,6 @@
 </template>
 
 <script setup>
-import IconLike from '@/components/icons/IconLike.vue'
-import IconComments from '@/components/icons/IconComments.vue'
 import { Form, Field } from 'vee-validate'
 import {
   getQuotes,
@@ -98,6 +96,8 @@ import { onMounted, ref, onUnmounted } from 'vue'
 import { useQuoteStore } from '@/stores/quotes/index.js'
 import { useUserStore } from '@/stores/authUser/index.js'
 import instantiatePusher from '@/helpers/instantiatePusher'
+import IconLike from '@/components/icons/IconLike.vue'
+import IconComments from '@/components/icons/IconComments.vue'
 
 const userStore = useUserStore()
 const quoteStore = useQuoteStore()

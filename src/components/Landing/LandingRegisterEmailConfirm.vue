@@ -27,12 +27,12 @@
 </template>
 
 <script setup>
-import LandingModal from '@/components/ui/LandingModal.vue'
-import iconDone from '@/components/icons/IconDone.vue'
 import { onMounted } from 'vue'
 import { useModalStore } from '@/stores/modal'
 import { useRoute } from 'vue-router'
 import { ref } from 'vue'
+import LandingModal from '@/components/ui/LandingModal.vue'
+import iconDone from '@/components/icons/IconDone.vue'
 
 const modalWrapper = ref(null)
 const modalStore = useModalStore()
@@ -40,10 +40,7 @@ const isModalActive = modalStore.isModalActive
 const route = useRoute()
 
 onMounted(async () => {
-  console.log(route.query)
-
   const { verify } = route.query
-
   if (verify === 'true') {
     modalStore.openModal('confirmModalActive')
   }

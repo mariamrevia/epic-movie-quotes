@@ -12,7 +12,7 @@
     >
       <HeaderEditAdd modalName="createQuoteModalActive" :heading="$t('quote.add_quote')" />
       <div
-        class="flex flex-row gap-4 xl:w-56 lg:w-37.5 w-20 md:bg-transparent bg-black md:p-0 p-3 w-20 m-auto"
+        class="flex flex-row gap-4 xl:w-56 lg:w-37.5 md:bg-transparent bg-black md:p-0 p-3 w-20 m-auto"
       >
         <img
           class="md:w-18 w-7 h-5 md:h-10 flex self-start rounded-xl"
@@ -72,10 +72,6 @@
 </template>
 
 <script setup>
-import TextAreaBase from '@/components/ui/TextAreaBase.vue'
-import ButtonBase from '@/components/ui/ButtonBase.vue'
-import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
-import imageUpload from '@/components/shared/ImageUpload.vue'
 import { useModalStore } from '@/stores/modal/index.js'
 import { Form } from 'vee-validate'
 import { useQuoteStore } from '@/stores/quotes/index.js'
@@ -83,6 +79,10 @@ import { useMovieStore } from '@/stores/movies/index.js'
 import { getMovies } from '@/services/api/movies.js'
 import { storeQuotes } from '@/services/api/quotes.js'
 import { onMounted, computed } from 'vue'
+import TextAreaBase from '@/components/ui/TextAreaBase.vue'
+import ButtonBase from '@/components/ui/ButtonBase.vue'
+import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
+import imageUpload from '@/components/shared/ImageUpload.vue'
 
 const props = defineProps({
   movie: {

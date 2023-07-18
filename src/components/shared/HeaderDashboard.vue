@@ -137,13 +137,14 @@ import IconChat from '@/components/icons/IconChat.vue'
 import IconSearch from '@/components/icons/IconSearch.vue'
 import IconGoBack from '@/components/icons/IconGoBack.vue'
 
-const router = useRouter()
 const notificationStore = useNotificationStore()
-const timeDifferences = ref([])
-const open = ref(false)
+const userStore = useUserStore()
+const router = useRouter()
 const route = useRoute()
 const searchModal = ref(false)
-const userStore = useUserStore()
+const listDivVisible = ref(false)
+const timeDifferences = ref([])
+const open = ref(false)
 
 onMounted(() => {
   notificationStore.notificationCount = notificationStore.notifications.reduce(
@@ -177,7 +178,7 @@ const closeSearchModal = () => {
 const toggle = () => {
   open.value = !open.value
 }
-const listDivVisible = ref(false)
+
 const toggleListDiv = () => {
   listDivVisible.value = !listDivVisible.value
 }

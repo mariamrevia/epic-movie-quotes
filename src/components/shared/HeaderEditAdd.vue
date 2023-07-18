@@ -20,12 +20,12 @@
 </template>
 
 <script setup>
-import IconCross from '@/components/icons/IconCross.vue'
+import { useModalStore } from '@/stores/modal'
 import { useUserStore } from '@/stores/authUser'
 import { ref } from 'vue'
+import IconCross from '@/components/icons/IconCross.vue'
 const userStore = useUserStore()
 const modalStore = useModalStore()
-import { useModalStore } from '@/stores/modal'
 const props = defineProps({
   heading: {
     type: String,
