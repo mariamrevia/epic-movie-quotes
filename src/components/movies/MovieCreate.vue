@@ -6,7 +6,7 @@
     <LandingModal :modalActive="isModalActive('AddMovieModalActive')">
       <Form
         @submit="submitData(movieStore.createMovieData)"
-        class="md:w-60 w-full z-10 fixed flex flex-col md:mt-5 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
+        class="xl:w-60 w-full z-10 fixed flex flex-col md:mt-5 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
       >
         <HeaderEditAdd :heading="$t('movie.add_movie')" modalName="AddMovieModalActive" />
         <InputMovie
@@ -25,13 +25,13 @@
         />
 
         <Field
-          class="md:w-56 sm:w-37.5 w-20 h-2.3 rounded-md border-0.1 placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
+          class="xl:w-56 lg:w-37.5 w-20 h-2.3 rounded-md border-0.1 placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
           name="genre"
           rules="required"
           v-model="movieStore.createMovieData.genre"
         >
           <div
-            class="md:w-56 sm:w-37.5 w-20 h-2.3 mt-1.25 rounded-md items-center border-0.1 gap-2 placeholder-white text-white bg-transparent relative border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none flex flex-row"
+            class="xl:w-56 lg:w-37.5 w-20 h-2.3 mt-1.25 rounded-md items-center border-0.1 gap-2 placeholder-white text-white bg-transparent relative border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none flex flex-row"
             @click="toggleDropdown"
           >
             <div
@@ -102,7 +102,7 @@
           :rules="movieStore.createMovieData.image ? '' : 'required'"
           @update:imageUpload="updateImageUpload"
         />
-        <ButtonBase type="submit" :text="$t('movie.add_moive')" />
+        <ButtonBase type="submit" :text="$t('movie.add_movie')" />
       </Form>
     </LandingModal>
   </div>

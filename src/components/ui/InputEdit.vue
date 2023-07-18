@@ -32,16 +32,19 @@ const props = defineProps({
   },
   value: {
     type: String,
+    required: true,
     default: ''
   },
   type: {
     type: String,
+    required: false,
     default: ''
   },
 
   rules: {
     type: String,
-    required: false
+    required: false,
+    default: ''
   },
   name: {
     type: String,

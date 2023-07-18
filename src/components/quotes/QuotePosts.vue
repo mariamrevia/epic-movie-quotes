@@ -1,15 +1,15 @@
 <template>
   <div
-    class="bg-darkgray pb-7 flex flex-col lg:w-60 md:w-43 w-22 pt-4 rounded-2xl mt-2"
+    class="bg-darkgray pb-7 flex flex-col xl:w-60 lg:w-43 sm:w-35 w-22 pt-4 rounded-2xl mt-2"
     v-for="quote in quoteStore.quotes"
     :key="quote.id"
   >
-    <div class="m-auto lg:w-56 md:w-43 w-22 items-center">
-      <div class="flex flex-row items-center gap-2">
+    <div class="m-auto xl:w-60 lg:w-43 w-22 items-center">
+      <div class="flex flex-row items-center gap-2 px-5">
         <img :src="getImage(quote.movie.image)" class="h-4 w-4 rounded-full bg-slate-500" />
         <h2 class="text-white">{{ quote.movie.user }}</h2>
       </div>
-      <div class="flex flex-row mt-2">
+      <div class="flex flex-row mt-2 px-5">
         <p class="text-white">{{ quote.body.en }}</p>
         <div class="flex flex-row ml-2">
           <h2 class="text-white">{{ $t('quote.movie') }} -</h2>
@@ -21,9 +21,12 @@
         </div>
       </div>
       <div class="m-auto mt-2 flex justify-center">
-        <img class="lg:w-56 md:w-43 md:h-31 w-22 h-15 rounded-lg" :src="getImageURL(quote.image)" />
+        <img
+          class="xl:w-60 lg:w-43 w-22 px-5 md:h-31 h-15 rounded-lg"
+          :src="getImageURL(quote.image)"
+        />
       </div>
-      <div class="flex flex-row gap-3 mt-2">
+      <div class="flex flex-row px-5 gap-3 mt-2">
         <div class="flex flex-row items-center gap-2">
           <h2 class="text-white text-1.5">
             {{ quote.comments.length }}
@@ -40,7 +43,7 @@
       <hr class="flex h-0.05 bg-slate-700 border-none mt-1.25" />
 
       <div
-        class="mt-1.5 flex flex-col"
+        class="mt-1.5 flex flex-col px-5"
         v-for="comment in quote && quote.comments"
         :key="comment.id"
       >
@@ -53,21 +56,21 @@
             <h2 class="text-white">{{ comment.user.username }}</h2>
             <p class="text-white">{{ comment.body }}</p>
           </div>
-          <hr class="flex h-0.05 bg-slate-700 border-none mt-1.25" />
         </div>
+        <hr class="flex h-0.05 bg-whiteGray border-none mt-2" />
       </div>
 
-      <div class="flex flex-row items-center mt-3.3">
+      <div class="flex flex-row items-center mt-3.3 px-5">
         <img
           :src="userStore.google_id ? userStore.image : imageUrl"
           class="h-3 w-3 rounded-full bg-slate-500"
         />
         <Form class="md:ml-2 ml-1" @submit="submitData(quote.id)">
           <div
-            class="flex relative h-3 flex-row items-center bg-#24222F lg:w-50 md:w-30 w-17.5 rounded-md border-none bg-transparen focus-within:ring focus:shadow-shadow outline-none"
+            class="flex relative h-3 flex-row items-center bg-#24222F xl:w-50 lg:w-30 w-15.6 rounded-md border-none bg-transparen focus-within:ring focus:shadow-shadow outline-none"
           >
             <Field
-              class="h-2.3 placeholder-white text-white bg-transparent lg:w-50 md:w-30 w-17.5 md:ml-1.5 ml-0 border-none outline-none"
+              class="h-2.3 placeholder-white text-white bg-transparent lg:w-50 md:w-30 w-15.6 md:ml-1.5 ml-0 border-none outline-none"
               v-model="quote.commentData.body"
               name="body"
               @keydown.enter.prevent="submitData(quote.id, quote.movie_id)"

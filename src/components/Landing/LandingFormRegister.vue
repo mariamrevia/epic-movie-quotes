@@ -57,8 +57,9 @@
           <button
             type="button"
             @click="registerWithGoogle"
-            class="w-22 mt-1.5 h-2.3 border rounded-md text-white"
+            class="w-22 mt-1.5 h-2.3 flex flex-row items-center justify-center gap-1 border rounded-md text-white"
           >
+            <IconGoogle />
             {{ $t('register.sign_up_google') }}
           </button>
           <div class="flex flex-row mb-5">
@@ -77,11 +78,12 @@
 import { Form, ErrorMessage } from 'vee-validate'
 import { useModalStore } from '@/stores/modal/index.js'
 import { useRegisterStore } from '@/stores/register'
-import InputText from '@/components/ui/InputText.vue'
-import LandingModalButton from '@/components/ui/LandingModalButton.vue'
 import { register } from '@/services/api/auth.js'
 import { authGoogle } from '@/services/api/oauth'
 import { ref } from 'vue'
+import InputText from '@/components/ui/InputText.vue'
+import LandingModalButton from '@/components/ui/LandingModalButton.vue'
+import IconGoogle from '@/components/icons/IconGoogle.vue'
 import csrf from '@/services/api/csrf.js'
 import LandingModal from '@/components/ui/LandingModal.vue'
 

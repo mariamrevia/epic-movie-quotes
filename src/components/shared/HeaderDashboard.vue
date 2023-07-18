@@ -3,13 +3,13 @@
     :class="
       searchModal
         ? 'hidden'
-        : 'w-screen flex fixed flex-row items-center bg-[#221f32] h-5 md:justify-between justify-end'
+        : 'w-screen flex fixed flex-row items-center bg-[#221f32] h-5 justify-between '
     "
   >
     <h2 class="text-caramel md:ml-4.4 hidden items-center ml-4 md:flex">
       {{ $t('landing.movie_quotes') }}
     </h2>
-    <button @click="toggleListDiv" class="lg:hidden flex mr-[30%]">
+    <button @click="toggleListDiv" class="md:hidden flex pl-1">
       <IconList />
     </button>
     <div class="md:mr-4.4 mr-4 flex flex-row items-center">

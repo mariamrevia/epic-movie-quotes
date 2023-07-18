@@ -8,7 +8,7 @@
   >
     <Form
       @submit="submitData"
-      class="md:w-60 w-25 h-48 flex flex-col md:mt-5 pb-13 md:pb-4 items-center bg-[#11101A] rounded-lg"
+      class="xl:w-60 lg:w-45 w-25 h-48 flex flex-col md:mt-5 pb-13 md:pb-4 items-center bg-[#11101A] rounded-lg"
     >
       <HeaderEditAdd modalName="addQuoteModalActive" :heading="$t('quote.new_quote')" />
       <TextAreaBase
@@ -35,14 +35,14 @@
       <ErrorMessage class="text-red-700" name="image" />
 
       <Field
-        class="w-56 h-2.3 rounded-md border-0.1 placeholder-white text-white bg-transparent border-dark-gray bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
+        class="xl:w-56 lg:w-37.5 w-20 h-2.3 rounded-md border-0.1 placeholder-white text-white bg-transparent border-dark-gray bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
         name="movie_id"
         :rules="quoteStore.quoteData.movie ? '' : 'required'"
         v-model="quoteStore.quoteData.movie"
       >
         <div
           @click="toggleDropdown"
-          class="md:w-56 w-20 h-5 py-4 mt-1.25 rounded-md items-center border-0.1 gap-2 placeholder-white text-white bg-black relative border-dark-gray border-none focus-within:ring focus:shadow-shadow outline-none flex flex-row"
+          class="xl:w-56 lg:w-37.5 w-20 h-5 py-4 mt-1.25 rounded-md items-center border-0.1 gap-2 placeholder-white text-white bg-black relative border-dark-gray border-none focus-within:ring focus:shadow-shadow outline-none flex flex-row"
         >
           <div class="text-white md:text-1.5 text-1.25 ml-2 flex flex-row items-center gap-2">
             <IconMovie class="h-2 w-2" />
@@ -50,7 +50,7 @@
           </div>
 
           <div
-            class="md:w-56 w-20 bg-lightBlack text-white absolute z-50 md:top-4.4 top-4 no-scrollbar overflow-y-auto rounded-b-lg p-3 pr-2"
+            class="xl:w-56 lg:w-37.5 w-20 bg-lightBlack text-white absolute z-50 md:top-4.4 top-4 no-scrollbar overflow-y-auto rounded-b-lg p-3 pr-2"
             v-if="isDropdownOpen"
           >
             <div

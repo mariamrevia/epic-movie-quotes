@@ -1,12 +1,12 @@
 <template>
   <DashboardLayout>
     <div class="flex flex-col md:ml-4.4 md:mr-4.4 m-auto md:mt-2">
-      <div class="flex items-center h-3.3 md:mt-4.4 mt-6 justify-between">
-        <div class="flex flex-row items-center mb-1.25 gap-2">
-          <p class="text-white md:text-1.5 text-1.25">{{ $t('movie.list_of_movie') }}</p>
-          <!-- <p class="text-white text-1.5">
-            {{ $t('movie.total') }} ({{ movieStore.movieData.length }})
-          </p> -->
+      <div class="flex h-3.3 md:mt-4.4 mt-6 justify-between">
+        <div class="flex flex-row items-center gap-2">
+          <p class="text-white md:text-1.5 text-1 pl-1">{{ $t('movie.list_of_movie') }}</p>
+          <p class="text-white md:text-1.5 text-1">
+            {{ $t('movie.total') }} ({{ movieStore.movieData && movieStore.movieData.length }})
+          </p>
         </div>
         <div class="flex flex-row items-center">
           <div class="md:flex flex-row gap-2 ml-1.5 hidden">
@@ -21,14 +21,15 @@
           </div>
           <button
             @click="toggleAddMovieModal"
-            class="bg-red ml-1.25 w-9.7 md:text-1 text-1 h-2.3 border-none rounded-md text-white"
+            class="bg-red ml-1.25 w-9.7 md:text-1 text-1 h-2.3 flex flex-row justify-center gap-1 items-center border-none rounded-md text-white"
           >
+            <IconPlus />
             {{ $t('movie.add_movie') }}
           </button>
         </div>
       </div>
       <div
-        class="md:grid grid-cols-3 gap-3 md:mt-0 mt-2 flex flex-col rounded-md justify-center align-middle w-full"
+        class="md:grid grid-cols-3 md:gap-3 md:mt-0 mt-3.3 flex flex-col rounded-md justify-center align-middle w-full"
       >
         <div
           class="rounded-md border-none"
@@ -48,7 +49,7 @@
             <p class="text-white text-1.5 flex items-center ml-2">({{ movie.year }})</p>
           </div>
           <div class="flex flex-row items-center text-1.25 gap-2 mt-1">
-            <p class="text-white">{{ movie.quotes.length }}</p>
+            <p class="text-white">{{ movie.quotes && movie.quotes.length }}</p>
             <IconChat />
           </div>
         </div>
@@ -63,6 +64,7 @@ import DashboardLayout from '@/components/DashboardLayout.vue'
 import movieCreate from '@/components/movies/MovieCreate.vue'
 import IconSearch from '@/components/icons/IconSearch.vue'
 import IconChat from '@/components/icons/IconChat.vue'
+import IconPlus from '@/components/icons/IconPlus.vue'
 import { getSearchResults } from '@/services/api/movies.js'
 import { getMovies } from '@/services/api/movies.js'
 import { onMounted, ref } from 'vue'
@@ -73,7 +75,6 @@ import { debounce } from 'lodash'
 
 const movieStore = useMovieStore()
 const router = useRouter()
-
 const searchQuery = ref('')
 const searchResults = ref([])
 const debouncedSearch = debounce(performSearch, 1000)

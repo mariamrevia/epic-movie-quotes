@@ -49,12 +49,11 @@
 
 <script setup>
 import { useUserStore } from '@/stores/authUser'
+import { useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
+import { ref } from 'vue'
 import IconCamera from '@/components/icons/IconCamera.vue'
 import IconHouse from '@/components/icons/IconHouse.vue'
-import { useRouter } from 'vue-router'
-import { ref } from 'vue'
-
-import { useRoute } from 'vue-router'
 
 const route = useRoute()
 

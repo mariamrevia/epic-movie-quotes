@@ -19,7 +19,7 @@
         </div>
         <div class="md:mt-9 mt-9 flex flex-col items-center">
           <div
-            class="lg:w-62 md:w-45 w-22 md:pb-10 pb-6 md:bg-darkgray bg-[#24222F] rounded-lg m-auto md:m-0 flex items-center justify-center"
+            class="xl:w-62 lg:w-45 md:pb-10 pb-6 md:bg-darkgray bg-[#24222F] rounded-lg m-auto md:m-0 flex items-center justify-center"
           >
             <div class="w-30 md:mt-9 mt-13.6 pt-4 flex flex-col gap-4">
               <div class="flex flex-row items-end md:justify-normal justify-center">

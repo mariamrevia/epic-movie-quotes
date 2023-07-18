@@ -1,10 +1,12 @@
 <template>
   <div class="w-full flex flex-row mt-2 items-center justify-center">
-    <h1 class="text-white text-2 flex items-center mr-0">{{ props.heading }}</h1>
-    <IconCross
-      class="w-2 h-2 md:mr-1.5 justify-self-end mr-0 fill-white"
-      @click="closeModal(modalName)"
-    />
+    <h1 class="text-white text-2 flex items-center mr-0 mx-auto">{{ props.heading }}</h1>
+    <div class="ml-auto">
+      <IconCross
+        class="w-2 h-2 md:mr-1.5 justify-self-end mr-0 fill-whiteGray"
+        @click="closeModal(modalName)"
+      />
+    </div>
   </div>
   <hr class="w-full h-0.05 bg-dark-gray border-none mt-1.25" />
   <div class="flex flex-row gap-2 items-center mt-1.25 mb-1.25 w-full justify-start">

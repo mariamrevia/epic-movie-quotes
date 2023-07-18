@@ -148,6 +148,7 @@ export default {
       backgroundColor: {
         '#24222F': '#24222F',
         lightRed: '#E33812',
+        purple: 'rgba(151, 71, 255, 0.4)',
         red: '#E31221',
         gray: '#222030',
         'light-gray': '#CED4DA',

@@ -8,24 +8,20 @@
         class="md:w-60 w-full z-10 fixed flex flex-col md:mt-5 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
       >
         <HeaderEditAdd modalName="viewQuoteModalActive" :heading="$t('quote.view_quote')" />
-        <div class="flex flex-row gap-2 absolute left-3 top-3.3">
-          <IconDelete @click="quoteDelete(quote.id)" />
-          <p class="md:flex hidden">{{ $t('quote.delete') }}</p>
-        </div>
         <div
-          class="md:w-60 w-22 h-54 flex flex-col items-center"
+          class="md:w-60 w-22 h-54 flex gap-2 overflow-y-auto flex-col items-center"
           v-for="quote in getFilteredQuotes"
           :key="quote.id"
         >
           <InputText
             :placeholder="quote.body.en"
-            class="md:w-54 w-22 border-gray-600 md:bg-transparent bg-transparent placeholder-whiteGray"
+            class="md:w-56 w-22 h-4 border-gray-600 md:bg-transparent bg-transparent placeholder-whiteGray"
             lang="Eng"
             rules="required"
             disabled
           />
           <InputText
-            class="md:w-54 w-22 border-gray-600 md:bg-transparent bg-transparent placeholder-whiteGray"
+            class="md:w-56 w-22 h-4 border-gray-600 md:bg-transparent bg-transparent placeholder-whiteGray"
             :placeholder="quote.body.ka"
             lang="Geo"
             rules="required"
@@ -65,7 +61,10 @@
           </div>
 
           <div class="flex flex-row items-center mt-3.3">
-            <img class="h-3 w-3 rounded-full bg-slate-500" />
+            <img
+              :src="userStore.google_id ? userStore.image : imageUrl"
+              class="h-3 w-3 rounded-full bg-slate-500"
+            />
             <Form class="md:ml-2 ml-1" @submit="submitData(quote.id)">
               <div
                 class="flex relative h-3 flex-row items-center bg-#24222F lg:w-50 md:w-30 w-17.5 rounded-md border-none bg-transparen focus-within:ring focus:shadow-shadow outline-none"
@@ -91,7 +90,6 @@ import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
 import InputText from '@/components/ui/InputText.vue'
 import IconLike from '@/components/icons/IconLike.vue'
 import IconComments from '@/components/icons/IconComments.vue'
-import IconDelete from '@/components/icons/IconDelete.vue'
 import { Form, Field } from 'vee-validate'
 import { getQuotes, storeComments, storeLikes, destroyLikes } from '@/services/api/quotes'
 import { useQuoteStore } from '@/stores/quotes/index.js'
@@ -170,7 +168,6 @@ const toggleLike = async (quoteId) => {
     console.log(response)
   }
 }
-
 const submitData = async (id) => {
   const quote = quoteStore.quotes.find((quote) => quote.id === id)
   try {

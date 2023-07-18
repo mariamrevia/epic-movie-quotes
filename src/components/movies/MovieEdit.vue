@@ -98,11 +98,11 @@
           class="md:w-56 sm:w-37.5 w-20 mt-0.5 rounded-md border-0.1 flex items-center placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
         >
           <div>
-            <img class="w-27 h-9.6" :src="imageUrl" />
+            <img class="w-27 h-9.6 p-2 rounded-xl" :src="imageUrl" />
           </div>
           <label
             for="image-upload"
-            class="h-2.6 ml-2 text-center flex p-3 rounded-sm items-center bg-[#9747FF]"
+            class="h-2.6 ml-2 text-center flex p-3 rounded-sm items-center bg-purple"
           >
             choose file
           </label>

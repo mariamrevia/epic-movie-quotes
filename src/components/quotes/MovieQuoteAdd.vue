@@ -11,7 +11,9 @@
       class="md:w-60 w-full fixed flex flex-col md:mt-5 pb-13 md:pb-10 items-center bg-[#11101A] rounded-lg"
     >
       <HeaderEditAdd modalName="createQuoteModalActive" :heading="$t('quote.add_quote')" />
-      <div class="flex flex-row gap-4 md:w-56 md:bg-transparent bg-black md:p-0 p-3 w-20 m-auto">
+      <div
+        class="flex flex-row gap-4 xl:w-56 lg:w-37.5 w-20 md:bg-transparent bg-black md:p-0 p-3 w-20 m-auto"
+      >
         <img
           class="md:w-18 w-7 h-5 md:h-10 flex self-start rounded-xl"
           :src="getImageURL(movie.image)"

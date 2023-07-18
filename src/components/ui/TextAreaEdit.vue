@@ -25,10 +25,12 @@ import { Field, ErrorMessage } from 'vee-validate'
 const props = defineProps({
   placeholder: {
     type: String,
+    required: false,
     default: ''
   },
   value: {
     type: String,
+    required: true,
     default: ''
   },
   rules: {

@@ -1,7 +1,7 @@
 <template>
   <Field v-slot="{ field }" :name="props.name" :rules="rules" :value="modelValue">
     <div
-      class="flex relative md:mt-1.5 mt-1 flex-row border-dark-gray md:w-56 sm:w-37.5 w-20 rounded-md border-0.1 bg-transparen focus-within:ring focus:shadow-shadow outline-none"
+      class="flex relative md:mt-1.5 mt-1 flex-row border-dark-gray xl:w-56 lg:w-37.5 w-20 rounded-md border-0.1 bg-transparen focus-within:ring focus:shadow-shadow outline-none"
     >
       <textarea
         v-bind="field"
@@ -24,15 +24,18 @@ import { Field, ErrorMessage } from 'vee-validate'
 const props = defineProps({
   placeholder: {
     type: String,
+    required: false,
     default: ''
   },
   value: {
     type: String,
+    required: true,
     default: ''
   },
   rules: {
     type: String,
-    required: false
+    required: false,
+    default: ''
   },
   name: {
     type: String,

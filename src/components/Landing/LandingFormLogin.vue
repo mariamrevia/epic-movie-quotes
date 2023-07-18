@@ -47,8 +47,9 @@
           <button
             @click="loginWithGoogle"
             type="button"
-            class="w-22 mt-1.5 h-2.3 border rounded-md text-white"
+            class="w-22 mt-1.5 h-2.3 flex flex-row justify-center items-center gap-1 border rounded-md text-white"
           >
+            <IconGoogle />
             {{ $t('login.sign_in_google') }}
           </button>
           <div class="flex flex-row mb-5">
@@ -72,6 +73,7 @@ import { login } from '@/services/api/auth.js'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
+import IconGoogle from '@/components/icons/IconGoogle.vue'
 import LandingModalButton from '@/components/ui/LandingModalButton.vue'
 import InputText from '@/components/ui/InputText.vue'
 import csrf from '@/services/api/csrf.js'

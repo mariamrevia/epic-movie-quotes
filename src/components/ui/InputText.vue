@@ -16,6 +16,10 @@
         class="absolute flex right-0.8 z-100"
       />
       <iconInvalid v-if="errorMessage" class="absolute flex right-0.8 z-100" />
+      <IconPassword
+        v-if="props.type === 'password' && !meta.valid && !errorMessage"
+        class="absolute fill-slate-600 flex right-0.8 z-100"
+      />
     </div>
   </div>
 
@@ -25,6 +29,7 @@
 <script setup>
 import iconValid from '@/components/icons/IconValid.vue'
 import iconInvalid from '@/components/icons/IconInvalid.vue'
+import IconPassword from '@/components/icons/IconPassword.vue'
 import { Field, ErrorMessage, useField } from 'vee-validate'
 import { computed } from 'vue'
 
@@ -36,6 +41,7 @@ const props = defineProps({
   },
   value: {
     type: String,
+    required: true,
     default: ''
   },
   type: {
@@ -45,7 +51,8 @@ const props = defineProps({
   },
   rules: {
     type: String,
-    required: false
+    required: false,
+    default: ''
   },
   name: {
     type: String,

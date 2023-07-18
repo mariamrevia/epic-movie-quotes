@@ -3,7 +3,7 @@
     <div
       v-for="quote in movieQuotes && movieQuotes.quotes"
       :key="quote.id"
-      class="lg:w-50 md:37.5 w-22 md:h-15 h-19 bg-darkgray text-whiteGray rounded-md"
+      class="xl:w-50 lg:w-35 w-22 md:h-15 h-19 bg-darkgray text-whiteGray rounded-md"
     >
       <div class="flex flex-row justify-between">
         <div class="flex md:flex-row flex-col items-center gap-7">

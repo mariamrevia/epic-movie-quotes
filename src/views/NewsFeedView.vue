@@ -1,8 +1,10 @@
 <template>
   <dashboardLayout>
-    <div class="flex flex-row lg:w-54 2xl:w-88 sm:w-22 w-14 items-center mt-6.5">
+    <div
+      class="flex flex-row md:w-35 2xl:w-88 w-22 justify-center md:justify-start items-center mt-6.5"
+    >
       <div
-        class="md:w-50 text-1.25 w-12 h-3.25 md:bg-#24222F bg-transparent rounded-lg text-white flex flex-row gap-2 items-center"
+        class="md:w-43 w-22 text-1.25 h-3.25 md:bg-#24222F bg-transparent rounded-lg text-white flex flex-row gap-2 items-center"
       >
         <iconPencil class="md:ml-2 h-2 w-2 ml-0" @click="toggleAddQuoteModal" />
         {{ $t('quote.write_quote') }}

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="md:w-56 sm:w-37.5 w-20 h-5 mt-0.5 p-2 rounded-md border-0.1 flex items-center placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
+    class="xl:w-56 lg:w-37.5 w-20 h-5 mt-0.5 p-2 rounded-md border-0.1 flex items-center placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
     @dragleave.prevent="onDragLeave"
     @drop.prevent="onDrop"
     @dragover="onDragOver"
@@ -21,7 +21,7 @@
 
         <label
           for="file-upload"
-          class="h-2.6 ml-3 md:mr-0 mr-2 text-center flex p-3 rounded-sm items-center bg-[#9747FF]"
+          class="h-2.6 ml-3 md:mr-0 mr-2 text-center flex p-3 rounded-sm items-center bg-purple"
         >
           {{ $t('image.choose_image') }}
         </label>
