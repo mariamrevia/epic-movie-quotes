@@ -62,7 +62,6 @@ const props = defineProps({
 
 const emits = defineEmits(['input'])
 const updateText = (newValue) => {
-  console.log(newValue)
   emits('input', newValue)
 }
 </script>

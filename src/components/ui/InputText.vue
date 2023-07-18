@@ -77,7 +77,6 @@ const fieldClasses = computed(() => {
 
 const emits = defineEmits(['input'])
 const updateText = (newValue) => {
-  console.log(newValue)
   emits('input', newValue)
 }
 </script>
