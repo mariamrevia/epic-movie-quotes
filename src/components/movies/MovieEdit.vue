@@ -123,7 +123,8 @@
 </template>
 
 <script setup>
-import { updateMovies } from '@/services/api/movies.js'
+import { updateMovies, getMovies } from '@/services/api/movies.js'
+import { useMovieStore } from '@/stores/movies/index.js'
 import { Field, Form, ErrorMessage } from 'vee-validate'
 import { useModalStore } from '@/stores/modal'
 import { computed, ref } from 'vue'
@@ -133,7 +134,6 @@ import ButtonBase from '@/components/ui/ButtonBase.vue'
 import iconCross from '@/components/icons/IconCross.vue'
 import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
 import TextAreaEdit from '@/components/ui/TextAreaEdit.vue'
-
 const props = defineProps({
   movie: {
     type: Object,
@@ -146,7 +146,9 @@ const props = defineProps({
 })
 
 const modalStore = useModalStore()
+const movieStore = useMovieStore()
 const isDropdownOpen = ref(false)
+const editMovie = computed(() => (props.movie ? { ...props.movie } : null))
 const image = ref(null)
 const selectedGenre = (genre, title) => {
   editMovie.value.genres.push({ id: genre.id, title: title })
@@ -161,10 +163,10 @@ const deleteGenre = (id) => {
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value
 }
-
+const emits = defineEmits(['movieUpdated'])
 const submitData = async () => {
   try {
-    await updateMovies({
+    const response = await updateMovies({
       name: {
         en: editMovie.value.name.en,
         ka: editMovie.value.name.ka
@@ -182,13 +184,24 @@ const submitData = async () => {
       movie: editMovie.value.id,
       image: image.value
     })
-    console.log(image.value)
+
+    if (response.status === 200) {
+      modalStore.closeModal('editMovieModalActive')
+    }
+
+    const responseMovie = await getMovies()
+    const movie = responseMovie.data.data.find((movie) => movie.id === editMovie.value.id)
+    movieStore.setMovies([movie])
+
+    emits('movieUpdated', movie)
+    console.log(editMovie.value)
   } catch (error) {
     console.log(error)
   }
+
+  return editMovie.value
 }
 
-const editMovie = computed(() => (props.movie ? { ...props.movie } : null))
 const isModalActive = modalStore.isModalActive
 const closeModal = (event) => {
   if (event.target.classList.contains('modal-wrapper')) {

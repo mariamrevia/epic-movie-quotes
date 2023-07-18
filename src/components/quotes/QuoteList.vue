@@ -53,7 +53,7 @@
         </div>
       </div>
 
-      <QuoteEdit :quoteToEdit="quoteToEdit" :movie="movie" />
+      <QuoteEdit :quoteToEdit="quoteToEdit" :movie="movie" @movieUpdated="handleMovieUpdated" />
       <QuoteView :quoteToEdit="quoteToEdit" />
     </div>
   </div>
@@ -84,7 +84,12 @@ const movieQuotes = computed(() => (props.movie ? { ...props.movie } : null))
 const getImageURL = (image) => {
   return `${import.meta.env.VITE_API_BASE_URL}/storage/${image}`
 }
+const emits = defineEmits(['movieUpdated'])
 
+const handleMovieUpdated = (updatedMovie) => {
+  movie.value = updatedMovie
+  emits('movieUpdated', movie.value)
+}
 const toggleDiv = ref(false)
 const activeQuoteId = ref(null)
 

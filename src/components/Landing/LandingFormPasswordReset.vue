@@ -8,11 +8,14 @@
   >
     <div class="h-screen w-screen flex justify-center md:h-0 md:w-0 bg-lightBlack">
       <LandingModal
-        class="md:w-33.6 w-full pb-10 pt-10 z-10 mt-5 md:mt-13.6 fixed flex flex-col items-center justify-center bg-gradient md:bg-gray rounded-lg"
+        class="md:w-33.6 w-full md:pb-9 md:pt-9 pb-10 pt-10 z-10 mt-5 md:mt-13.6 fixed flex flex-col items-center justify-center bg-gradient md:bg-gray rounded-lg"
         :modalActive="isModalActive('passwordResetModalActive')"
       >
         <Form class="flex justify-center flex-col" @submit="handleSubmit">
           <h2 class="text-white text-2 flex justify-center">{{ $t('passwordReset.title') }}</h2>
+          <p class="mt-1.25 w-22 text-center flex justify-center text-gray-600">
+            {{ $t('passwordReset.password_note') }}
+          </p>
           <InputText
             v-model="resetPasswordDataStore.password"
             name="password"
@@ -32,7 +35,6 @@
             :placeholder="$t('placeholders.enter_password')"
           />
 
-          <p class="mt-4 text-white">{{ $t('passwordReset.note_activation') }}</p>
           <LandingModalButton :text="$t('passwordReset.reset_password')" type="submit" />
         </Form>
       </LandingModal>

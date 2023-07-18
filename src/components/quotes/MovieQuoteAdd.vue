@@ -49,14 +49,14 @@
         lang="Eng"
         placeholder="Start create a new quote"
         v-model="quoteStore.quoteData.body.en"
-        rules="required"
+        rules="required|alphabetEn"
       />
       <TextAreaBase
         name="body[ka]"
         lang="Geo"
         placeholder="შექმენი ახალი ციტატა"
         v-model="quoteStore.quoteData.body.ka"
-        rules="required"
+        rules="required|alphabetKa"
       />
 
       <imageUpload

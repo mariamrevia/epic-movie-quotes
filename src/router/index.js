@@ -7,6 +7,8 @@ import LandingView from '@/views/LandingView.vue'
 import ListOfMoviesView from '@/views/ListOfMoviesView.vue'
 import NewsFeedView from '@/views/NewsFeedView.vue'
 import MovieView from '@/views/MovieView.vue'
+import ForbiddenView from '@/views/ForbiddenView.vue'
+import NotFoundView from '@/views/NotFoundView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -62,6 +64,16 @@ const router = createRouter({
       name: 'movie',
       component: MovieView,
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/forbidden',
+      name: 'forbidden',
+      component: ForbiddenView
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'Not-Found',
+      component: NotFoundView
     }
   ]
 })
@@ -73,7 +85,7 @@ router.beforeEach(async (to, from, next) => {
     await authUserStore.fetchUser()
     await notificationStore.fetchNotifications(authUserStore.user)
     if (to.meta.requiresAuth && (!authUserStore.isAuthenticated || authUserStore.verified)) {
-      next({ name: 'landing' })
+      next({ name: 'forbidden' })
     } else {
       next()
     }

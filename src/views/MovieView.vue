@@ -6,7 +6,7 @@
           <h2 class="mb-1.5 text-1.5 text-whiteGray">{{ $t('movie.movie_discription') }}</h2>
           <img
             class="lg:w-50 md:37.5 w-22 md:h-27 h-23.4 object-center rounded-2xl"
-            :src="getImageURL(movie && movie.image)"
+            :src="getImageURL(movie && movie.image) || ''"
           />
         </div>
         <div class="text-white">
@@ -61,11 +61,11 @@
         </div>
       </div>
       <MovieQuoteAdd v-if="movie" :movie="movie" />
-      <QuoteList v-if="movie" :movie="movie" />
+      <QuoteList v-if="movie" :movie="movie" @movieUpdated="handleMovieUpdated" />
     </div>
     <h2 class="text-caramel text-4xl mt-9" v-else>Movie was Deleted</h2>
   </DashboardLayout>
-  <MovieEdit v-if="movie" :movie="movie" :genres="genres" />
+  <MovieEdit v-if="movie" :movie="movie" :genres="genres" @movieUpdated="handleMovieUpdated" />
 </template>
 
 <script setup>
@@ -90,7 +90,6 @@ const destinationId = ref(parseInt(toRef(route, 'params').value.id))
 
 const movie = ref(null)
 const genres = ref(null)
-// const movieData = computed(() => (movie.value ? { ...movie.value } : null))
 onMounted(async () => {
   try {
     if (movieStore.movieData.length > 0 && movieStore.genreData.length > 0) {
@@ -100,18 +99,20 @@ onMounted(async () => {
       const response = await getMovies()
       console.log(response)
       movie.value = response.data.data.find((movie) => movie.id === destinationId.value)
-      movieStore.setMovies([movie])
+      movieStore.setMovies([movie.value])
       movieStore.setGenres(response.data.genres)
       genres.value = response.data.genres
     }
+
+    console.log(movieStore.movieData.value)
   } catch (error) {
     console.log(error)
   }
-
-  movieStore.getMovies(movie.value)
-  console.log(movie.value)
 })
 
+const handleMovieUpdated = (updatedMovie) => {
+  movie.value = updatedMovie
+}
 const movieToDelete = ref(null)
 const movieDelete = async (id) => {
   movieToDelete.value = id

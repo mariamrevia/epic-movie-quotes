@@ -15,8 +15,18 @@
           <p class="md:flex hidden">{{ $t('quote.delete') }}</p>
         </div>
         <HeaderEditAdd modalName="editQuoteModalActive" :heading="$t('quote.edit_quote')" />
-        <TextAreaBase name="body[en]" v-model="quote.body.en" lang="Eng" rules="required" />
-        <TextAreaBase name="body[ka]" v-model="quote.body.ka" lang="Geo" rules="required" />
+        <TextAreaBase
+          name="body[en]"
+          v-model="quote.body.en"
+          lang="Eng"
+          rules="required|alphabetEn"
+        />
+        <TextAreaBase
+          name="body[ka]"
+          v-model="quote.body.ka"
+          lang="Geo"
+          rules="required|alphabetKa"
+        />
         <div
           class="md:w-56 mt-1.25 rounded-md border-0.1 flex items-center text-white border-[#6C757D] focus-within:ring focus:shadow-shadow outline-none"
         >
@@ -47,9 +57,11 @@
 <script setup>
 import { Form, Field } from 'vee-validate'
 import { useModalStore } from '@/stores/modal'
+import { getMovies } from '@/services/api/movies.js'
 import { computed, onMounted, ref } from 'vue'
 import { updateQuotes } from '@/services/api/quotes.js'
 import { deleteQuote } from '@/services/api/quotes'
+import { useMovieStore } from '@/stores/movies/index.js'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import TextAreaBase from '@/components/ui/TextAreaBase.vue'
 import ButtonBase from '@/components/ui/ButtonBase.vue'
@@ -68,11 +80,12 @@ const props = defineProps({
   }
 })
 
-const imageUrl = ref(null)
-
 const editQuote = computed(() => (props.movie ? { ...props.movie } : null))
 const modalStore = useModalStore()
+const movieStore = useMovieStore()
+const imageUrl = ref(null)
 const isModalActive = modalStore.isModalActive
+
 const getFilteredQuotes = computed(() => {
   if (props.quoteToEdit && editQuote) {
     return editQuote.value.quotes.filter((quote) => quote.id === props.quoteToEdit)
@@ -99,11 +112,12 @@ const onFileChange = (event) => {
   image.value = file
   console.log(image.value)
 }
+const emits = defineEmits(['movieUpdated'])
 const submitData = async () => {
   console.log(image.value)
 
   try {
-    await updateQuotes({
+    const response = await updateQuotes({
       body: {
         en: getFilteredQuotes.value[0].body.en,
         ka: getFilteredQuotes.value[0].body.ka
@@ -111,6 +125,14 @@ const submitData = async () => {
       image: image.value ? image.value : getFilteredQuotes.value[0].image,
       id: props.quoteToEdit
     })
+    if (response.status === 200) {
+      modalStore.closeModal('editQuoteModalActive')
+    }
+
+    const responseMovie = await getMovies()
+    const movieQuote = responseMovie.data.data.find((movie) => movie.id === editQuote.value.id)
+    movieStore.setMovies([movieQuote])
+    emits('movieUpdated', movieQuote)
   } catch (error) {
     console.log(error)
   }
