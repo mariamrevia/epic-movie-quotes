@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col">
-    <label class="text-caramel mb-0.5 mt-0.5">{{ label }}</label>
+    <label class="text-white mb-0.5 mt-0.5">{{ label }}</label>
     <div class="flex relative h-3 flex-row items-center">
       <Field
         v-bind="$attrs"
@@ -12,10 +12,14 @@
         :rules="props.rules"
       />
       <iconValid
-        v-if="meta.valid && !errorMessage && !meta.initialValue"
+        v-if="meta.valid && !errorMessage && !meta.initialValue && meta.dirty"
         class="absolute flex right-0.8 z-100"
       />
       <iconInvalid v-if="errorMessage" class="absolute flex right-0.8 z-100" />
+      <IconPassword
+        v-if="props.type === 'password' && !meta.valid && !errorMessage"
+        class="absolute fill-slate-600 flex right-0.8 z-100"
+      />
     </div>
   </div>
 
@@ -25,6 +29,7 @@
 <script setup>
 import iconValid from '@/components/icons/IconValid.vue'
 import iconInvalid from '@/components/icons/IconInvalid.vue'
+import IconPassword from '@/components/icons/IconPassword.vue'
 import { Field, ErrorMessage, useField } from 'vee-validate'
 import { computed } from 'vue'
 
@@ -36,6 +41,7 @@ const props = defineProps({
   },
   value: {
     type: String,
+    required: false,
     default: ''
   },
   type: {
@@ -45,7 +51,8 @@ const props = defineProps({
   },
   rules: {
     type: String,
-    required: false
+    required: false,
+    default: ''
   },
   name: {
     type: String,
@@ -58,7 +65,7 @@ const { errorMessage, meta } = useField(props.name)
 
 const fieldClasses = computed(() => {
   let classes =
-    ' h-2.3 rounded-md border-0.1 md:bg-light-gray  focus-within:ring focus:shadow-shadow outline-none '
+    ' h-2.3 rounded-md border-0.1  px-2 md:bg-light-gray bg-light-gray   focus-within:ring focus:shadow-shadow outline-none '
   if (meta.touched && errorMessage.value) {
     classes += ' border-red-700'
   }

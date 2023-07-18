@@ -1,6 +1,6 @@
 <template>
   <div class="w-33 pt-3 py-3 border-0.1 border-dark-gray rounded-lg">
-    <h2 class="text-white ml-1.25 mb-1">{{ name }} should contain:</h2>
+    <h2 class="text-white ml-1.25 mb-1">{{ name }} {{ $t('profile.shoud_contain') }}</h2>
     <div
       v-for="(item, index) in props.items"
       :key="index"

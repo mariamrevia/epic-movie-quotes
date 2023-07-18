@@ -6,9 +6,9 @@
     <LandingModal :modalActive="isModalActive('AddMovieModalActive')">
       <Form
         @submit="submitData(movieStore.createMovieData)"
-        class="w-60 z-10 fixed flex flex-col md:mt-13.6 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
+        class="xl:w-60 w-full z-10 fixed flex flex-col md:mt-5 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
       >
-        <HeaderEditAdd heading="Add Movie" />
+        <HeaderEditAdd :heading="$t('movie.add_movie')" modalName="AddMovieModalActive" />
         <InputMovie
           name="name[en]"
           v-model="movieStore.createMovieData.name.en"
@@ -25,22 +25,22 @@
         />
 
         <Field
-          class="w-56 h-2.3 rounded-md border-0.1 placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
+          class="xl:w-56 lg:w-37.5 pl-2 w-20 h-2.3 rounded-md border-0.1 placeholder-white text-white bg-transparent border-gray bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
           name="genre"
           rules="required"
           v-model="movieStore.createMovieData.genre"
         >
           <div
-            class="w-56 h-2.3 mt-1.25 rounded-md items-center border-0.1 gap-2 placeholder-white text-white bg-transparent relative border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none flex flex-row"
+            class="xl:w-56 lg:w-37.5 w-20 h-2.3 mt-1.25 rounded-md items-center border-0.1 gap-2 placeholder-white text-white bg-transparent relative border-gray bg-light-gray focus-within:ring focus:shadow-shadow outline-none flex flex-row"
             @click="toggleDropdown"
           >
             <div
               v-for="title in movieStore.genreTitle"
               :key="title"
-              class="text-white justify-between h-1.5 p-2 border ml-1 rounded-sm flex items-center bg-[#6C757D] border-none gap-2"
+              class="text-white justify-between h-1.5 p-2 border ml-1 rounded-sm flex items-center bg-lightGray border-none gap-2"
             >
               {{ title }}
-              <IconCross @click.stop="deleteGenre(title)" />
+              <IconCross class="fill-white" @click.stop="deleteGenre(title)" />
             </div>
 
             <div
@@ -57,7 +57,9 @@
                 {{ genre.title }}
               </div>
             </div>
-            {{ select() }}
+            <div class="pl-6">
+              {{ select() }}
+            </div>
           </div>
           <ErrorMessage class="text-red-700" name="genre" />
         </Field>
@@ -102,13 +104,19 @@
           :rules="movieStore.createMovieData.image ? '' : 'required'"
           @update:imageUpload="updateImageUpload"
         />
-        <ButtonBase type="submit" text="Add Movie" />
+        <ButtonBase type="submit" :text="$t('movie.add_movie')" />
       </Form>
     </LandingModal>
   </div>
 </template>
 
 <script setup>
+import { useModalStore } from '@/stores/modal'
+import { Field, ErrorMessage } from 'vee-validate'
+import { ref } from 'vue'
+import { useMovieStore } from '@/stores/movies'
+import { Form } from 'vee-validate'
+import { storeMovies, getMovies } from '@/services/api/movies'
 import TextAreaBase from '@/components/ui/TextAreaBase.vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import IconCross from '@/components/icons/IconCross.vue'
@@ -116,13 +124,7 @@ import InputMovie from '@/components/ui/InputMovie.vue'
 import ButtonBase from '@/components/ui/ButtonBase.vue'
 import imageUpload from '@/components/shared/ImageUpload.vue'
 import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
-
-import { useModalStore } from '@/stores/modal'
-import { Field, ErrorMessage } from 'vee-validate'
-import { ref } from 'vue'
-import { useMovieStore } from '@/stores/movies'
-import { Form } from 'vee-validate'
-import { storeMovies } from '@/services/api/movies'
+import i18n from '@/i18n'
 
 const modalStore = useModalStore()
 const movieStore = useMovieStore()
@@ -136,7 +138,6 @@ const updateImageUpload = (file) => {
 const selectedGenre = (genre, title) => {
   movieStore.createMovieData.genre.push(genre.id)
   movieStore.genreTitle.push(title)
-  console.log(movieStore.genreTitle)
 }
 const deleteGenre = (title) => {
   const index = movieStore.genreTitle.indexOf(title)
@@ -149,14 +150,14 @@ const select = () => {
   if (movieStore.genreTitle.length > 0) {
     return ''
   } else {
-    return 'select the genres'
+    return i18n.global.t('movie.select_genre')
   }
 }
 const isModalActive = modalStore.isModalActive
 
 const submitData = async () => {
   try {
-    await storeMovies({
+    const storeResponse = await storeMovies({
       name: {
         en: movieStore.createMovieData.name.en,
         ka: movieStore.createMovieData.name.ka
@@ -173,6 +174,14 @@ const submitData = async () => {
       genre: movieStore.createMovieData.genre,
       image: movieStore.createMovieData.image
     })
+
+    console.log(storeResponse)
+    if (storeResponse.status === 201) {
+      modalStore.closeModal('AddMovieModalActive')
+    }
+    const response = await getMovies()
+    const data = response.data
+    movieStore.setMovies(data.data)
   } catch (error) {
     console.log(error)
   }

@@ -1,11 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useUserStore } from '@/stores/authUser'
+import { useUserStore } from '@/stores/authUser/index.js'
 import { verifyEmail, verifyNewEmail } from '@/services/api/auth.js'
+import { useNotificationStore } from '@/stores/notification/index.js'
 import ProfileView from '@/views/ProfileView.vue'
 import LandingView from '@/views/LandingView.vue'
 import ListOfMoviesView from '@/views/ListOfMoviesView.vue'
 import NewsFeedView from '@/views/NewsFeedView.vue'
 import MovieView from '@/views/MovieView.vue'
+import ForbiddenView from '@/views/ForbiddenView.vue'
+import NotFoundView from '@/views/NotFoundView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -58,24 +61,37 @@ const router = createRouter({
     },
     {
       path: '/movie/:id',
+      name: 'movie',
       component: MovieView,
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/forbidden',
+      name: 'forbidden',
+      component: ForbiddenView
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'Not-Found',
+      component: NotFoundView
     }
   ]
 })
 
 router.beforeEach(async (to, from, next) => {
   try {
+    const notificationStore = useNotificationStore()
     const authUserStore = useUserStore()
     await authUserStore.fetchUser()
-    console.log(authUserStore)
+    await notificationStore.fetchNotifications(authUserStore.user)
     if (to.meta.requiresAuth && (!authUserStore.isAuthenticated || authUserStore.verified)) {
-      next({ name: 'landing' })
+      next({ name: 'forbidden' })
     } else {
       next()
     }
   } catch (error) {
     console.error(error)
+    next(error)
   }
 })
 

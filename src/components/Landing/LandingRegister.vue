@@ -9,26 +9,32 @@
     >
       <Form
         @submit="handleSubmit"
-        class="w-37.5 z-10 fixed flex flex-col pb-13 md:pb-4 items-center bg-darkgray md:bg-gray rounded-lg mt-0 md:mt-7.4"
+        class="md:w-37.5 w-full z-10 fixed flex flex-col pb-13 md:pb-4 items-center bg-darkgray md:bg-gray rounded-lg mt-0 md:mt-7.4"
       >
         <div class="flex flex-col items-center">
           <h1 class="text-white text-2 mt-3.3">{{ $t('register.create_account') }}</h1>
           <p class="text-dark-gray">{{ $t('register.start_journey') }}</p>
           <InputText
             name="username"
+            class="w-22"
             :label="$t('register.name')"
             v-model="registerStore.username"
             rules="required|minLength:3|maxLength:15|lowercase"
             :placeholder="$t('placeholders.name')"
           />
+          <div v-if="errors.username" class="text-red-500 mt-1">{{ errors.username[0] }}</div>
+
           <InputText
             name="email"
+            class="w-22"
             v-model="registerStore.email"
             :label="$t('register.email')"
             rules="required|email"
             :placeholder="$t('placeholders.email')"
           />
+          <div v-if="errors.email" class="text-red-500 mt-1">{{ errors.email[0] }}</div>
           <InputText
+            class="w-22"
             v-model="registerStore.password"
             name="password"
             :label="$t('register.password')"
@@ -36,7 +42,9 @@
             rules="required|minLength:8|maxLength:15|lowercase"
             :placeholder="$t('placeholders.password')"
           />
+          <div v-if="errors.password" class="text-red-500 mt-1">{{ errors.password[0] }}</div>
           <InputText
+            class="w-22"
             v-model="registerStore.confirm_password"
             name="password_confirmation"
             :label="$t('register.confirm_password')"
@@ -49,8 +57,9 @@
           <button
             type="button"
             @click="registerWithGoogle"
-            class="w-22 mt-1.5 h-2.3 border rounded-md text-white"
+            class="w-22 mt-1.5 h-2.3 flex flex-row items-center justify-center gap-1 border rounded-md text-white"
           >
+            <IconGoogle />
             {{ $t('register.sign_up_google') }}
           </button>
           <div class="flex flex-row mb-5">
@@ -69,10 +78,12 @@
 import { Form } from 'vee-validate'
 import { useModalStore } from '@/stores/modal/index.js'
 import { useRegisterStore } from '@/stores/register'
-import InputText from '@/components/ui/InputText.vue'
-import LandingModalButton from '@/components/ui/LandingModalButton.vue'
 import { register } from '@/services/api/auth.js'
 import { authGoogle } from '@/services/api/oauth'
+import { ref } from 'vue'
+import InputText from '@/components/ui/InputText.vue'
+import LandingModalButton from '@/components/ui/LandingModalButton.vue'
+import IconGoogle from '@/components/icons/IconGoogle.vue'
 import csrf from '@/services/api/csrf.js'
 import LandingModal from '@/components/ui/LandingModal.vue'
 
@@ -89,6 +100,7 @@ const closeModal = (event) => {
   }
 }
 
+const errors = ref({})
 const handleSubmit = async (values) => {
   try {
     await csrf.getCookie()
@@ -101,9 +113,10 @@ const handleSubmit = async (values) => {
     if (response.status === 200) {
       modalStore.openModal('emailSentModalActive')
     }
-    console.log('sdfsdfs')
   } catch (error) {
-    console.log(error)
+    if (error.response && error.response.data && error.response.data.errors) {
+      errors.value = error.response.data.errors
+    }
   }
 }
 const registerWithGoogle = async () => {

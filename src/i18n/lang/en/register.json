@@ -12,8 +12,7 @@
 
   "email_confirm": {
     "thank_you": "thank you!",
-    "note": "Your account has been activated",
-    "go_news_feed": "Go to my news feed"
+    "note": "Your account has been activated"
   },
   "email_sent": {
     "thank_you": "thank you!",

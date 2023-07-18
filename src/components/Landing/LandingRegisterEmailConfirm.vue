@@ -15,8 +15,11 @@
         <iconDone />
         <h2 class="text-white text-2 mt-1.5">{{ $t('register.email_confirm.thank_you') }}</h2>
         <p class="mt-4 text-white">{{ $t('register.email_confirm.note') }}</p>
-        <button class="bg-red w-56 md:w-22 h-2.3 border-none rounded-md text-white mt-1.5">
-          {{ $t('register.email_confirm.go_news_feed') }}
+        <button
+          @click="goToLogIn"
+          class="bg-red w-56 md:w-22 h-2.3 border-none rounded-md text-white mt-1.5"
+        >
+          {{ $t('register.log_in') }}
         </button>
       </LandingModal>
     </div>
@@ -24,12 +27,12 @@
 </template>
 
 <script setup>
-import LandingModal from '@/components/ui/LandingModal.vue'
-import iconDone from '@/components/icons/IconDone.vue'
 import { onMounted } from 'vue'
 import { useModalStore } from '@/stores/modal'
 import { useRoute } from 'vue-router'
 import { ref } from 'vue'
+import LandingModal from '@/components/ui/LandingModal.vue'
+import iconDone from '@/components/icons/IconDone.vue'
 
 const modalWrapper = ref(null)
 const modalStore = useModalStore()
@@ -37,15 +40,14 @@ const isModalActive = modalStore.isModalActive
 const route = useRoute()
 
 onMounted(async () => {
-  console.log(route.query)
-
   const { verify } = route.query
-
   if (verify === 'true') {
     modalStore.openModal('confirmModalActive')
   }
 })
-
+const goToLogIn = () => {
+  modalStore.openModal('loginModalActive')
+}
 const closeModal = (event) => {
   if (event.target === modalWrapper.value) {
     modalStore.closeModal('confirmModalActive')

@@ -8,14 +8,18 @@
   >
     <div class="h-screen w-screen flex justify-center md:h-0 md:w-0 bg-lightBlack">
       <LandingModal
-        class="w-33.6 pb-10 pt-10 z-10 mt-5 md:mt-13.6 fixed flex flex-col items-center justify-center bg-gradient md:bg-gray rounded-lg"
+        class="md:w-33.6 w-full md:pb-9 md:pt-9 pb-10 pt-10 z-10 mt-5 md:mt-13.6 fixed flex flex-col items-center justify-center bg-gradient md:bg-gray rounded-lg"
         :modalActive="isModalActive('passwordResetModalActive')"
       >
         <Form class="flex justify-center flex-col" @submit="handleSubmit">
           <h2 class="text-white text-2 flex justify-center">{{ $t('passwordReset.title') }}</h2>
+          <p class="mt-1.25 w-22 text-center flex justify-center text-gray-600">
+            {{ $t('passwordReset.password_note') }}
+          </p>
           <InputText
             v-model="resetPasswordDataStore.password"
             name="password"
+            class="w-22"
             :label="$t('passwordReset.password')"
             type="password"
             rules="required|minLength:8|maxLength:15|lowercase"
@@ -24,13 +28,13 @@
           <InputText
             v-model="resetPasswordDataStore.password_confirmation"
             name="password_confirmation"
+            class="w-22"
             :label="$t('passwordReset.confirm_password')"
             type="password"
             rules="required|confirmed:password"
             :placeholder="$t('placeholders.enter_password')"
           />
 
-          <p class="mt-4 text-white">{{ $t('passwordReset.note_activation') }}</p>
           <LandingModalButton :text="$t('passwordReset.reset_password')" type="submit" />
         </Form>
       </LandingModal>
@@ -39,22 +43,22 @@
 </template>
 
 <script setup>
+import { usePasswordResetStore } from '@/stores/passwordReset'
+import { useModalStore } from '@/stores/modal'
+import { resetPassword } from '@/services/api/auth.js'
+import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { Form } from 'vee-validate'
 import InputText from '@/components/ui/InputText.vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import LandingModalButton from '@/components/ui/LandingModalButton.vue'
-import { usePasswordResetStore } from '@/stores/passwordReset'
-import { useModalStore } from '@/stores/modal'
-import { onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { resetPassword } from '@/services/api/auth.js'
 import csrf from '@/services/api/csrf.js'
 
 const modalStore = useModalStore()
 const resetPasswordDataStore = usePasswordResetStore()
+const route = useRoute()
 const isModalActive = modalStore.isModalActive
 
-const route = useRoute()
 onMounted(() => {
   const token = route.query.token
   if (token) {

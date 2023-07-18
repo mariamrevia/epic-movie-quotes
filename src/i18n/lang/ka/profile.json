@@ -1,0 +1,22 @@
+{
+  "photo_upload": "ატვირთე ფოტო",
+  "update_success": "პროფილი წარმატებით შეიცვალა",
+  "update_email": "გადადი იმეილზე და დაადასტურე",
+  "cancell_button": "გამორთე",
+  "edit_button": "შეცვლა",
+  "make_changes": "ნამდვილად გსურს შეცვლა?",
+  "confirm_button": "დადასტურება",
+  "shoud_contain": "უნდა შეიცავდეს",
+  "header": "ჩემი პროფილი",
+  "save_button": "შენახვა",
+  "username": "სახელი",
+  "password": "პაროლი",
+  "email": "მეილი",
+  "new_password": "ახალი პაროლი",
+  "new_username": "ახალი მომხმარებლის სახელი",
+  "new_email": "შეიყვანე ახალი მეილი",
+  "confirm_password": "დაადასტურე პაროლი",
+  "minLength": "მინიმუმ 3 სიმბოლოს",
+  "maxLength": "მაქსიმუმ 15 სიმბოლოს",
+  "lowerCase": "მხოლოდ დაბალი რეგისტრის სიმბოლოებს"
+}

@@ -19,16 +19,18 @@
           <h2 class="text-2 text-white mt-1.5">{{ $t('passwordReset.forgot_password') }}</h2>
           <InputText
             name="email"
+            class="w-22"
             v-model="resetPasswordEmailStore.email"
             rules="required|email"
             :placeholder="$t('placeholders.email')"
           />
+          <div v-if="errors.email" class="text-red-500 mt-1">{{ errors.email[0] }}</div>
           <p class="mt-4 text-dark-gray w-96 text-center">
             {{ $t('passwordReset.note_instractions') }}
           </p>
-          <LandingModalButton type="submit" text="Send instructions" />
+          <LandingModalButton type="submit" :text="$t('passwordReset.instraction_button')" />
 
-          <button @click="goToLogIn" class="border-none text-dark-gray mt-6">
+          <button @click="goToLogIn" class="border-none text-dark-gray mt-2">
             {{ $t('passwordReset.back_log_in') }}
           </button>
         </Form>
@@ -38,20 +40,21 @@
 </template>
 
 <script setup>
-import { Form } from 'vee-validate'
+import { useResetPasswordEmailStore } from '@/stores/passwordEmailVerify'
+import { resetPasswordVerifyEmail } from '@/services/api/auth.js'
 import { useModalStore } from '@/stores/modal'
+import { Form } from 'vee-validate'
+import { ref } from 'vue'
 import InputText from '@/components/ui/InputText.vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import LandingModalButton from '@/components/ui/LandingModalButton.vue'
-import { useResetPasswordEmailStore } from '@/stores/passwordEmailVerify'
-import { resetPasswordVerifyEmail } from '@/services/api/auth.js'
 import csrf from '@/services/api/csrf.js'
 import iconcheckSend from '@/components/icons/IconCheckSend.vue'
 
 const resetPasswordEmailStore = useResetPasswordEmailStore()
 const modalStore = useModalStore()
+const errors = ref({})
 const isModalActive = modalStore.isModalActive
-console.log(resetPasswordEmailStore)
 
 const handleSubmit = async (value) => {
   try {
@@ -62,7 +65,9 @@ const handleSubmit = async (value) => {
     }
     console.log('sdfsdfs')
   } catch (error) {
-    console.log(error)
+    if (error.response && error.response.data && error.response.data.errors) {
+      errors.value = error.response.data.errors
+    }
   }
 }
 const goToLogIn = () => {

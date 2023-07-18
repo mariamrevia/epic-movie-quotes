@@ -1,20 +1,20 @@
 <template>
   <dashboardLayout>
-    <div class="flex flex-row w-88 items-center mt-2">
-      <div class="w-50 h-3.25 bg-#24222F rounded-lg text-white flex flex-row gap-2 items-center">
-        <iconPencil class="ml-2" @click="toggleAddQuoteModal" />
-        write new quote
+    <div
+      class="flex flex-row md:w-35 2xl:w-88 w-22 justify-center md:justify-start items-center mt-6.5"
+    >
+      <div
+        :class="{
+          'w-15.6 text-1.25 h-3.25 md:bg-#24222F bg-transparent rounded-lg text-white flex flex-row gap-2 items-center':
+            search,
+          'md:w-43 w-22': !search
+        }"
+        class="text-1.25 h-3.25 md:bg-#24222F bg-transparent rounded-lg text-white flex flex-row gap-2 items-center"
+      >
+        <iconPencil class="md:ml-2 h-2 w-2 ml-0" @click="toggleAddQuoteModal" />
+        {{ $t('quote.write_quote') }}
       </div>
-      <div class="flex flex-row gap-2 ml-1.5">
-        <IconSearch />
-        <input
-          class="bg-transparent outline-none text-white"
-          type="text"
-          v-model="searchQuery"
-          @input="performSearch"
-          placeholder="Search by"
-        />
-      </div>
+      <TheSearch class="md:flex hidden" @search="handleIncrease" />
     </div>
     <QuotePosts />
   </dashboardLayout>
@@ -22,49 +22,22 @@
 </template>
 
 <script setup>
+import { useModalStore } from '@/stores/modal/index.js'
 import dashboardLayout from '@/components/DashboardLayout.vue'
 import iconPencil from '@/components/icons/IconPencil.vue'
 import quoteCreate from '@/components/quotes/QuoteCreate.vue'
 import QuotePosts from '@/components/quotes/QuotePosts.vue'
-import IconSearch from '@/components/icons/IconSearch.vue'
-import { useModalStore } from '@/stores/modal/index.js'
-import { useQuoteStore } from '@/stores/quotes/index.js'
-import { getSearchResults } from '@/services/api/quotes.js'
-import { onMounted, ref } from 'vue'
-import { debounce } from 'lodash'
+import TheSearch from '@/components/TheSearch.vue'
+import { ref } from 'vue'
 
 const modalStore = useModalStore()
-const quoteStore = useQuoteStore()
-const searchQuery = ref('')
-const searchResults = ref([])
-const debouncedSearch = debounce(performSearch, 1000)
-
-async function performSearch() {
-  if (searchQuery.value.length > 0) {
-    try {
-      const response = await getSearchResults(searchQuery.value)
-      searchResults.value = response.data.data
-      console.log(searchResults.value)
-      quoteStore.quotes = searchResults.value.map((quote) => ({
-        ...quote,
-        commentData: {
-          body: '',
-          quote_id: quote.id
-        },
-        isLiked: false,
-        likes: 0
-      }))
-    } catch (error) {
-      console.error(error)
-    }
-  }
-}
-
-onMounted(() => {
-  debouncedSearch()
-})
 
 const toggleAddQuoteModal = () => {
   modalStore.openModal('addQuoteModalActive')
+}
+
+const search = ref(false)
+const handleIncrease = (searchValue) => {
+  search.value = searchValue
 }
 </script>

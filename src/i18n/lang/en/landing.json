@@ -3,5 +3,11 @@
   "get_started": "Get started",
   "sign_up": "sign up",
   "log_in": "Log In",
-  "movie_quotes": "MOVIE QUOTES"
+  "movie_quotes": "MOVIE QUOTES",
+  "first_quote": "You have to leave somethig behind to go forward",
+  "first_movie": "Interstellar",
+  "second_quote": "I think we’re just gonna have to be secretly in love with earch other and leave it that",
+  "second_movie": "The Royal Tenenbaums",
+  "third_quote": "I see in your eyes the same fear that would take the heart of me",
+  "third_movie": "The Lord of the Rings"
 }

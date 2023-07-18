@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 .modal-wrapper {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.386);
+  backdrop-filter: blur(2px);
   z-index: 999;
   cursor: pointer;
   opacity: 0;
@@ -29,4 +29,7 @@
 .modal-animation-enter-from,
 .modal-animation-leave-to {
   opacity: 0;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

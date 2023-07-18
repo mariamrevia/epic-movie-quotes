@@ -1,0 +1,22 @@
+{
+  "photo_upload": " Upload new photo",
+  "update_success": "Profile Updated successfully",
+  "update_email": "Check email for verification",
+  "cancell_button": "Cancell",
+  "edit_button": "Edit",
+  "make_changes": "Are you sure to make changes?",
+  "confirm_button": "Confirm",
+  "shoud_contain": "shoud contain:",
+  "header": "My Profile",
+  "save_button": "save changes",
+  "username": "username",
+  "password": "Password",
+  "email": "Email",
+  "new_password": "New password",
+  "new_username": "Enter new username",
+  "new_email": "Enter new email",
+  "confirm_password": "confirm password",
+  "minLength": "Minimum 3 characters",
+  "maxLength": "Maximum 15 characters",
+  "lowerCase": "Only lowercase characters"
+}

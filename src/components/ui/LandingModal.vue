@@ -14,7 +14,8 @@
 const props = defineProps({
   modalActive: {
     require: true,
-    type: Boolean
+    type: Boolean,
+    default: false
   }
 })
 </script>

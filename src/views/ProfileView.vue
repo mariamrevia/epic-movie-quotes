@@ -1,25 +1,25 @@
 <template>
   <dashboardLayout>
-    <h2 class="text-white md:flex hidden text-1.5 ml-13.6 md:mt-1.5 mt-0">My Profile</h2>
-    <div>
+    <h2 class="text-white text-1.5 mt-6 md:flex hidden">{{ $t('profile.header') }}</h2>
+    <div class="hidden md:flex">
       <Form
         v-slot="{ meta }"
         @submit="submitData"
-        class="relative md:mt-3.3 mt-0 lg:ml-9 md:ml-3 ml-0 flex flex-col items-center"
+        class="relative hidden md:mt-3.3 mt-5 md:flex flex-col items-center"
       >
-        <div class="absolute z-999 flex w-22 flex-col items-center top-5">
+        <div class="md:flex hidden absolute z-999 w-22 flex-col items-center top-5">
           <img
             :src="userStore.google_id ? userStore.image : imageUrl"
             class="h-12 w-12 bg-slate-500 rounded-full"
           />
           <input id="file-upload" class="hidden" name="image" type="file" @change="onFileChange" />
-          <label v-if="!userStore.google_id" for="file-upload" class="text-white text-1.25"
-            >Upload new photo</label
-          >
+          <label v-if="!userStore.google_id" for="file-upload" class="text-white text-1.25">{{
+            $t('profile.photo_upload')
+          }}</label>
         </div>
         <div class="md:mt-9 mt-9 flex flex-col items-center">
           <div
-            class="md:w-62 w-22 md:pb-10 pb-6 md:bg-darkgray bg-[#24222F] rounded-lg m-auto md:m-0 flex items-center justify-center"
+            class="xl:w-62 lg:w-45 md:pb-10 pb-6 md:bg-darkgray bg-[#24222F] rounded-lg m-auto md:m-0 flex items-center justify-center"
           >
             <div class="w-30 md:mt-9 mt-13.6 pt-4 flex flex-col gap-4">
               <div class="flex flex-row items-end md:justify-normal justify-center">
@@ -27,21 +27,19 @@
                   class="md:w-30 sm:22 bg-transparent border-none placeholder-slate-700"
                   name="disabledUsername"
                   :placeholder="userStore.username"
-                  label="username"
+                  :label="$t('profile.username')"
                   disabled
                 />
-                <p class="text-white text-1.25 ml-2" @click="openEdit('username')">Edit</p>
+                <p class="text-white text-1.25 ml-2" @click="openEdit('username')">
+                  {{ $t('profile.edit_button') }}
+                </p>
               </div>
 
               <ValidationProfile
                 v-if="isEdit && name === 'username'"
                 name="username"
                 :valid="meta.valid"
-                :items="[
-                  'Minimum 3 characters',
-                  'Maximum 15 characters',
-                  'Only lowercase characters'
-                ]"
+                :items="[$t('profile.minLength'), $t('profile.maxLength'), $t('profile.lowerCase')]"
               />
               <InputText
                 v-if="isEdit && name === 'username'"
@@ -49,7 +47,7 @@
                 class="w-30 placeholder-slate-700"
                 name="username"
                 rules="minLength:3|maxLength:15|lowercase"
-                label="username"
+                :label="$t('profile.username')"
               />
               <p class="text-white md:flex sm:hidden">{{ console.log(meta) }}</p>
 
@@ -57,7 +55,7 @@
                 <InputText
                   class="md:w-30 sm:22 bg-transparent border-none placeholder-slate-700"
                   name="disabledEmail"
-                  label="Email"
+                  :label="$t('profile.email')"
                   :placeholder="userStore.email"
                   disabled
                 />
@@ -66,7 +64,7 @@
                   class="text-white text-1.25 ml-2"
                   @click="openEdit('email')"
                 >
-                  Edit
+                  {{ $t('profile.edit_button') }}
                 </p>
               </div>
               <ValidationProfile
@@ -80,7 +78,7 @@
                 class="w-30 placeholder-slate-700"
                 v-model="userInfoStore.userData.email"
                 name="email"
-                label="Email"
+                :label="$t('profile.email')"
                 rules="email"
               />
               <div
@@ -93,10 +91,12 @@
                 <InputText
                   class="md:w-30 sm:22 bg-transparent border-none placeholder-slate-700"
                   name="disabledPassword"
-                  label="Password"
+                  :label="$t('profile.password')"
                   disabled
                 />
-                <p class="text-white text-1.25 ml-2" @click="openEdit('password')">Edit</p>
+                <p class="text-white text-1.25 ml-2" @click="openEdit('password')">
+                  {{ $t('profile.edit_button') }}
+                </p>
               </div>
               <ValidationProfile
                 v-if="isEdit && name === 'password'"
@@ -110,7 +110,7 @@
                 v-model="userInfoStore.userData.password"
                 name="password"
                 type="password"
-                label="new password"
+                :label="$t('profile.new_password')"
                 rules="required"
               />
               <InputText
@@ -119,27 +119,35 @@
                 type="password"
                 v-model="userInfoStore.userData.password_confirmation"
                 name="password_confirmation"
-                label="confirm new password"
+                :label="$t('profile.confirm_password')"
                 rules="required|confirmed:password"
               />
             </div>
           </div>
         </div>
-        <div class="md:flex flex-row w-full hidden justify-end items-center gap-3 mt-3.3">
-          <p @click="cancell" class="text-white text-1.5">Cancell</p>
-          <button class="bg-red w-9.7 h-2.3 border-none rounded-md self-end text-white">
-            Save Changes
+        <div class="md:flex mb-1.5 flex-row w-full hidden justify-end items-center gap-3 mt-3.3">
+          <p @click="cancell" class="text-white text-1.5">{{ $t('profile.cancell_button') }}</p>
+          <button
+            class="bg-red md:flex hidden items-center justify-center w-9.7 h-2.3 border-none rounded-md self-end text-white"
+          >
+            {{ $t('profile.save_button') }}
           </button>
         </div>
       </Form>
     </div>
+    <ProfileUpdate />
+    <ProfileUpdateSuccessModal name="profileUpdateSuccess" :text="$t('profile.update_success')" />
+    <ProfileUpdateSuccessModal name="profileEmailUpdate" :text="$t('profile.update_email')" />
   </dashboardLayout>
 </template>
 
 <script setup>
 import dashboardLayout from '@/components/DashboardLayout.vue'
 import InputText from '@/components/ui/InputText.vue'
-import ValidationProfile from '@/components/ValidationProfile.vue'
+import ValidationProfile from '@/components/profile/ValidationProfile.vue'
+import ProfileUpdate from '@/components/profile/ProfileUpdate.vue'
+import ProfileUpdateSuccessModal from '@/components/profile/ProfileUpdateSuccessModal.vue'
+import { useModalStore } from '@/stores/modal/index.js'
 import { useUserStore } from '@/stores/authUser/index.js'
 import { updateUsersInfo } from '@/services/api/profileUpdate.js'
 import { useUserInfoStore } from '@/stores/updateUserInfo/index.js'
@@ -147,9 +155,12 @@ import { getUser } from '@/services/api/auth.js'
 import { onMounted, ref } from 'vue'
 import { Form } from 'vee-validate'
 
+const userInfoStore = useUserInfoStore()
+const modalStore = useModalStore()
+const userStore = useUserStore()
 const isEdit = ref(false)
 const name = ref('')
-const userInfoStore = useUserInfoStore()
+const image = ref(null)
 
 const openEdit = (inputName) => {
   if (inputName === 'username') {
@@ -167,33 +178,39 @@ const openEdit = (inputName) => {
 const cancell = () => {
   isEdit.value = !isEdit.value
 }
-const userStore = useUserStore()
+
 onMounted(async () => {
-  console.log(userStore.google_id)
   try {
+    await userStore.fetchUser()
     const response = await getUser()
     const data = response.data
     userInfoStore.setUser(data)
-
-    console.log(userInfoStore.user)
   } catch (error) {
     console.error(error)
   }
 })
 
-const image = ref(null)
-
 const submitData = async () => {
-  await updateUsersInfo({
-    user: userInfoStore.user.id,
-    username: userInfoStore.userData.username,
-    email: userInfoStore.userData.email,
-    password: userInfoStore.userData.password,
-    password_confirmation: userInfoStore.userData.password_confirmation,
-    image: image.value
-  })
-
-  await userStore.fetchUser()
+  try {
+    const response = await updateUsersInfo({
+      user: userInfoStore.user.id,
+      username: userInfoStore.userData.username,
+      email: userInfoStore.userData.email,
+      password: userInfoStore.userData.password,
+      password_confirmation: userInfoStore.userData.password_confirmation,
+      image: image.value
+    })
+    if (response.data.message.includes('UserInfo updated successfully')) {
+      modalStore.openModal('profileUpdateSuccess')
+    } else if (
+      response.data.message.includes('Please check your email to verify the new email address')
+    ) {
+      modalStore.openModal('profileEmailUpdate')
+    }
+    await userStore.fetchUser()
+  } catch (error) {
+    console.log(error)
+  }
 }
 const imageUrl = ref(`${import.meta.env.VITE_API_BASE_URL}/storage/${userStore.image}`)
 const onFileChange = (event) => {

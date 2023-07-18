@@ -12,7 +12,7 @@ export async function storeMovies(data) {
   })
 }
 export async function updateMovies(data) {
-  return await axios.post(`/movies/${data.movieId}`, data, {
+  return await axios.post(`/movies/${data.movie}`, data, {
     headers: {
       'Content-Type': 'multipart/form-data',
       'X-HTTP-Method-Override': 'PATCH'
