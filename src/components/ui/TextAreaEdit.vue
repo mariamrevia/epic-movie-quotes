@@ -61,7 +61,6 @@ const props = defineProps({
 
 const emits = defineEmits(['update:modelValue'])
 const updateText = (newValue) => {
-  console.log(newValue)
   emits('update:modelValue', newValue)
 }
 </script>

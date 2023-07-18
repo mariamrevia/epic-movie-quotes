@@ -175,7 +175,6 @@ const submitData = async () => {
       image: movieStore.createMovieData.image
     })
 
-    console.log(storeResponse)
     if (storeResponse.status === 201) {
       modalStore.closeModal('AddMovieModalActive')
     }
