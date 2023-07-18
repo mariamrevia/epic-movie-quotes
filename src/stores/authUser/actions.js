@@ -3,7 +3,6 @@ export default {
   async fetchUser() {
     try {
       const user = await getUser()
-      console.log(user)
       this.username = user.data.username
       this.user = user.data.id
       this.email = user.data.email
@@ -15,8 +14,6 @@ export default {
       } else {
         this.verified === user.data.email_verified_at
       }
-
-      console.log(this.isAuthenticated)
     } catch (error) {
       console.error(error)
     }

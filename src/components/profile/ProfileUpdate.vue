@@ -6,10 +6,7 @@
     >
       <div class="w-22 m-auto flex flex-col items-center justify-center">
         <div class="flex w-22 flex-col items-center top-5">
-          <img
-            :src="userStore.google_id ? userStore.image : imageUrl"
-            class="h-12 w-12 bg-slate-500 rounded-full"
-          />
+          <img :src="getImage" class="h-12 w-12 bg-slate-500 rounded-full" />
           <input
             id="file-uploaded"
             class="hidden"
@@ -142,7 +139,7 @@ import { updateUsersInfo } from '@/services/api/profileUpdate.js'
 import { useModalStore } from '@/stores/modal/index.js'
 import { useUserInfoStore } from '@/stores/updateUserInfo/index.js'
 import { Form } from 'vee-validate'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import ProfileUpdateSuccessModal from '@/components/profile/ProfileUpdateSuccessModal.vue'
 import ProfileUpdateModal from '@/components/profile/ProfileUpdateModal.vue'
 import InputText from '@/components/ui/InputText.vue'
@@ -187,4 +184,13 @@ const onFileChange = (event) => {
     imageUrl.value = URL.createObjectURL(file)
   }
 }
+const getImage = computed(() => {
+  if (userStore.google_id) {
+    return userStore.image
+  } else if (userStore.image === null) {
+    return 'https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg'
+  } else {
+    return `${import.meta.env.VITE_API_BASE_URL}/storage/${userStore.image}`
+  }
+})
 </script>

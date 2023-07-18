@@ -5,10 +5,11 @@
   "reacted_like": "Reacted to your quote",
   "commented_quote": " Commented to you movie Quote",
   "log_out": "Log Out",
-  "search_with_movie": "Enter @ to search movies",
-  "search_with_quote": "Enter # to search quotes",
+  "search_with_movie": "Enter {hash} to search movies",
+  "search_with_quote": "Enter  {at} to search quotes",
+  "search": "Enter {hash} to search movies, Enter {at} to search quotes",
   "edit_profile": "Edit your profile",
   "news_feed": "News Feed",
   "list_movies": "List of movies",
-  "search": "search by"
+  "search_by": "search by"
 }

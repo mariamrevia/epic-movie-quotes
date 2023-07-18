@@ -25,19 +25,19 @@
         />
 
         <Field
-          class="xl:w-56 lg:w-37.5 w-20 h-2.3 rounded-md border-0.1 placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
+          class="xl:w-56 lg:w-37.5 pl-2 w-20 h-2.3 rounded-md border-0.1 placeholder-white text-white bg-transparent border-gray bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
           name="genre"
           rules="required"
           v-model="movieStore.createMovieData.genre"
         >
           <div
-            class="xl:w-56 lg:w-37.5 w-20 h-2.3 mt-1.25 rounded-md items-center border-0.1 gap-2 placeholder-white text-white bg-transparent relative border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none flex flex-row"
+            class="xl:w-56 lg:w-37.5 w-20 h-2.3 mt-1.25 rounded-md items-center border-0.1 gap-2 placeholder-white text-white bg-transparent relative border-gray bg-light-gray focus-within:ring focus:shadow-shadow outline-none flex flex-row"
             @click="toggleDropdown"
           >
             <div
               v-for="title in movieStore.genreTitle"
               :key="title"
-              class="text-white justify-between h-1.5 p-2 border ml-1 rounded-sm flex items-center bg-[#6C757D] border-none gap-2"
+              class="text-white justify-between h-1.5 p-2 border ml-1 rounded-sm flex items-center bg-lightGray border-none gap-2"
             >
               {{ title }}
               <IconCross class="fill-white" @click.stop="deleteGenre(title)" />
@@ -57,7 +57,9 @@
                 {{ genre.title }}
               </div>
             </div>
-            {{ select() }}
+            <div class="pl-6">
+              {{ select() }}
+            </div>
           </div>
           <ErrorMessage class="text-red-700" name="genre" />
         </Field>
@@ -155,7 +157,7 @@ const isModalActive = modalStore.isModalActive
 
 const submitData = async () => {
   try {
-    await storeMovies({
+    const storeResponse = await storeMovies({
       name: {
         en: movieStore.createMovieData.name.en,
         ka: movieStore.createMovieData.name.ka
@@ -173,6 +175,10 @@ const submitData = async () => {
       image: movieStore.createMovieData.image
     })
 
+    console.log(storeResponse)
+    if (storeResponse.status === 201) {
+      modalStore.closeModal('AddMovieModalActive')
+    }
     const response = await getMovies()
     const data = response.data
     movieStore.setMovies(data.data)

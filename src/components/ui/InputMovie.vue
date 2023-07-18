@@ -6,7 +6,7 @@
       <Field
         v-bind="$attrs"
         :value="props.value"
-        class="xl:w-56 lg:w-37.5 w-20 h-2.3 rounded-md border-0.1 placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
+        class="xl:w-56 lg:w-37.5 px-6 w-20 h-2.3 rounded-md border-0.1 placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
         @input="updateText($event.target.value)"
         :type="props.type"
         :name="props.name"

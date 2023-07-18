@@ -2,7 +2,7 @@
   <div class="w-22 h-31 p-12 flex flex-col fixed">
     <div class="flex flex-row">
       <img
-        :src="authUserStore.google_id ? authUserStore.image : imageUrl"
+        :src="image"
         @onChange="onFileChange"
         :class="
           isActivePage('profile')
@@ -51,7 +51,7 @@
 import { useUserStore } from '@/stores/authUser'
 import { useRouter } from 'vue-router'
 import { useRoute } from 'vue-router'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import IconCamera from '@/components/icons/IconCamera.vue'
 import IconHouse from '@/components/icons/IconHouse.vue'
 
@@ -78,4 +78,14 @@ const onFileChange = (event) => {
     imageUrl.value = URL.createObjectURL(file)
   }
 }
+
+const image = computed(() => {
+  if (authUserStore.google_id) {
+    return authUserStore.image
+  } else if (authUserStore.image === null) {
+    return 'https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg'
+  } else {
+    return `${import.meta.env.VITE_API_BASE_URL}/storage/${authUserStore.image}`
+  }
+})
 </script>

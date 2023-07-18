@@ -108,7 +108,6 @@ onMounted(async () => {
   try {
     const response = await getMovies()
     const data = response.data
-    console.log(data)
     movieStore.setMovies(data.data)
   } catch (error) {
     console.error(error)
@@ -124,7 +123,7 @@ const selectedMovie = (id, title) => {
 }
 const submitData = async () => {
   try {
-    await storeQuotes({
+    const storeResponse = await storeQuotes({
       body: {
         en: quoteStore.quoteData.body.en,
         ka: quoteStore.quoteData.body.ka
@@ -132,6 +131,10 @@ const submitData = async () => {
       image: quoteStore.quoteData.image,
       movie_id: quoteStore.quoteData.movie
     })
+
+    if (storeResponse.status === 201) {
+      modalStore.closeModal('addQuoteModalActive')
+    }
     const response = await getQuotes()
     quoteStore.updateQuotes(response.data.data)
 

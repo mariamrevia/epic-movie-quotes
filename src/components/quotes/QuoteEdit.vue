@@ -28,7 +28,7 @@
           rules="required|alphabetKa"
         />
         <div
-          class="md:w-56 mt-1.25 rounded-md border-0.1 flex items-center text-white border-[#6C757D] focus-within:ring focus:shadow-shadow outline-none"
+          class="md:w-56 mt-1.25 rounded-md border-0.1 flex items-center text-white border-gray focus-within:ring focus:shadow-shadow outline-none"
         >
           <img class="md:w-56 md:h-32 w-20 h-19" :src="imageUrl || initialImageUrl" />
         </div>
@@ -58,7 +58,7 @@
 import { Form, Field } from 'vee-validate'
 import { useModalStore } from '@/stores/modal'
 import { getMovies } from '@/services/api/movies.js'
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { updateQuotes } from '@/services/api/quotes.js'
 import { deleteQuote } from '@/services/api/quotes'
 import { useMovieStore } from '@/stores/movies/index.js'
@@ -98,11 +98,6 @@ const closeModal = (event) => {
   }
 }
 
-onMounted(() => {
-  console.log(editQuote.value)
-  console.log(getFilteredQuotes.value[0])
-})
-
 const image = ref(null)
 const onFileChange = (event) => {
   const file = event.target.files[0]
@@ -110,12 +105,9 @@ const onFileChange = (event) => {
     imageUrl.value = URL.createObjectURL(file)
   }
   image.value = file
-  console.log(image.value)
 }
 const emits = defineEmits(['movieUpdated'])
 const submitData = async () => {
-  console.log(image.value)
-
   try {
     const response = await updateQuotes({
       body: {

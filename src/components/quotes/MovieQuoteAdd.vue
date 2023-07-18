@@ -8,7 +8,7 @@
   >
     <Form
       @submit="submitData"
-      class="md:w-60 w-full fixed flex flex-col md:mt-5 pb-13 md:pb-10 items-center bg-[#11101A] rounded-lg"
+      class="md:w-60 w-full fixed flex flex-col md:mt-5 pb-13 md:pb-10 items-center bg-darkgray rounded-lg"
     >
       <HeaderEditAdd modalName="createQuoteModalActive" :heading="$t('quote.add_quote')" />
       <div
@@ -123,6 +123,9 @@ const submitData = async () => {
       image: quoteStore.quoteData.image,
       movie_id: movie.value.id
     })
+    if (response.status === 201) {
+      modalStore.closeModal('createQuoteModalActive')
+    }
 
     if (response.data && response.data.data) {
       const createdQuote = response.data.data
@@ -130,7 +133,6 @@ const submitData = async () => {
     } else {
       console.error('invalid response')
     }
-    console.log(movie.value)
   } catch (errors) {
     console.log(errors)
   }

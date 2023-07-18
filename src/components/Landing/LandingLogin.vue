@@ -31,7 +31,13 @@
           />
           <div v-if="errors.password" class="text-red-500 mt-1">{{ errors.password[0] }}</div>
 
-          <div class="flex flex-row justify-between text-white w-full mt-4">
+          <div
+            :class="
+              $i18n.locale === 'en'
+                ? 'flex flex-row items-center justify-between text-white w-full mt-4'
+                : 'flex flex-row items-center justify-center gap-3 text-white w-full mt-4'
+            "
+          >
             <div class="flex flex-row items-center gap-1">
               <input type="checkbox" name="remember" id="remember" />
               <p>{{ $t('login.remmeber_me') }}</p>

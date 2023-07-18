@@ -100,7 +100,6 @@ onMounted(async () => {
     const data = response.data
     movieStore.setMovies(data.data)
     movieStore.setGenres(data.genres)
-    console.log(response)
   } catch (error) {
     console.error(error)
   }
@@ -115,7 +114,6 @@ const modalStore = useModalStore()
 
 const toggleAddMovieModal = () => {
   modalStore.openModal('AddMovieModalActive')
-  console.log('sdfsdf')
 }
 
 const navigate = (id) => {

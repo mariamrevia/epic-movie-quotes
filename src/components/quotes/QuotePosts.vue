@@ -84,14 +84,7 @@
 
 <script setup>
 import { Form, Field } from 'vee-validate'
-import {
-  getQuotes,
-  storeComments,
-  storeLikes,
-  destroyLikes,
-  likeNotification,
-  commentNotification
-} from '@/services/api/quotes'
+import * as Api from '@/services/api/quotes.js'
 import { onMounted, ref, onUnmounted } from 'vue'
 import { useQuoteStore } from '@/stores/quotes/index.js'
 import { useUserStore } from '@/stores/authUser/index.js'
@@ -106,7 +99,7 @@ const hasMoreQuotes = ref(true)
 
 const fetchQuotes = async () => {
   try {
-    const response = await getQuotes(currentPage.value)
+    const response = await Api.getQuotes(currentPage.value)
     const newQuotes = response.data.data
     if (newQuotes.length === 0) {
       hasMoreQuotes.value = false
@@ -159,7 +152,7 @@ onUnmounted(() => {
 
 let userLikes = {}
 onMounted(async () => {
-  const response = await getQuotes()
+  const response = await Api.getQuotes()
   quoteStore.updateQuotes(response.data.data)
 
   quoteStore.quotes.forEach((quote) => {
@@ -180,11 +173,11 @@ const toggleLike = async (quoteId, movieId) => {
 
   if (isLiked) {
     userLikes[quoteId] = false
-    await destroyLikes({ quote_id: quoteId })
+    await Api.destroyLikes({ quote_id: quoteId })
   } else {
     userLikes[quoteId] = true
-    await storeLikes(quoteId)
-    await likeNotification(movieId)
+    await Api.storeLikes(quoteId)
+    await Api.likeNotification(movieId)
   }
 }
 
@@ -193,11 +186,12 @@ const submitData = async (id, movieId) => {
   quote_id.value = id
   const quote = quoteStore.quotes.find((quote) => quote.id === id)
   try {
-    await storeComments({
+    await Api.storeComments({
       body: quote.commentData.body,
       quote_id: quote_id.value
     })
-    await commentNotification(movieId)
+    quote.commentData.body = ''
+    await Api.commentNotification(movieId)
   } catch (error) {
     console.log(error)
   }
@@ -236,15 +230,6 @@ const getImage = (image) => {
     return image
   }
 }
-// const userImage = (image) => {
-//   if (image.startsWith('images')) {
-//     return `${import.meta.env.VITE_API_BASE_URL}/storage/${image}`
-//   } else {
-//     return image
-//   }
-
-// }
-
 const getImageURL = (image) => {
   return `${import.meta.env.VITE_API_BASE_URL}/storage/${image}`
 }

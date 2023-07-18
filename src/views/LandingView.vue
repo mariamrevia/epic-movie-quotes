@@ -4,12 +4,12 @@
     <div
       class="bg-landingPage h-53 border-none min-w-full flex flex-col items-center justify-center"
     >
-      <LandingFormRegister />
-      <LandingFormLogin />
+      <LandingRegister />
+      <LandingLogin />
       <LandingRegisterEmailSent />
       <LandingRegisterEmailConfirm />
       <LandingPasswordVerifyEmail />
-      <LandingFormPasswordReset />
+      <LandingPasswordReset />
       <LandingPasswordResetSuccess />
       <LandingPasswordEmailSent />
 
@@ -59,16 +59,16 @@
   </div>
 </template>
 <script setup>
-import LandingFormRegister from '@/components/Landing/LandingFormRegister.vue'
+import { useModalStore } from '@/stores/modal'
+import LandingRegister from '@/components/Landing/LandingRegister.vue'
 import LandingPasswordResetSuccess from '@/components/Landing/LandingPasswordResetSuccess.vue'
-import LandingFormLogin from '@/components/Landing/LandingFormLogin.vue'
+import LandingLogin from '@/components/Landing/LandingLogin.vue'
 import LandingRegisterEmailSent from '@/components/Landing/LandingRegisterEmailSent.vue'
 import LandingRegisterEmailConfirm from '@/components/Landing/LandingRegisterEmailConfirm.vue'
 import LandingPasswordVerifyEmail from '@/components/Landing/LandingPasswordVerifyEmail.vue'
-import LandingFormPasswordReset from '@/components/Landing/LandingFormPasswordReset.vue'
+import LandingPasswordReset from '@/components/Landing/LandingPasswordReset.vue'
 import LandingPasswordEmailSent from '@/components/Landing/LandingPasswordEmailSent.vue'
 import TheHeader from '@/components/shared/TheHeader.vue'
-import { useModalStore } from '@/stores/modal'
 
 const modalStore = useModalStore()
 const goToLogIn = () => {

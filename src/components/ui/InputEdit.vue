@@ -9,7 +9,7 @@
         v-bind="$attrs"
         :value="props.value"
         :placeholder="placeholder"
-        class="h-2.3 placeholder-white text-white bg-transparent md:w-56 sm:33.6 w-20 ml-1.5 border-[#6C757D] outline-none"
+        class="h-2.3 placeholder-white px-6 text-white bg-transparent md:w-56 sm:33.6 w-20 ml-1.5 border-[#6C757D] outline-none"
         @input="updateText($event.target.value)"
         :type="props.type"
         :name="props.name"

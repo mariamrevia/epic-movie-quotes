@@ -88,6 +88,7 @@ export default {
         3.25: '3.25rem',
         3.6: '3.6rem',
         43: '43rem',
+        40: '40rem',
         10: '9rem',
         12: '12rem',
         8.3: '8.3rem',
@@ -139,6 +140,7 @@ export default {
         'dark-gray': '#6C757D',
         shadow: '0px 0px 0px 4px rgba(13, 110, 253, 0.25);',
         whiteGray: '#CED4DA',
+        gray: '#6C757D',
         '#24222F': '#24222F'
       },
       gap: {
@@ -147,6 +149,7 @@ export default {
 
       backgroundColor: {
         '#24222F': '#24222F',
+        darkPurple: '#221f32',
         lightRed: '#E33812',
         purple: 'rgba(151, 71, 255, 0.4)',
         red: '#E31221',
@@ -154,6 +157,7 @@ export default {
         'light-gray': '#CED4DA',
         blur: 'rgba(0, 0, 0, 0.5)',
         darkgray: '#11101A',
+        lightGray: '#6C757D',
         gradient: 'linear-gradient(187.16deg, #181623 0.7%, #191725 51.65%, #0D0B14 98.75%)',
         modalgradient:
           'linear-gradient(112.94deg, rgba(239, 239, 239, 0.4) -1.81%, rgba(239, 239, 239, 0.00514528) 102.5%, rgba(1, 1, 1, 0.00260417) 102.51%, rgba(239, 239, 239, 0.05) 102.52%);',
@@ -172,12 +176,15 @@ export default {
 
       inset: {
         0.8: '0.8rem',
+        0.1: '0.1rem',
         2.5: '2.5rem',
         3: '2rem',
+        3.1: '3rem',
         7: '7rem',
         8: '8rem',
         9: '9rem',
         10: '10rem',
+        11: '11rem',
         12: '12rem',
         3.3: '3.3rem',
         75: '75rem',

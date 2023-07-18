@@ -9,14 +9,14 @@
         class="md:w-60 w-full z-10 fixed flex flex-col md:mt-5 pb-13 md:pb-4 items-center bg-darkgray rounded-lg"
       >
         <HeaderEditAdd modalName="editMovieModalActive" :heading="$t('movie.edit_movie')" />
-        <inputEdit
+        <InputEdit
           name="name[en]"
           rules="required|alphabetEn"
           v-model="editMovie.name.en"
           text="Movie name:"
           lang="Eng"
         />
-        <inputEdit
+        <InputEdit
           name="name[ka]"
           rules="required|alphabetKa"
           v-model="editMovie.name.ka"
@@ -36,10 +36,10 @@
             <div
               v-for="genre in editMovie.genres"
               :key="genre.index"
-              class="text-white justify-between h-1.5 p-2 border ml-1 rounded-sm flex items-center bg-[#6C757D] border-none gap-2"
+              class="text-white pl-2 justify-between h-1.5 p-2 border ml-1 rounded-sm flex items-center bg-[#6C757D] border-none gap-2"
             >
               {{ genre.title }}
-              <iconCross class="fill-white" @click.stop="deleteGenre(genre.id)" />
+              <IconCross class="fill-white" @click.stop="deleteGenre(genre.id)" />
             </div>
 
             <div
@@ -131,7 +131,7 @@ import { computed, ref } from 'vue'
 import LandingModal from '@/components/ui/LandingModal.vue'
 import InputEdit from '@/components/ui/InputEdit.vue'
 import ButtonBase from '@/components/ui/ButtonBase.vue'
-import iconCross from '@/components/icons/IconCross.vue'
+import IconCross from '@/components/icons/IconCross.vue'
 import HeaderEditAdd from '@/components/shared/HeaderEditAdd.vue'
 import TextAreaEdit from '@/components/ui/TextAreaEdit.vue'
 const props = defineProps({

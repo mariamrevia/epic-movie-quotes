@@ -185,8 +185,6 @@ onMounted(async () => {
     const response = await getUser()
     const data = response.data
     userInfoStore.setUser(data)
-
-    console.log(userInfoStore.user)
   } catch (error) {
     console.error(error)
   }

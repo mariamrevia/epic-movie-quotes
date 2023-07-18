@@ -1,12 +1,15 @@
 <template>
-  <div class="flex flex-row gap-2 ml-1.5">
+  <div class="flex flex-row gap-2 ml-1.5" @click="increase">
     <IconSearch />
     <input
       class="bg-transparent outline-none text-white"
+      :class="{ 'md:border-b pb-1 pt-1 2xl:w-40 lg:w-17.5 w-17.5': searchBar }"
       type="text"
       v-model="searchQuery"
       @input="performSearch"
-      :placeholder="$t('dashboard.search')"
+      :placeholder="
+        searchBar ? $t('dashboard.search', { at: '@', hash: '#' }) : $t('dashboard.search_by')
+      "
     />
   </div>
 </template>
@@ -46,4 +49,10 @@ async function performSearch() {
 onMounted(() => {
   debouncedSearch()
 })
+const emits = defineEmits(['search'])
+const searchBar = ref(false)
+const increase = () => {
+  searchBar.value = !searchBar.value
+  emits('search', searchBar.value)
+}
 </script>

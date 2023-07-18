@@ -17,7 +17,6 @@ onMounted(async () => {
     await userStore.fetchUser()
     const response = await getNotifications(userStore.user)
     notificationStore.setNotification(response.data.data)
-    console.log(notificationStore.notifications)
   } catch (error) {
     console.log(error)
   }
@@ -25,7 +24,6 @@ onMounted(async () => {
 
   console.log(userStore.user)
   window.Echo.private(`likes.${userStore.user}`).listen('Notification', (data) => {
-    console.log(data)
     notificationStore.notifications.unshift(data.notification)
     notificationStore.notificationCount++
   })

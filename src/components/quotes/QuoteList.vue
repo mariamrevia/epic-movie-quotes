@@ -116,8 +116,6 @@ const quoteDelete = async (id) => {
 const quoteToEdit = ref(null)
 const toggleQuoteModal = (quoteId, modalName) => {
   quoteToEdit.value = quoteId
-  console.log(quoteToEdit.value)
   modalStore.openModal(modalName)
-  console.log('hehe')
 }
 </script>

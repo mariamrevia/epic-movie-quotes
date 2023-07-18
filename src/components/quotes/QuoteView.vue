@@ -86,7 +86,7 @@
 
 <script setup>
 import { Form, Field } from 'vee-validate'
-import { getQuotes, storeComments, storeLikes, destroyLikes } from '@/services/api/quotes'
+import * as Api from '@/services/api/quotes.js'
 import { useQuoteStore } from '@/stores/quotes/index.js'
 import { useModalStore } from '@/stores/modal'
 import { onMounted, onUnmounted, computed } from 'vue'
@@ -116,7 +116,7 @@ const getFilteredQuotes = computed(() => {
 
 onMounted(async () => {
   try {
-    const response = await getQuotes()
+    const response = await Api.getQuotes()
     quoteStore.updateQuotes(response.data.data)
 
     quoteStore.quotes.forEach((quote) => {
@@ -132,7 +132,7 @@ onMounted(async () => {
 
 let userLikes = {}
 onMounted(async () => {
-  const response = await getQuotes()
+  const response = await Api.getQuotes()
   quoteStore.updateQuotes(response.data.data)
   quoteStore.quotes.forEach((quote) => {
     quote.commentData = {
@@ -150,7 +150,7 @@ const toggleLike = async (quoteId) => {
   const isLiked = userLikes[quoteId]
   if (isLiked) {
     userLikes[quoteId] = false
-    await destroyLikes({ quote_id: quoteId })
+    await Api.destroyLikes({ quote_id: quoteId })
     const quote = quoteStore.quotes.find((quote) => quote.id === quoteId)
 
     if (quote) {
@@ -158,27 +158,25 @@ const toggleLike = async (quoteId) => {
     }
   } else {
     userLikes[quoteId] = true
-    const response = await storeLikes(quoteId)
+    const response = await Api.storeLikes(quoteId)
     const quote = quoteStore.quotes.find((quote) => quote.id === response.data.data.quote_id)
     const like = response.data.data
     if (quote) {
       quote.likes.push({ id: like.id })
     }
-
-    console.log(response)
   }
 }
 const submitData = async (id) => {
   const quote = quoteStore.quotes.find((quote) => quote.id === id)
   try {
-    await storeComments({
+    await Api.storeComments({
       body: quote.commentData.body,
       quote_id: id
     })
   } catch (error) {
     console.log(error)
   }
-  const response = await getQuotes()
+  const response = await Api.getQuotes()
   quoteStore.updateQuotes(response.data.data)
 
   quoteStore.quotes.forEach((quote) => {

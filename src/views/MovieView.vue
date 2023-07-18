@@ -6,7 +6,7 @@
           <h2 class="mb-1.5 text-1.5 text-whiteGray">{{ $t('movie.movie_discription') }}</h2>
           <img
             class="lg:w-50 md:37.5 w-22 md:h-27 h-23.4 object-center rounded-2xl"
-            :src="getImageURL(movie && movie.image) || ''"
+            :src="getImageURL(movie && movie.image)"
           />
         </div>
         <div class="text-white">
@@ -57,13 +57,12 @@
         </button>
         <div class="flex flex-row gap-1 md:mt-0 mt-1.25">
           <h2 class="text-1.5">{{ $t('movie.quotes') }}</h2>
-          <p class="text-1.5">Total({{ movie && movie.quotes.length }})</p>
+          <p class="text-1.5">{{ $t('movie.total') }}({{ movie && movie.quotes.length }})</p>
         </div>
       </div>
       <MovieQuoteAdd v-if="movie" :movie="movie" />
       <QuoteList v-if="movie" :movie="movie" @movieUpdated="handleMovieUpdated" />
     </div>
-    <h2 class="text-caramel text-4xl mt-9" v-else>Movie was Deleted</h2>
   </DashboardLayout>
   <MovieEdit v-if="movie" :movie="movie" :genres="genres" @movieUpdated="handleMovieUpdated" />
 </template>
@@ -103,8 +102,6 @@ onMounted(async () => {
       movieStore.setGenres(response.data.genres)
       genres.value = response.data.genres
     }
-
-    console.log(movieStore.movieData.value)
   } catch (error) {
     console.log(error)
   }

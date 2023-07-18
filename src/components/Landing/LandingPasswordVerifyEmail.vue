@@ -28,7 +28,7 @@
           <p class="mt-4 text-dark-gray w-96 text-center">
             {{ $t('passwordReset.note_instractions') }}
           </p>
-          <LandingModalButton type="submit" text="Send instructions" />
+          <LandingModalButton type="submit" :text="$t('passwordReset.instraction_button')" />
 
           <button @click="goToLogIn" class="border-none text-dark-gray mt-2">
             {{ $t('passwordReset.back_log_in') }}

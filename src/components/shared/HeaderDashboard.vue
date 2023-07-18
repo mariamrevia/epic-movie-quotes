@@ -3,7 +3,7 @@
     :class="
       searchModal
         ? 'hidden'
-        : 'w-screen flex fixed flex-row items-center bg-[#221f32] h-5 justify-between '
+        : 'w-screen flex fixed flex-row items-center bg-darkPurple h-5 justify-between '
     "
   >
     <h2 class="text-caramel md:ml-4.4 hidden items-center ml-4 md:flex">
@@ -28,6 +28,8 @@
           {{ notificationStore.notificationCount }}
         </div>
       </div>
+
+      <IconNotification v-if="open" class="h2 w-2 absolute top-3.1" />
       <div
         v-if="open"
         class="no-scrollbar z-10 flex overflow-y-auto h-41 flex-col md:w-58 w-25 absolute md:right-[5%] right-0 top-[90%] rounded-lg bg-black gap-2 z-999 p-8"
@@ -41,7 +43,7 @@
           :key="notification.index"
         >
           <div
-            class="flex flex-row text-white md:w-54 md:22 h-7.3 items-center gap-2 border-0.1 border-[#6C757D] rounded-md"
+            class="flex flex-row text-white md:w-54 md:22 h-7.3 items-center gap-2 border-0.1 border-gray rounded-md"
           >
             <div class="flex flex-row gap-2">
               <div class="flex flex-col items-center">
@@ -112,8 +114,8 @@
     </div>
     <hr class="max-h-0 mt-1.5 bg-whiteGray w-full" />
     <div class="text-whiteGray mt-3.3 ml-6 gap-2 flex flex-col">
-      <p>{{ $t('dashboard.search_with_movie') }}</p>
-      <p>{{ $t('dashboard.search_with_quote') }}</p>
+      <p>{{ $t('dashboard.search_with_movie', { hash: '#' }) }}</p>
+      <p>{{ $t('dashboard.search_with_quote', { at: '@' }) }}</p>
     </div>
   </div>
 </template>
@@ -136,6 +138,7 @@ import IconHeartFill from '@/components/icons/IconHeartFill.vue'
 import IconChat from '@/components/icons/IconChat.vue'
 import IconSearch from '@/components/icons/IconSearch.vue'
 import IconGoBack from '@/components/icons/IconGoBack.vue'
+import IconNotification from '@/components/icons/IconNotification.vue'
 
 const notificationStore = useNotificationStore()
 const userStore = useUserStore()
@@ -156,7 +159,6 @@ onMounted(() => {
 
   notificationStore.notifications.forEach((notification) => {
     const notificationTimestamp = new Date(notification.created_at)
-    console.log(notificationTimestamp)
     const currentTime = new Date()
     const timeDifference = formatDistanceToNow(notificationTimestamp, {
       addSuffix: true,

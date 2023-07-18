@@ -23,7 +23,7 @@
             :placeholder="$t('placeholders.name')"
           />
           <div v-if="errors.username" class="text-red-500 mt-1">{{ errors.username[0] }}</div>
-          <ErrorMessage name="username" as="div" class="text-red-500 mt-1" />
+
           <InputText
             name="email"
             class="w-22"
@@ -75,7 +75,7 @@
 </template>
 
 <script setup>
-import { Form, ErrorMessage } from 'vee-validate'
+import { Form } from 'vee-validate'
 import { useModalStore } from '@/stores/modal/index.js'
 import { useRegisterStore } from '@/stores/register'
 import { register } from '@/services/api/auth.js'
