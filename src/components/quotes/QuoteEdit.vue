@@ -1,6 +1,9 @@
 <template>
   <div
-    :class="['modal-wrapper', { 'modal-wrapper--active': isModalActive('editQuoteModalActive') }]"
+    :class="[
+      'modal-wrapper overflow-y-auto',
+      { 'modal-wrapper--active': isModalActive('editQuoteModalActive') }
+    ]"
     @click="closeModal"
   >
     <LandingModal :modalActive="isModalActive('editQuoteModalActive')">
