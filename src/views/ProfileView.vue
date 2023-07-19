@@ -49,8 +49,6 @@
                 rules="minLength:3|maxLength:15|lowercase"
                 :label="$t('profile.username')"
               />
-              <p class="text-white md:flex sm:hidden">{{ console.log(meta) }}</p>
-
               <div class="flex flex-row items-end md:justify-normal justify-center">
                 <InputText
                   class="md:w-30 sm:22 bg-transparent border-none placeholder-slate-700"

@@ -127,7 +127,6 @@ const fetchQuotes = async () => {
 onMounted(async () => {
   try {
     await fetchQuotes()
-    console.log(quoteStore.quotes)
   } catch (error) {
     console.log(error)
   }

@@ -44,7 +44,6 @@ export async function deleteQuote(quote_id) {
   return await axios.delete(`/quotes/${quote_id}`)
 }
 export async function getNotifications(user) {
-  console.log(user)
   return await axios.get(`/notifications/${user}`)
 }
 

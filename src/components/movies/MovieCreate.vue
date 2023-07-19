@@ -1,6 +1,9 @@
 <template>
   <div
-    :class="['modal-wrapper', { 'modal-wrapper--active': isModalActive('AddMovieModalActive') }]"
+    :class="[
+      'modal-wrapper overflow-y-auto',
+      { 'modal-wrapper--active': isModalActive('AddMovieModalActive') }
+    ]"
     @click="closeModal"
   >
     <LandingModal :modalActive="isModalActive('AddMovieModalActive')">
@@ -16,6 +19,7 @@
           rules="required|alphabetEn"
           lang="Eng"
         />
+        <div v-if="errors['name.en']" class="text-red-500 mt-1">{{ errors['name.en'][0] }}</div>
         <InputMovie
           name="name[ka]"
           v-model="movieStore.createMovieData.name.ka"
@@ -23,6 +27,7 @@
           rules="required|alphabetKa"
           lang="Geo"
         />
+        <div v-if="errors['name.ka']" class="text-red-500 mt-1">{{ errors['name.ka'][0] }}</div>
 
         <Field
           class="xl:w-56 lg:w-37.5 pl-2 w-20 h-2.3 rounded-md border-0.1 placeholder-white text-white bg-transparent border-gray bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
@@ -155,6 +160,7 @@ const select = () => {
 }
 const isModalActive = modalStore.isModalActive
 
+const errors = ref({})
 const submitData = async () => {
   try {
     const storeResponse = await storeMovies({
@@ -182,7 +188,10 @@ const submitData = async () => {
     const data = response.data
     movieStore.setMovies(data.data)
   } catch (error) {
-    console.log(error)
+    if (error.response && error.response.data && error.response.data.errors) {
+      errors.value = error.response.data.errors
+      console.log(errors.value)
+    }
   }
 }
 

@@ -86,7 +86,7 @@
       </div>
 
       <ProfileUpdateModal @confirm="submitForm" name="usernameUpdateModalActive">
-        <div class="bg-[#24222F] h-14 w-full flex flex-col items-center justify-center">
+        <div class="bg-#24222F h-14 w-full flex flex-col items-center justify-center">
           <InputText
             v-model="userInfoStore.userData.username"
             class="w-20 placeholder-slate-700 bg-whiteGray"
@@ -97,7 +97,7 @@
         </div>
       </ProfileUpdateModal>
       <ProfileUpdateModal @confirm="submitForm" name="emailUpdateModalActive">
-        <div class="bg-[#24222F] h-14 w-full flex flex-col items-center justify-center">
+        <div class="bg-#24222F h-14 w-full flex flex-col items-center justify-center">
           <InputText
             class="w-20 placeholder-slate-700 bg-whiteGray"
             v-model="userInfoStore.userData.email"
@@ -108,7 +108,7 @@
         </div>
       </ProfileUpdateModal>
       <ProfileUpdateModal @confirm="submitForm" name="passwordUpdateModalActive">
-        <div class="bg-[#24222F] h-14 w-full flex flex-col items-center justify-center">
+        <div class="bg-#24222F h-14 w-full flex flex-col items-center justify-center">
           <InputText
             class="w-20 placeholder-slate-700 bg-whiteGray"
             v-model="userInfoStore.userData.password"
@@ -161,7 +161,6 @@ const submitForm = async () => {
       password_confirmation: userInfoStore.userData.password_confirmation,
       image: image.value
     })
-    console.log(response.data.message)
     if (response.data.message.includes('UserInfo updated successfully')) {
       modalStore.openModal('profileUpdateSuccess')
     } else if (

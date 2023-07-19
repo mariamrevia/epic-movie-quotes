@@ -1,6 +1,9 @@
 <template>
   <div
-    :class="['modal-wrapper', { 'modal-wrapper--active': isModalActive('editMovieModalActive') }]"
+    :class="[
+      'modal-wrapper overflow-y-auto',
+      { 'modal-wrapper--active': isModalActive('editMovieModalActive') }
+    ]"
     @click="closeModal"
   >
     <LandingModal :modalActive="isModalActive('editMovieModalActive')">
@@ -194,7 +197,6 @@ const submitData = async () => {
     movieStore.setMovies([movie])
 
     emits('movieUpdated', movie)
-    console.log(editMovie.value)
   } catch (error) {
     console.log(error)
   }

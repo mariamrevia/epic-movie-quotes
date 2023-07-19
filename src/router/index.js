@@ -40,8 +40,6 @@ const router = createRouter({
       beforeEnter: async (to) => {
         const { expires, new_email, signature } = to.query
         const { id, hash } = to.params
-        console.log(to.params)
-
         await verifyNewEmail(id, hash, expires, new_email, signature)
         const authUserStore = useUserStore()
         await authUserStore.fetchUser()
@@ -55,7 +53,6 @@ const router = createRouter({
       beforeEnter: async (to) => {
         const { expires, signature } = to.query
         const { id, hash } = to.params
-
         await verifyEmail(id, hash, expires, signature)
       }
     },
