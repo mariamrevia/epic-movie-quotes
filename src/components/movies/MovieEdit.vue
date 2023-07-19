@@ -194,7 +194,6 @@ const submitData = async () => {
     movieStore.setMovies([movie])
 
     emits('movieUpdated', movie)
-    console.log(editMovie.value)
   } catch (error) {
     console.log(error)
   }

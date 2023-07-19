@@ -2,17 +2,17 @@
   <div class="flex flex-col">
     <label class="text-caramel mb-0.5 mt-0.5">{{ label }}</label>
     <div class="flex relative h-3 flex-row items-center">
-      <span class="absolute z-999 ml-[1%] text-[#6C757D]">{{ text }}</span>
+      <span class="absolute z-999 ml-[1%] text-dark-gray">{{ text }}</span>
       <Field
         v-bind="$attrs"
         :value="props.value"
-        class="xl:w-56 lg:w-37.5 px-6 w-20 h-2.3 rounded-md border-0.1 placeholder-white text-white bg-transparent border-[#6C757D] bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
+        class="xl:w-56 lg:w-37.5 px-6 w-20 h-2.3 rounded-md border-0.1 placeholder-white text-white bg-transparent border-dark-gray bg-light-gray focus-within:ring focus:shadow-shadow outline-none"
         @input="updateText($event.target.value)"
         :type="props.type"
         :name="props.name"
         :rules="props.rules"
       />
-      <span class="absolute z-999 md:ml-95 ml-90 text-[#6C757D]">{{ props.lang }}</span>
+      <span class="absolute z-999 md:ml-95 ml-90 text-dark-gray">{{ props.lang }}</span>
     </div>
   </div>
   <ErrorMessage class="text-red-700" :name="name" />

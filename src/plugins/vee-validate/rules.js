@@ -41,14 +41,14 @@ defineRule('lowercase', (value) => {
 })
 
 defineRule('alphabetKa', (value) => {
-  if (!/^[\sა-ჰ,.]+$/u.test(value)) {
+  if (!/^[\sა-ჰ!@#%^&*()_+\-={}|;':",./<>?~`]+$/u.test(value)) {
     return i18n.global.t('validation.alphabetKa')
   }
   return true
 })
 
 defineRule('alphabetEn', (value) => {
-  if (!/^[\sa-zA-Z,.]+$/u.test(value)) {
+  if (!/^[\sa-zA-Z!@#%^&*()_+\-={}|;':",./<>?~`]+$/u.test(value)) {
     return i18n.global.t('validation.alphabetEn')
   }
   return true

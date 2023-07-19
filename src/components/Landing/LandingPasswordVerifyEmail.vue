@@ -63,7 +63,6 @@ const handleSubmit = async (value) => {
     if (response.status === 200) {
       modalStore.openModal('passwordEmailSentModalActive')
     }
-    console.log('sdfsdfs')
   } catch (error) {
     if (error.response && error.response.data && error.response.data.errors) {
       errors.value = error.response.data.errors

@@ -30,7 +30,6 @@ async function performSearch() {
     try {
       const response = await getSearchResults(searchQuery.value)
       searchResults.value = response.data.data
-      console.log(searchResults.value)
       quoteStore.quotes = searchResults.value.map((quote) => ({
         ...quote,
         commentData: {
