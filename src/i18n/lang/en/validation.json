@@ -6,5 +6,6 @@
   "maxLength": "This field must not exceed {limit} characters",
   "lowerCase": "Only lowercase letters are allowed",
   "alphabetKa": "Fill the field in Georgian",
-  "alphabetEn": "Fill the field in English"
+  "alphabetEn": "Fill the field in English",
+  "number": "field should be number"
 }
