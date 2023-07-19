@@ -70,10 +70,10 @@
         </Field>
         <InputMovie
           name="year"
-          type="number"
+          type="text"
           v-model="movieStore.createMovieData.year"
           placeholder="year"
-          rules="required"
+          rules="required|number"
         />
         <InputMovie
           name="director[en]"

@@ -53,3 +53,9 @@ defineRule('alphabetEn', (value) => {
   }
   return true
 })
+defineRule('number', (value) => {
+  if (!/^[0-9]+$/.test(value)) {
+    return i18n.global.t('validation.number')
+  }
+  return true
+})
