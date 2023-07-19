@@ -1,4 +1,4 @@
-## Covid-Questionaire
+## Epic Movie-quotes
 
 The Movie-Quotes app is a website where users can sign up and access various features related to movies and their quotes. Once registered, users can log in to the app and do the following functionalities:
 
